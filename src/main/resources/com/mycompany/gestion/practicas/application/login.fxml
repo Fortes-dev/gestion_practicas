@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../img/logo%20cesur.png" />
+                  <Image url="@../../../../../img/logocesur.png" />
                </image>
             </ImageView>
             <VBox spacing="10.0">

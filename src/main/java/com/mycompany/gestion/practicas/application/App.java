@@ -21,7 +21,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("login"), 501, 660);
         stage.setResizable(false);
         stage.setTitle("CESUR Gestión de prácticas");
-        stage.getIcons().add(new Image("img/logo cesur.png"));
+        stage.getIcons().add(new Image("img/logocesur.png"));
         stage.setScene(scene);
         stage.show();
     }
