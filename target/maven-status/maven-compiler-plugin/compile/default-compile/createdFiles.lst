@@ -1,0 +1,4 @@
+com\mycompany\gestion\practicas\models\Practica.class
+com\mycompany\gestion\practicas\models\Alumno.class
+module-info.class
+com\mycompany\gestion\practicas\models\Empresa.class
