@@ -1,4 +1,11 @@
-com\mycompany\gestion\practicas\models\Practica.class
+com\mycompany\gestion\practicas\application\AnadirAlumnoController.class
+com\mycompany\gestion\practicas\application\App.class
 com\mycompany\gestion\practicas\models\Alumno.class
+com\mycompany\gestion\practicas\application\PerfilAlumnoController.class
 module-info.class
 com\mycompany\gestion\practicas\models\Empresa.class
+com\mycompany\gestion\practicas\application\LoginController.class
+com\mycompany\gestion\practicas\application\HistorialController.class
+com\mycompany\gestion\practicas\models\Profesor.class
+com\mycompany\gestion\practicas\models\Practica.class
+com\mycompany\gestion\practicas\application\PrincipalAlumnoController.class

@@ -18,8 +18,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 501, 660);
-        stage.setResizable(false);
+        scene = new Scene(loadFXML("AnadirAlumno"), 501, 660);
+        stage.setResizable(true);
         stage.setTitle("CESUR Gestión de prácticas");
         stage.getIcons().add(new Image("img/logocesur.png"));
         stage.setScene(scene);
