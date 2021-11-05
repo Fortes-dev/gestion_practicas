@@ -1,5 +1,6 @@
 package com.mycompany.gestion.practicas.application;
 
+import com.mycompany.gestion.practicas.customassets.ToggleSwitch;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,11 +19,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("AnadirAlumno"), 501, 660);
-        stage.setResizable(true);
+        ToggleSwitch boton = new ToggleSwitch();
+        scene = new Scene(loadFXML("practicas"));
+        stage.setResizable(false);
         stage.setTitle("CESUR Gestión de prácticas");
         stage.getIcons().add(new Image("img/logocesur.png"));
         stage.setScene(scene);
+        
         stage.show();
     }
 
