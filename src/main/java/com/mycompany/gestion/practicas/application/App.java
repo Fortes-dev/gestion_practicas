@@ -20,7 +20,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         ToggleSwitch boton = new ToggleSwitch();
-        scene = new Scene(loadFXML("perfilProfesor"));
+        scene = new Scene(loadFXML("añadirPracticas"));
         stage.setResizable(false);
         stage.setTitle("CESUR Gestión de prácticas");
         //stage.getIcons().add(new Image("img/logocesur.png"));

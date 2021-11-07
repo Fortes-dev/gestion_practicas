@@ -12,4 +12,5 @@ com\mycompany\gestion\practicas\application\LoginController.class
 com\mycompany\gestion\practicas\application\HistorialController.class
 com\mycompany\gestion\practicas\models\Profesor.class
 com\mycompany\gestion\practicas\models\Practica.class
+com\mycompany\gestion\practicas\application\PrincipalProfesor.class
 com\mycompany\gestion\practicas\application\PrincipalAlumnoController.class
