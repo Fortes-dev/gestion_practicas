@@ -15,11 +15,41 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class ToggleSwitch extends StackPane {
-    private final Rectangle back = new Rectangle(50, 10, Color.RED);
-    private final Button button = new Button();
+    private Rectangle back = new Rectangle(50, 10, Color.RED);
+    private Button button = new Button();
     private String buttonStyleOff = "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 0.2, 0.0, 0.0, 2); -fx-background-color: WHITE;";
     private String buttonStyleOn = "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 0.2, 0.0, 0.0, 2); -fx-background-color: #00893d;";
     private boolean state;
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+    public boolean getState() {
+        return state;
+    }
+
+    public Rectangle getBack() {
+        return back;
+    }
+
+    public Button getButton() {
+        return button;
+    }
+
+    public String getButtonStyleOff() {
+        return buttonStyleOff;
+    }
+
+    public String getButtonStyleOn() {
+        return buttonStyleOn;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+    
+    
 
     private void init() {
         getChildren().addAll(back, button);
@@ -41,25 +71,9 @@ public class ToggleSwitch extends StackPane {
 
     public ToggleSwitch() {
         init();
-        EventHandler<Event> click = new EventHandler<Event>() {
-            @Override
-            public void handle(Event e) {
-                if (state) {
-                    button.setStyle(buttonStyleOff);
-                    back.setFill(Color.valueOf("#ced5da"));
-                    setAlignment(button, Pos.CENTER_LEFT);
-                    state = false;
-                } else {
-                    button.setStyle(buttonStyleOn);
-                    back.setFill(Color.valueOf("#80C49E"));
-                    setAlignment(button, Pos.CENTER_RIGHT);
-                    state = true;
-                }
-            }
-        };
+
 
         button.setFocusTraversable(false);
-        setOnMouseClicked(click);
-        button.setOnMouseClicked(click);
+
     }
 }

@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -23,6 +26,9 @@ import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import static javafx.scene.layout.StackPane.setAlignment;
+import javafx.scene.paint.Color;
+
 /**
  * FXML Controller class
  *
@@ -30,12 +36,11 @@ import javafx.scene.layout.HBox;
  */
 public class PracticasController implements Initializable {
 
-
     @FXML
     private DatePicker datePicker;
-    
+
     ToggleSwitch toggle = new ToggleSwitch();
-    
+
     @FXML
     private HBox hbox1;
     @FXML
@@ -52,7 +57,7 @@ public class PracticasController implements Initializable {
     private TextArea observaciones;
     @FXML
     private Button btnEliminar;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -61,29 +66,70 @@ public class PracticasController implements Initializable {
 
         tipopractica.setItems(FXCollections.observableArrayList("Dual", "FCT"));
         tipopractica.getSelectionModel().selectFirst();
-        
-        SpinnerValueFactory svf = new IntegerSpinnerValueFactory(1,8);
+
+        SpinnerValueFactory svf = new IntegerSpinnerValueFactory(1, 8);
         horas.setValueFactory(svf);
         horas.getValueFactory().setValue(8);
-        
+
+
         toggle.setMaxWidth(50);
         toggle.setMaxHeight(28);
-        
+
         hbox1.getChildren().add(3, toggle);
-        
+
         descripcion.setWrapText(true);
         observaciones.setWrapText(true);
         
-    }    
+        disableOptions();
+
+
+        descripcion.setText("hola que tal");
+
+        toggle.setOnMouseClicked((Event t) -> {
+            if (toggle.getState()) {
+
+                toggle.getButton().setStyle(toggle.getButtonStyleOff());
+                toggle.getBack().setFill(Color.valueOf("#ced5da"));
+                setAlignment(toggle.getButton(), Pos.CENTER_LEFT);
+
+                toggle.setState(false);
+                disableOptions();
+            } else {
+
+                toggle.getButton().setStyle(toggle.getButtonStyleOn());
+                toggle.getBack().setFill(Color.valueOf("#80C49E"));
+                setAlignment(toggle.getButton(), Pos.CENTER_RIGHT);
+
+                toggle.setState(true);
+                enableOptions();
+            }
+        });
+    }
+
+    private void disableOptions() {
+        datePicker.setDisable(true);
+        horas.setDisable(true);
+        tipopractica.setDisable(true);
+        descripcion.setEditable(false);
+        observaciones.setEditable(false);
+    }
+
+    private void enableOptions() {
+        datePicker.setDisable(false);
+        horas.setDisable(false);
+        tipopractica.setDisable(false);
+        descripcion.setEditable(true);
+        observaciones.setEditable(true);
+    }
 
     @FXML
     private void btnGuardarHandler(ActionEvent event) {
-        
+
     }
 
     @FXML
     private void btnEliminarHandler(ActionEvent event) {
-        
+
     }
-    
+
 }
