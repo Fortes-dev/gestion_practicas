@@ -6,7 +6,8 @@ module com.mycompany.gestion.practicas.application {
     requires java.naming;
     requires java.sql;
     requires java.persistence;
+    requires javafx.web;
 
-    opens com.mycompany.gestion.practicas.application to javafx.fxml, org.hibernate.orm.core, java.sql;
+    opens com.mycompany.gestion.practicas.application to javafx.fxml, org.hibernate.orm.core, java.sql, javafx.web;
     exports com.mycompany.gestion.practicas.application;
 }

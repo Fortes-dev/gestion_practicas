@@ -1,6 +1,7 @@
 package com.mycompany.gestion.practicas.application;
 
-import com.mycompany.gestion.practicas.customassets.ToggleSwitch;
+
+import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import javafx.scene.image.Image;
 
 /**
  * JavaFX App
@@ -19,8 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        ToggleSwitch boton = new ToggleSwitch();
-        scene = new Scene(loadFXML("añadirPracticas"));
+        scene = new Scene(loadFXML("principalProfesor"));
         stage.setResizable(false);
         stage.setTitle("CESUR Gestión de prácticas");
         //stage.getIcons().add(new Image("img/logocesur.png"));
