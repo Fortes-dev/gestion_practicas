@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalAlumnoController">
+<VBox fx:id="vFondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="655.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalAlumnoController">
    <children>
       <BorderPane>
          <left>

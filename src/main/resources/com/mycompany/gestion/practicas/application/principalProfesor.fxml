@@ -14,115 +14,117 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
-      prefWidth="1035.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalProfesor">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1035.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalProfesor">
    <BorderPane>
       <center>
-         <HBox/>
+         <HBox />
       </center>
       <left>
          <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-               <Insets left="15.0"/>
+               <Insets left="15.0" />
             </BorderPane.margin>
             <Label fx:id="lbBienvenido" text="Bienvenido, Francisco">
                <font>
-                  <Font name="System Bold" size="35.0"/>
+                  <Font name="System Bold" size="35.0" />
                </font>
             </Label>
             <Label fx:id="lbCentro" text="Cesur Málaga Este">
                <font>
-                  <Font size="22.0"/>
+                  <Font size="22.0" />
                </font>
             </Label>
          </VBox>
       </left>
       <right>
-         <ImageView fx:id="ivLogoCesur" fitHeight="127.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true"
-                    BorderPane.alignment="CENTER">
+         <ImageView fx:id="ivLogoCesur" fitHeight="127.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-               <Insets right="30.0"/>
+               <Insets right="30.0" />
             </BorderPane.margin>
-            <Image url="@../../../../../img/logocesur.png"/>
+            <Image url="@../../../../../img/logocesur.png" />
          </ImageView>
       </right>
    </BorderPane>
    <HBox prefHeight="326.0" prefWidth="1035.0">
       <VBox.margin>
-         <Insets top="30.0"/>
+         <Insets top="30.0" />
       </VBox.margin>
       <VBox prefHeight="326.0" prefWidth="598.0">
          <HBox.margin>
-            <Insets left="10.0"/>
+            <Insets left="10.0" />
          </HBox.margin>
          <HBox alignment="CENTER_LEFT">
             <VBox.margin>
-               <Insets bottom="15.0"/>
+               <Insets bottom="15.0" />
             </VBox.margin>
-            <Label prefHeight="27.0" prefWidth="180.0" text="Lista de los Alumnos" underline="true">
+            <Label prefHeight="27.0" prefWidth="180.0" text="Lista de Alumnos" underline="true">
                <font>
-                  <Font size="18.0"/>
+                  <Font size="18.0" />
                </font>
             </Label>
             <ChoiceBox fx:id="cbFiltroAlum1" prefHeight="25.0" prefWidth="54.0">
                <HBox.margin>
-                  <Insets left="50.0"/>
+                  <Insets left="50.0" right="5.0" />
                </HBox.margin>
             </ChoiceBox>
-            <ChoiceBox fx:id="cbFiltroAlum2" prefHeight="25.0" prefWidth="54.0"/>
-            <ChoiceBox fx:id="cbFiltroAlum3" prefHeight="25.0" prefWidth="54.0"/>
+            <ChoiceBox fx:id="cbFiltroAlum2" prefHeight="25.0" prefWidth="54.0">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></ChoiceBox>
+            <ChoiceBox fx:id="cbFiltroAlum3" prefHeight="25.0" prefWidth="54.0" />
             <TextField fx:id="tfFiltroAlum">
                <HBox.margin>
-                  <Insets left="30.0"/>
+                  <Insets left="30.0" />
                </HBox.margin>
             </TextField>
          </HBox>
          <TableView fx:id="tvListaAlumnos" prefHeight="255.0" prefWidth="502.0">
             <columns>
-               <TableColumn prefWidth="75.0" text="Nombre"/>
-               <TableColumn prefWidth="75.0" text="Curso"/>
+               <TableColumn prefWidth="75.0" text="Nombre" />
+               <TableColumn prefWidth="75.0" text="Curso" />
             </columns>
          </TableView>
          <HBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="502.0">
-            <Button fx:id="btnAnnadirAlumno" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0"
-                    text="Añadir"/>
+            <Button fx:id="btnAnnadirAlumno" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Añadir" />
          </HBox>
       </VBox>
       <VBox>
          <HBox.margin>
-            <Insets left="13.0" right="10.0"/>
+            <Insets left="13.0" right="10.0" />
          </HBox.margin>
          <HBox alignment="CENTER_LEFT">
             <VBox.margin>
-               <Insets bottom="15.0"/>
+               <Insets bottom="15.0" />
             </VBox.margin>
-            <Label prefHeight="27.0" prefWidth="184.0" text="Lista de las Empresas" underline="true">
+            <Label prefHeight="27.0" prefWidth="184.0" text="Lista de Empresas" underline="true">
                <font>
-                  <Font size="18.0"/>
+                  <Font size="18.0" />
                </font>
             </Label>
             <ChoiceBox fx:id="cbFiltroEmpre1" prefHeight="25.0" prefWidth="54.0">
                <HBox.margin>
-                  <Insets left="50.0"/>
+                  <Insets left="50.0" right="5.0" />
                </HBox.margin>
             </ChoiceBox>
-            <ChoiceBox fx:id="cbFiltroEmpre2" prefHeight="25.0" prefWidth="54.0"/>
-            <ChoiceBox fx:id="cbFiltroEmpre3" prefHeight="25.0" prefWidth="54.0"/>
+            <ChoiceBox fx:id="cbFiltroEmpre2" prefHeight="25.0" prefWidth="54.0">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></ChoiceBox>
+            <ChoiceBox fx:id="cbFiltroEmpre3" prefHeight="25.0" prefWidth="54.0" />
             <TextField fx:id="tfFiltroEmpresa">
                <HBox.margin>
-                  <Insets left="30.0"/>
+                  <Insets left="30.0" />
                </HBox.margin>
             </TextField>
          </HBox>
          <TableView fx:id="tvListaEmpresas" prefHeight="254.0" prefWidth="500.0">
             <columns>
-               <TableColumn prefWidth="75.0" text="C1"/>
-               <TableColumn prefWidth="75.0" text="C2"/>
+               <TableColumn prefWidth="75.0" text="C1" />
+               <TableColumn prefWidth="75.0" text="C2" />
             </columns>
          </TableView>
          <HBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="502.0">
-            <Button fx:id="btnAnnadirEmpresa" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0"
-                    text="Añadir"/>
+            <Button fx:id="btnAnnadirEmpresa" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Añadir" />
          </HBox>
       </VBox>
    </HBox>

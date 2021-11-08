@@ -1,4 +1,55 @@
 
+/*  Estilos de los botones  */
 .boton {
-    -fx-background-color:azure;
+    -fx-background-color: #115bce;
+    -fx-text-fill: white;
+    -fx-border-color: #115bce;
+    -fx-border-radius: 2px;
+    -fx-font-weight: bold;
+}
+
+.boton:hover {
+    -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.1, 0.0, 0.0);
+    -fx-background-color: #2476f6;
+}
+
+.boton:armed {
+    -fx-background-color: #155acc;
+}
+
+.boton:focused {
+    -fx-border-color: #84aaee;
+}
+
+.botonRojo {
+    -fx-background-color: #c20000;
+    -fx-text-fill: white;
+    -fx-border-color: #c20000;
+    -fx-border-radius: 2px;
+    -fx-font-weight: bold;
+}
+
+.botonRojo:hover {
+    -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.1, 0.0, 0.0);
+    -fx-background-color: #ff0000;
+}
+
+.botonRojo:armed {
+    -fx-background-color: #ad0404;
+}
+
+.botonRojo:focused {
+    -fx-border-color: #670000;
+}
+
+/*  Imagen de fondo de las ventanas   */
+.ventana {
+    -fx-background-image: url(../../../src/main/resources/img/fondoVentana.png);
+    -fx-background-color: 2px;
+}
+
+/*  Estilos TableView  */
+
+.table-view {
+
 }

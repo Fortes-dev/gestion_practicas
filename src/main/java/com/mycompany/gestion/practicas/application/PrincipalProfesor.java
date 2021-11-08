@@ -1,5 +1,7 @@
 package com.mycompany.gestion.practicas.application;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -17,11 +19,11 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private ImageView ivLogoCesur;
     @FXML
-    private ChoiceBox cbFiltroAlum1;
+    private ChoiceBox<String> cbFiltroAlum1;
     @FXML
-    private ChoiceBox cbFiltroAlum2;
+    private ChoiceBox<String> cbFiltroAlum2;
     @FXML
-    private ChoiceBox cbFiltroAlum3;
+    private ChoiceBox<String> cbFiltroAlum3;
     @FXML
     private TextField tfFiltroAlum;
     @FXML
@@ -29,11 +31,11 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private Button btnAnnadirAlumno;
     @FXML
-    private ChoiceBox cbFiltroEmpre1;
+    private ChoiceBox<String> cbFiltroEmpre1;
     @FXML
-    private ChoiceBox cbFiltroEmpre2;
+    private ChoiceBox<String> cbFiltroEmpre2;
     @FXML
-    private ChoiceBox cbFiltroEmpre3;
+    private ChoiceBox<String> cbFiltroEmpre3;
     @FXML
     private TextField tfFiltroEmpresa;
     @FXML
