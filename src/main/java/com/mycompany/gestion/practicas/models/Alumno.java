@@ -7,7 +7,7 @@ package com.mycompany.gestion.practicas.models;
 
 import java.io.Serializable;
 import java.sql.Blob;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -22,7 +22,7 @@ public class Alumno implements Serializable {
     private Date fecha_nac;
     private String email;
     private String password;
-    private int telefono;
+    private String telefono;
     private Long id_empresa;
     private Long id_profesor;
     private int horas_fct;
@@ -32,7 +32,23 @@ public class Alumno implements Serializable {
     public Alumno() {
     }
 
-    public Alumno(Long id, String nombre, String apellidos, String dni, Date fecha_nac, String email, String password, int telefono, Long id_empresa, Long id_profesor, int horas_fct, int horas_dual, Blob foto_img) {
+    public Alumno(String nombre) {
+        this.id = 1l;
+        this.nombre = nombre;
+        this.apellidos = "García";
+        this.dni = "3463456867H";
+        this.fecha_nac = new Date();
+        this.email = "email";
+        this.password = "password";
+        this.telefono = "telefono";
+        this.id_empresa = 0l;
+        this.id_profesor = 0l;
+        this.horas_fct = 12;
+        this.horas_dual = 8;
+        this.foto_img = null;
+    }
+
+    public Alumno(Long id, String nombre, String apellidos, String dni, Date fecha_nac, String email, String password, String telefono, Long id_empresa, Long id_profesor, int horas_fct, int horas_dual, Blob foto_img) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -104,11 +120,11 @@ public class Alumno implements Serializable {
         this.password = password;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

@@ -9,5 +9,8 @@ module com.mycompany.gestion.practicas.application {
     requires javafx.web;
 
     opens com.mycompany.gestion.practicas.application to javafx.fxml, org.hibernate.orm.core, java.sql, javafx.web;
+    opens com.mycompany.gestion.practicas.models;
+    opens com.mycompany.gestion.practicas.hibernate;
+    opens com.mycompany.gestion.practicas.customassets;
     exports com.mycompany.gestion.practicas.application;
 }

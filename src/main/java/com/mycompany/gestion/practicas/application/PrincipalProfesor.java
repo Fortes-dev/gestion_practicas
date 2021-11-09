@@ -1,10 +1,10 @@
 package com.mycompany.gestion.practicas.application;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.mycompany.gestion.practicas.models.Alumno;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
@@ -12,6 +12,28 @@ import java.util.ResourceBundle;
 
 public class PrincipalProfesor implements Initializable {
 
+    @FXML
+    private TableColumn<Alumno, String> cNombreAlum;
+    @FXML
+    private TableColumn<Alumno, String> cApellidoAlum;
+    @FXML
+    private TableColumn<Alumno, String> cDniAlum;
+    @FXML
+    private TableColumn<Alumno, String> cEmailAlum;
+    @FXML
+    private TableColumn<Alumno, String> cTelefonoAlum;
+    @FXML
+    private TableColumn<Alumno, Long> cEmpresaAlum;
+    @FXML
+    private TableColumn cNombreEmp;
+    @FXML
+    private TableColumn cLocalizacion;
+    @FXML
+    private TableColumn cTutor;
+    @FXML
+    private TableColumn cEmailEmp;
+    @FXML
+    private TableColumn cTelefonoEmp;
     @FXML
     private Label lbBienvenido;
     @FXML
@@ -45,6 +67,17 @@ public class PrincipalProfesor implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        cNombreAlum.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        cApellidoAlum.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        cDniAlum.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        cEmailAlum.setCellValueFactory(new PropertyValueFactory<>("email"));
+        cTelefonoAlum.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+        cEmpresaAlum.setCellValueFactory(new PropertyValueFactory<>("id_empresa"));
 
+        tvListaAlumnos.getItems().add(new Alumno("Carlos"));
+        tvListaAlumnos.getItems().add(new Alumno("Alberto"));
+        tvListaAlumnos.getItems().add(new Alumno("Pablo"));
+        tvListaAlumnos.getItems().add(new Alumno("Roberto"));
+        tvListaAlumnos.getItems().add(new Alumno("Marcos"));
     }
 }
