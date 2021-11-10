@@ -5,111 +5,144 @@
  */
 package com.mycompany.gestion.practicas.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Blob;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author CarlosFortesMedina
  */
+@Entity
+@Table(name = "alumno")
 public class Alumno implements Serializable {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
+
+    @Column(name = "apellidos", nullable = false)
     private String apellidos;
+
+    @Column(name = "dni", nullable = false, length = 9)
     private String dni;
-    private Date fecha_nac;
+
+    @Column(name = "fecha_nac", nullable = false)
+    private java.sql.Date fechaNac;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "password", nullable = false)
     private String password;
-    private String telefono;
-    private Long id_empresa;
-    private Long id_profesor;
-    private int horas_fct;
-    private int horas_dual;
-    private Blob foto_img;
+
+    @Column(name = "telefono", nullable = false)
+    private Integer telefono;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_empresa", nullable = false)
+    private Empresa idEmpresa;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_profesor", nullable = false)
+    private Profesor idProfesor;
+
+    @Column(name = "horas_fct", nullable = false)
+    private Integer horasFct;
+
+    @Column(name = "horas_dual", nullable = false)
+    private Integer horasDual;
+
+    @Lob
+    @Column(name = "foto_img", nullable = false)
+    private Blob fotoImg;
 
     public Alumno() {
     }
 
-    public Alumno(String nombre) {
-        this.id = 1l;
-        this.nombre = nombre;
-        this.apellidos = "García";
-        this.dni = "3463456867H";
-        this.fecha_nac = new Date();
-        this.email = "email";
-        this.password = "password";
-        this.telefono = "telefono";
-        this.id_empresa = 0l;
-        this.id_profesor = 0l;
-        this.horas_fct = 12;
-        this.horas_dual = 8;
-        this.foto_img = null;
-    }
-
-    public Alumno(Long id, String nombre, String apellidos, String dni, Date fecha_nac, String email, String password, String telefono, Long id_empresa, Long id_profesor, int horas_fct, int horas_dual, Blob foto_img) {
+    public Alumno(Long id, String nombre, String apellidos, String dni, java.sql.Date fechaNac, String email, String password, Integer telefono, Empresa idEmpresa, Profesor idProfesor, Integer horasFct, Integer horasDual, Blob fotoImg) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;
-        this.fecha_nac = fecha_nac;
+        this.fechaNac = fechaNac;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
-        this.id_empresa = id_empresa;
-        this.id_profesor = id_profesor;
-        this.horas_fct = horas_fct;
-        this.horas_dual = horas_dual;
-        this.foto_img = foto_img;
+        this.idEmpresa = idEmpresa;
+        this.idProfesor = idProfesor;
+        this.horasFct = horasFct;
+        this.horasDual = horasDual;
+        this.fotoImg = fotoImg;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
+    public Alumno(String nombre) {
+        this.id = 1L;
         this.nombre = nombre;
+        this.apellidos = "García";
+        this.dni = "3463456867H";
+        this.fechaNac = new Date(0L);
+        this.email = "email";
+        this.password = "password";
+        this.telefono = 123456789;
+        this.idEmpresa = new Empresa();
+        this.idProfesor = new Profesor();
+        this.horasFct = 12;
+        this.horasDual = 8;
+        this.fotoImg = null;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public Blob getFotoImg() {
+        return fotoImg;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setFotoImg(Blob fotoImg) {
+        this.fotoImg = fotoImg;
     }
 
-    public String getDni() {
-        return dni;
+    public Integer getHorasDual() {
+        return horasDual;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setHorasDual(Integer horasDual) {
+        this.horasDual = horasDual;
     }
 
-    public Date getFecha_nac() {
-        return fecha_nac;
+    public Integer getHorasFct() {
+        return horasFct;
     }
 
-    public void setFecha_nac(Date fecha_nac) {
-        this.fecha_nac = fecha_nac;
+    public void setHorasFct(Integer horasFct) {
+        this.horasFct = horasFct;
     }
 
-    public String getEmail() {
-        return email;
+    public Profesor getIdProfesor() {
+        return idProfesor;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIdProfesor(Profesor idProfesor) {
+        this.idProfesor = idProfesor;
+    }
+
+    public Empresa getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Empresa idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public Integer getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
     }
 
     public String getPassword() {
@@ -120,59 +153,70 @@ public class Alumno implements Serializable {
         this.password = password;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Long getId_empresa() {
-        return id_empresa;
+    public java.sql.Date getFechaNac() {
+        return fechaNac;
     }
 
-    public void setId_empresa(Long id_empresa) {
-        this.id_empresa = id_empresa;
+    public void setFechaNac(java.sql.Date fechaNac) {
+        this.fechaNac = fechaNac;
     }
 
-    public Long getId_profesor() {
-        return id_profesor;
+    public String getDni() {
+        return dni;
     }
 
-    public void setId_profesor(Long id_profesor) {
-        this.id_profesor = id_profesor;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
-    public int getHoras_fct() {
-        return horas_fct;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setHoras_fct(int horas_fct) {
-        this.horas_fct = horas_fct;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public int getHoras_dual() {
-        return horas_dual;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setHoras_dual(int horas_dual) {
-        this.horas_dual = horas_dual;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Blob getFoto_img() {
-        return foto_img;
+    public Long getId() {
+        return id;
     }
 
-    public void setFoto_img(Blob foto_img) {
-        this.foto_img = foto_img;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "Alumno{" + "id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", dni=" + dni + ", fecha_nac=" + fecha_nac + ", email=" + email + ", telefono=" + telefono + '}';
+        return "Alumno{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", dni='" + dni + '\'' +
+                ", fechaNac=" + fechaNac +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", telefono=" + telefono +
+                ", idEmpresa=" + idEmpresa +
+                ", idProfesor=" + idProfesor +
+                ", horasFct=" + horasFct +
+                ", horasDual=" + horasDual +
+                ", fotoImg=" + fotoImg +
+                '}';
     }
-    
-    
-    
 }

@@ -5,6 +5,7 @@
  */
 package com.mycompany.gestion.practicas.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Blob;
 
@@ -12,35 +13,86 @@ import java.sql.Blob;
  *
  * @author CarlosFortesMedina
  */
+@Entity
+@Table(name = "empresa")
 public class Empresa implements Serializable {
-    
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(name = "nombre", nullable = false)
     private String nombre;
-    private String tutor_empresa;
-    private String localizacion_url;
-    private int telefono;
-    private String email_tutor;
-    private Blob logo_img;
+
+    @Column(name = "tutor_empresa", nullable = false)
+    private String tutorEmpresa;
+
+    @Column(name = "localizacion_url", nullable = false, length = 800)
+    private String localizacionUrl;
+
+    @Column(name = "telefono", nullable = false)
+    private Integer telefono;
+
+    @Column(name = "email_tutor", nullable = false)
+    private String emailTutor;
+
+    @Lob
+    @Column(name = "logo_img", nullable = false)
+    private Blob logoImg;
 
     public Empresa() {
     }
 
-    public Empresa(Long id, String nombre, String tutor_empresa, String localizacion_url, int telefono, String email_tutor, Blob logo_img) {
+    public Empresa(Long id, String nombre, String tutorEmpresa, String localizacionUrl, Integer telefono, String emailTutor, Blob logoImg) {
         this.id = id;
         this.nombre = nombre;
-        this.tutor_empresa = tutor_empresa;
-        this.localizacion_url = localizacion_url;
+        this.tutorEmpresa = tutorEmpresa;
+        this.localizacionUrl = localizacionUrl;
         this.telefono = telefono;
-        this.email_tutor = email_tutor;
-        this.logo_img = logo_img;
+        this.emailTutor = emailTutor;
+        this.logoImg = logoImg;
     }
 
-    public Long getId() {
-        return id;
+    public Blob getLogoImg() {
+        return logoImg;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setLogoImg(Blob logoImg) {
+        this.logoImg = logoImg;
+    }
+
+    public String getEmailTutor() {
+        return emailTutor;
+    }
+
+    public void setEmailTutor(String emailTutor) {
+        this.emailTutor = emailTutor;
+    }
+
+    public Integer getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getLocalizacionUrl() {
+        return localizacionUrl;
+    }
+
+    public void setLocalizacionUrl(String localizacionUrl) {
+        this.localizacionUrl = localizacionUrl;
+    }
+
+    public String getTutorEmpresa() {
+        return tutorEmpresa;
+    }
+
+    public void setTutorEmpresa(String tutorEmpresa) {
+        this.tutorEmpresa = tutorEmpresa;
     }
 
     public String getNombre() {
@@ -51,50 +103,24 @@ public class Empresa implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getTutor_empresa() {
-        return tutor_empresa;
+    public Long getId() {
+        return id;
     }
 
-    public void setTutor_empresa(String tutor_empresa) {
-        this.tutor_empresa = tutor_empresa;
-    }
-
-    public String getLocalizacion_url() {
-        return localizacion_url;
-    }
-
-    public void setLocalizacion_url(String localizacion_url) {
-        this.localizacion_url = localizacion_url;
-    }
-
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail_tutor() {
-        return email_tutor;
-    }
-
-    public void setEmail_tutor(String email_tutor) {
-        this.email_tutor = email_tutor;
-    }
-
-    public Blob getLogo_img() {
-        return logo_img;
-    }
-
-    public void setLogo_img(Blob logo_img) {
-        this.logo_img = logo_img;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "Empresa{" + "id=" + id + ", nombre=" + nombre + ", tutor_empresa=" + tutor_empresa + ", localizacion_url=" + localizacion_url + ", telefono=" + telefono + ", email_tutor=" + email_tutor + '}';
+        return "Empresa{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", tutorEmpresa='" + tutorEmpresa + '\'' +
+                ", localizacionUrl='" + localizacionUrl + '\'' +
+                ", telefono=" + telefono +
+                ", emailTutor='" + emailTutor + '\'' +
+                ", logoImg=" + logoImg +
+                '}';
     }
-    
-    
 }

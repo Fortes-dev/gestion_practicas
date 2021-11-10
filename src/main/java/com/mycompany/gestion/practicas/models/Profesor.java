@@ -5,6 +5,7 @@
  */
 package com.mycompany.gestion.practicas.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Blob;
 
@@ -12,51 +13,46 @@ import java.sql.Blob;
  *
  * @author CarlosFortesMedina
  */
+@Entity
+@Table(name = "profesor")
 public class Profesor implements Serializable {
-    private long id;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "nombre", nullable = false)
     private String nombre;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "password", nullable = false)
     private String password;
-    private Blob foto_img;
-    
+
+    @Lob
+    @Column(name = "foto_img", nullable = false)
+    private Blob fotoImg;
+
     public Profesor() {
     }
 
-    public Profesor(long id, String nombre, String email, String password, Blob foto_img) {
+    public Profesor(Long id, String nombre, String email, String password, Blob fotoImg) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-        this.foto_img = foto_img;
+        this.fotoImg = fotoImg;
     }
 
-    @Override
-    public String toString() {
-        return "Profesor{" + "id=" + id + ", nombre=" + nombre + ", email=" + email + ", password=" + password + '}';
+    public Blob getFotoImg() {
+        return fotoImg;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFotoImg(Blob fotoImg) {
+        this.fotoImg = fotoImg;
     }
 
     public String getPassword() {
@@ -67,13 +63,38 @@ public class Profesor implements Serializable {
         this.password = password;
     }
 
-    public Blob getFoto_img() {
-        return foto_img;
+    public String getEmail() {
+        return email;
     }
 
-    public void setFoto_img(Blob foto_img) {
-        this.foto_img = foto_img;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Profesor{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fotoImg=" + fotoImg +
+                '}';
+    }
 }

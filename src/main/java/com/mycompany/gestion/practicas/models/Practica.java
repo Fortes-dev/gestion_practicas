@@ -5,86 +5,54 @@
  */
 package com.mycompany.gestion.practicas.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  *
  * @author CarlosFortesMedina
  */
+@Entity
+@Table(name = "practicas")
 public class Practica implements Serializable {
-    private long id;
-    private long id_alumno;
-    private String fecha;
-    private String tipo;
-    private int horas_empleadas;
-    private String descripcion;
-    private String observaciones;
-    
-    public Practica(long id_alumno, String fecha, String tipo, int horas_empleadas, String descripcion, String observaciones) {
-        this.id_alumno = id_alumno;
-        this.fecha = fecha;
-        this.tipo = tipo;
-        this.horas_empleadas = horas_empleadas;
-        this.descripcion = descripcion;
-        this.observaciones = observaciones;
-    }
 
-    @Override
-    public String toString() {
-        return "Practica{" + "id=" + id + ", id_alumno=" + id_alumno + ", fecha=" + fecha + ", tipo=" + tipo + ", horas_empleadas=" + horas_empleadas + ", descripcion=" + descripcion + ", observaciones=" + observaciones + '}';
-    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_alumno", nullable = false)
+    private Alumno idAlumno;
+
+    @Column(name = "fecha", nullable = false)
+    private Date fecha;
+
+    @Column(name = "tipo", nullable = false, length = 4)
+    private String tipo;
+
+    @Column(name = "horas_empleadas", nullable = false)
+    private Integer horasEmpleadas;
+
+    @Column(name = "descripcion", nullable = false, length = 1000)
+    private String descripcion;
+
+    @Column(name = "observaciones", nullable = false, length = 1000)
+    private String observaciones;
 
     public Practica() {
     }
-    
-    
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
+    public Practica(Long id, Alumno idAlumno, Date fecha, String tipo, Integer horasEmpleadas, String descripcion, String observaciones) {
         this.id = id;
-    }
-
-    public long getId_alumno() {
-        return id_alumno;
-    }
-
-    public void setId_alumno(long id_alumno) {
-        this.id_alumno = id_alumno;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
+        this.idAlumno = idAlumno;
         this.fecha = fecha;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public int getHoras_empleadas() {
-        return horas_empleadas;
-    }
-
-    public void setHoras_empleadas(int horas_empleadas) {
-        this.horas_empleadas = horas_empleadas;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
+        this.horasEmpleadas = horasEmpleadas;
         this.descripcion = descripcion;
+        this.observaciones = observaciones;
     }
 
     public String getObservaciones() {
@@ -95,6 +63,64 @@ public class Practica implements Serializable {
         this.observaciones = observaciones;
     }
 
-    
-    
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Integer getHorasEmpleadas() {
+        return horasEmpleadas;
+    }
+
+    public void setHorasEmpleadas(Integer horasEmpleadas) {
+        this.horasEmpleadas = horasEmpleadas;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Alumno getIdAlumno() {
+        return idAlumno;
+    }
+
+    public void setIdAlumno(Alumno idAlumno) {
+        this.idAlumno = idAlumno;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Practica{" +
+                "id=" + id +
+                ", idAlumno=" + idAlumno +
+                ", fecha=" + fecha +
+                ", tipo='" + tipo + '\'' +
+                ", horasEmpleadas=" + horasEmpleadas +
+                ", descripcion='" + descripcion + '\'' +
+                ", observaciones='" + observaciones + '\'' +
+                '}';
+    }
 }
