@@ -45,12 +45,13 @@ public class LoginController implements Initializable {
     private Button btnAceptar;
     
     private Session s;
+    private SceneController escena = new SceneController();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        var s = HibernateUtil.getSessionFactory().openSession();
+        s = HibernateUtil.getSessionFactory().openSession();
         
     }    
     
@@ -74,7 +75,7 @@ public class LoginController implements Initializable {
             SessionData.setAlumnoActual(a);
             s.close();
             try {
-                App.setRoot("practicas");
+                escena.switchToPrincipalAlumno(event);
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -83,7 +84,7 @@ public class LoginController implements Initializable {
             SessionData.setProfesorActual(p);
             s.close();
             try {
-                App.setRoot("principalProfesor");
+                escena.switchToPrincipalProfesor(event);
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
