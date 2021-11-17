@@ -5,6 +5,7 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.mycompany.gestion.practicas.hibernate.SessionData;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -34,9 +35,9 @@ public class PerfilProfesorController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        email.setText("francisco.romero@cesurformacion.com");
-        imgPerfil.setImage(new Image("img/capitancubata.jpg"));
+        nombre.setText(SessionData.getProfesorActual().getNombre());
+        email.setText(SessionData.getProfesorActual().getEmail());
+        imgPerfil.setImage((Image) SessionData.getProfesorActual().getFotoImg());
     }    
-    
     
 }
