@@ -20,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
@@ -35,6 +36,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import static javafx.scene.layout.StackPane.setAlignment;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 
 /**
@@ -147,6 +149,17 @@ public class PracticasController implements Initializable {
             s.update(pr);
             tr.commit();
 
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Guardado");
+            alert.setHeaderText("Guardado con éxito");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/confirmacion.png").toString())));
+            alert.setContentText("La práctica: ID[" + pr.getId() + "] Fecha: " + pr.getFecha() + " ha sido modificada con éxito!");
+            alert.showAndWait();
+
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -165,6 +178,41 @@ public class PracticasController implements Initializable {
 
     @FXML
     private void btnEliminarHandler(ActionEvent event) {
+
+        setData();
+
+        try {
+
+            s = HibernateUtil.getSessionFactory().openSession();
+            var tr = s.beginTransaction();
+            s.remove(pr);
+            tr.commit();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Eliminado");
+            alert.setHeaderText("Eliminado con éxito");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/eliminar.png").toString())));
+            alert.setContentText("La práctica: ID[" + pr.getId() + "] Fecha: " + pr.getFecha() + " ha sido eliminada con éxito!");
+            alert.showAndWait();
+            
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error!");
+            alert.setHeaderText("No ha sido posible eliminar");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+            alert.setContentText("No puede contener un campo vació o hay algún campo erróneo");
+            alert.show();
+
+        } finally {
+            s.close();
+        }
 
     }
 

@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
@@ -28,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 
 /**
@@ -91,6 +93,17 @@ public class AñadirPracticasController implements Initializable {
             var tr = s.beginTransaction();
             s.save(pr);
             tr.commit();
+            
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Guardado");
+            alert.setHeaderText("Nueva práctica añadida con éxito");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/añadir.png").toString())));
+            alert.setContentText("La práctica: ID[" + pr.getId() + "] Fecha: " + pr.getFecha() + " ha sido añadida con éxito!");
+            alert.showAndWait();
+
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
             
         } catch (Exception e) {
             
