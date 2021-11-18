@@ -107,11 +107,11 @@ public class SceneController {
 
     public void switchToAñadirPracticas(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/añadirPracticas.fxml"));
+        scene = new Scene(root);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.getIcons().add(new Image("img/logocesur.png"));
-        stage.setResizable(false);
-        stage.setTitle("Añadir práctica");
+        stage.setResizable(false);;
         stage.setScene(scene);
         stage.show();
     }
