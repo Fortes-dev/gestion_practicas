@@ -59,7 +59,7 @@ public class Alumno implements Serializable {
     private Integer horasDual;
 
     @Lob
-    @Column(name = "foto_img", nullable = false)
+    @Column(name = "foto_img")
     private Blob fotoImg;
 
     public Alumno() {

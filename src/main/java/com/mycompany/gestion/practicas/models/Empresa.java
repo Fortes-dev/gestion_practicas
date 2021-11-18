@@ -29,7 +29,7 @@ public class Empresa implements Serializable {
     @Column(name = "tutor_empresa", nullable = false)
     private String tutorEmpresa;
 
-    @Column(name = "localizacion_url", nullable = false, length = 800)
+    @Column(name = "localizacion_url", length = 800)
     private String localizacionUrl;
 
     @Column(name = "telefono", nullable = false)
@@ -39,7 +39,7 @@ public class Empresa implements Serializable {
     private String emailTutor;
 
     @Lob
-    @Column(name = "logo_img", nullable = false)
+    @Column(name = "logo_img")
     private Blob logoImg;
 
     public Empresa() {

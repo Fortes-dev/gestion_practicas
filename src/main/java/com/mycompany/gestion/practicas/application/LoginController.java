@@ -27,13 +27,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-
 /**
  * FXML Controller class
  *
  * @author medin
  */
 public class LoginController implements Initializable {
+
 
     @FXML
     private TextField userField;

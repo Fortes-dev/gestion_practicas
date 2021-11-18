@@ -8,7 +8,7 @@ and open the template in the editor.
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/gestion_practicas?zeroDateTimeBehavior=CONVERT_TO_NULL</property>
+        <property name="connection.url">jdbc:mysql://localhost:3307/gestion_practicas?zeroDateTimeBehavior=CONVERT_TO_NULL</property>
         <property name="connection.username">root</property>
         <property name="connection.password"></property>
         <property name="hibernate.show_sql">true</property>

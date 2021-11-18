@@ -33,7 +33,7 @@ public class Profesor implements Serializable {
     private String password;
 
     @Lob
-    @Column(name = "foto_img", nullable = false)
+    @Column(name = "foto_img")
     private Blob fotoImg;
 
     public Profesor() {
