@@ -39,7 +39,7 @@
          </font>
       </Label>
       <TextField fx:id="TextFieldBuscador" layoutX="449.0" layoutY="103.0" prefHeight="25.0" prefWidth="117.0" />
-      <Button fx:id="botonAnadir" layoutX="477.0" layoutY="360.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Añadir" />
+      <Button fx:id="btnAnadir" layoutX="477.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnAnadir" prefHeight="25.0" prefWidth="89.0" text="Añadir" />
       <Label fx:id="claseAlumno" layoutX="58.0" layoutY="73.0" prefHeight="17.0" prefWidth="89.0" text="1º TECO">
          <font>
             <Font size="13.0" />

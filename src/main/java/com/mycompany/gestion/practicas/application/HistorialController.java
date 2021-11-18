@@ -6,6 +6,7 @@ package com.mycompany.gestion.practicas.application;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -48,11 +49,11 @@ public class HistorialController implements Initializable {
     @FXML
     private TextField TextFieldBuscador;
     @FXML
-    private Button botonAnadir;
-    @FXML
     private Label claseAlumno;
     @FXML
     private ChoiceBox<String> choiceBoxTipo;
+    @FXML
+    private Button btnAnadir;
     /**
      * Initializes the controller class.
      */
@@ -61,5 +62,9 @@ public class HistorialController implements Initializable {
         choiceBoxTipo.getItems().addAll("FCT","Dual");
         choiceBoxTipo.getSelectionModel().selectFirst();
     }    
+
+    @FXML
+    private void btnAnadir(ActionEvent event) {
+    }
     
 }
