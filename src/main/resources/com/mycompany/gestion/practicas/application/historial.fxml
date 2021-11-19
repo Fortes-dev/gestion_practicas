@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -27,10 +27,10 @@
         <columns>
           <TableColumn fx:id="colId" prefWidth="51.33331298828125" text="ID" />
           <TableColumn fx:id="colIdAlumno" prefWidth="75.33334350585938" text="ID Alumno" />
+            <TableColumn fx:id="colFecha" prefWidth="75.33334350585938" text="Fecha" />
             <TableColumn fx:id="colTipo" prefWidth="51.33331298828125" text="Tipo" />
             <TableColumn fx:id="colHoras" prefWidth="99.99993896484375" text="Horas Empleadas" />
-            <TableColumn fx:id="colDescripcion" prefWidth="121.99993896484375" text="Descripción" />
-            <TableColumn fx:id="colObservaciones" prefWidth="121.99993896484375" text="Observaciones" />
+            <TableColumn fx:id="colDescripcion" prefWidth="159.0" text="Descripción" />
         </columns>
       </TableView>
       <Label layoutX="58.0" layoutY="105.0" prefHeight="21.0" prefWidth="155.0" text="Historial de Prácticas">
@@ -38,13 +38,13 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="TextFieldBuscador" layoutX="449.0" layoutY="103.0" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="TextFieldBuscador" layoutX="449.0" layoutY="103.0" onKeyTyped="#filtrar" prefHeight="25.0" prefWidth="117.0" />
       <Button fx:id="btnAnadir" layoutX="477.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnAnadir" prefHeight="25.0" prefWidth="89.0" text="Añadir" />
       <Label fx:id="claseAlumno" layoutX="58.0" layoutY="73.0" prefHeight="17.0" prefWidth="89.0" text="1º TECO">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="choiceBoxTipo" layoutX="311.0" layoutY="103.0" prefHeight="25.0" prefWidth="117.0" />
+      <ComboBox fx:id="comboBoxTipo" layoutX="321.0" layoutY="103.0" onAction="#valorActualizado" prefHeight="25.0" prefWidth="117.0" />
    </children>
 </AnchorPane>

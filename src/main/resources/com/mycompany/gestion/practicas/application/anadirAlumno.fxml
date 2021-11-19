@@ -99,7 +99,7 @@
                         <Insets left="21.0" top="4.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/kisspng-computer-icons-identity-document-revyve-chiropract-id-5ac09a18e18419.9298761515225718009237.png" />
+                        <Image url="@../../../../../img/dni.png" />
                      </image>
                   </ImageView>
                   <TextField fx:id="txtFieldDNI" prefHeight="25.0" prefWidth="241.0" promptText="DNI">
@@ -109,7 +109,7 @@
                   </TextField>
                   <ImageView fitHeight="30.0" fitWidth="33.0" layoutX="31.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/telephone.png" />
+                        <Image url="@../../../../../img/telephone.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="27.0" top="7.0" />
@@ -129,7 +129,7 @@
                         <Insets left="21.0" top="4.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/email.png" />
+                        <Image url="@../../../../../img/email.png" />
                      </image>
                   </ImageView>
                   <TextField fx:id="txtFieldEmail" prefHeight="25.0" prefWidth="484.0" promptText="Email">
@@ -146,7 +146,7 @@
                         <Insets left="21.0" top="4.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/kisspng-solar-calendar-symbol-computer-icons-encapsulated-calendar-icon-5ac41db8b0bae7.2492870115228021047239.png" />
+                        <Image url="@../../../../../img/calendario.png" />
                      </image>
                   </ImageView>
                   <DatePicker fx:id="DatepickerNacimiento" prefHeight="25.0" prefWidth="138.0" promptText="fecha de nacimiento">
@@ -163,7 +163,7 @@
                         <Insets left="21.0" top="4.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/birrete.png" />
+                        <Image url="@../../../../../img/birrete.png" />
                      </image>
                   </ImageView>
                   <ChoiceBox fx:id="cbNombreTutor" prefHeight="25.0" prefWidth="255.0">

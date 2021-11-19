@@ -73,7 +73,7 @@ public class SceneController {
         stage.setScene(scene);
         stage.getIcons().add(new Image("img/logocesur.png"));
         stage.setResizable(false);
-        stage.setTitle("Bienvenido "+SessionData.getProfesorActual().getNombre());
+        stage.setTitle("Bienvenido " + SessionData.getProfesorActual().getNombre());
         stage.show();
     }
 
@@ -107,8 +107,11 @@ public class SceneController {
 
     public void switchToAñadirPracticas(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/añadirPracticas.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+        stage.getIcons().add(new Image("img/logocesur.png"));
+        stage.setResizable(false);
+        stage.setTitle("Añadir práctica");
         stage.setScene(scene);
         stage.show();
     }
@@ -147,8 +150,11 @@ public class SceneController {
 
     public void switchToPracticas(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/practicas.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+        stage.getIcons().add(new Image("img/logocesur.png"));
+        stage.setResizable(false);
+        stage.setTitle("Prácticas");
         stage.setScene(scene);
         stage.show();
     }

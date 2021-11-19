@@ -57,15 +57,18 @@ public class Alumno implements Serializable {
 
     @Column(name = "horas_dual", nullable = false)
     private Integer horasDual;
+    
+    @Column(name = "curso", nullable = false)
+    private String curso;
 
     @Lob
-    @Column(name = "foto_img", nullable = false)
+    @Column(name = "foto_img")
     private Blob fotoImg;
 
     public Alumno() {
     }
 
-    public Alumno(Long id, String nombre, String apellidos, String dni, java.sql.Date fechaNac, String email, String password, Integer telefono, Empresa idEmpresa, Profesor idProfesor, Integer horasFct, Integer horasDual, Blob fotoImg) {
+    public Alumno(Long id, String nombre, String apellidos, String dni, java.sql.Date fechaNac, String email, String password, Integer telefono, Empresa idEmpresa, Profesor idProfesor, Integer horasFct,String curso, Integer horasDual, Blob fotoImg) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -79,6 +82,7 @@ public class Alumno implements Serializable {
         this.horasFct = horasFct;
         this.horasDual = horasDual;
         this.fotoImg = fotoImg;
+        this.curso = curso;
     }
 
     public Alumno(String nombre) {
@@ -201,6 +205,14 @@ public class Alumno implements Serializable {
         this.id = id;
     }
 
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
     @Override
     public String toString() {
         return "Alumno{" +
@@ -208,6 +220,7 @@ public class Alumno implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", dni='" + dni + '\'' +
+                ", curso='" + curso + '\'' +
                 ", fechaNac=" + fechaNac +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

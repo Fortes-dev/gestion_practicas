@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Amazon RDS" uuid="e4a016fc-1678-47be-9983-27886627d547">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://gestionpracticas.ciuynywbywzh.eu-west-3.rds.amazonaws.com:3306/</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="AWS.RdsSigningPort" value="3306" />
-        <property name="AWS.RegionId" value="eu-west-3" />
-        <property name="AWS.CredentialId" value="profile:default" />
-        <property name="AWS.RdsSigningHost" value="gestionpracticas.ciuynywbywzh.eu-west-3.rds.amazonaws.com" />
-      </jdbc-additional-properties>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="gestion_practicas@localhost" uuid="9a497fac-15f3-495b-b55a-c0990ae144e0">
+    <data-source source="LOCAL" name="gestion_practicas@localhost" uuid="ed608c92-1668-4ba6-b619-f7e86f04f1c7">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/gestion_practicas</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3307/gestion_practicas</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

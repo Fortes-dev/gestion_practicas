@@ -4,6 +4,7 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Empresa;
 import com.mycompany.gestion.practicas.models.Profesor;
@@ -58,9 +59,9 @@ public class AnadirAlumnoController implements Initializable {
     @FXML
     private TextField txtFieldApellidos;
     @FXML
-    private ChoiceBox<Empresa> cbEmpresa;
+    private ChoiceBox<String> cbEmpresa;
     @FXML
-    private ChoiceBox<Profesor> cbNombreTutor;
+    private ChoiceBox<String> cbNombreTutor;
     @FXML
     private TextField txtFieldContraseña;
 
@@ -78,16 +79,16 @@ public class AnadirAlumnoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        s.getSessionFactory();
+        s=HibernateUtil.getSessionFactory().openSession();
         try{
-        ObservableList<Empresa> empresas = FXCollections.observableArrayList();//Contenido del ChoiceBox de Empresas
-        Query<Empresa> q = s.createQuery("nombre FROM Empresa");
-        q.list().forEach((e) -> empresas.add(0, e));
+        ObservableList<String> empresas = FXCollections.observableArrayList();//Contenido del ChoiceBox de Empresas
+        Query<Empresa> q = s.createQuery("FROM Empresa");
+        q.list().forEach((e) -> empresas.add( e.getNombre()));
         cbEmpresa.setItems(empresas);
         
-        ObservableList<Profesor> profesores = FXCollections.observableArrayList();//Contenido del ChoiceBox de Profesores
-        Query<Profesor> q2 = s.createQuery("nombre FROM Profesor");
-        q2.list().forEach((p) -> profesores.add(0, p));
+        ObservableList<String> profesores = FXCollections.observableArrayList();//Contenido del ChoiceBox de Profesores
+        Query<Profesor> q2 = s.createQuery("FROM Profesor");
+        q2.list().forEach((p) -> profesores.add( p.getNombre()));
         cbNombreTutor.setItems(profesores);
         }finally{
             s.close();
@@ -99,32 +100,37 @@ public class AnadirAlumnoController implements Initializable {
     @FXML
     private void btnAceptar(ActionEvent event) {
         
+        try{
 // Busco el id de la empresa seleccionada para añadirlo a la tabla de alumno
-        s.getSessionFactory();
-        Query<Empresa> q = s.createQuery("id FROM Empresa WHERE nombre:=n");
+        s=HibernateUtil.getSessionFactory().openSession();
+        Query<Empresa> q = s.createQuery("FROM Empresa e WHERE e.nombre=:n");
         q.setParameter("n", cbEmpresa.getValue());
         
 // Busco el id del tutor seleccionado para añadirlo a la tabla de alumno    
-        Query<Profesor> q2 = s.createQuery("id FROM Empresa WHERE nombre:=np");
-        q.setParameter("np",cbNombreTutor.getValue());
-        try{
+        Query<Profesor> q2 = s.createQuery("FROM Profesor e WHERE e.nombre=:n");
+        q2.setParameter("n",cbNombreTutor.getValue());
+            
             Alumno alumno = new Alumno();
+            
             alumno.setNombre(txtFieldNombre.getText());
             alumno.setApellidos(txtFieldApellidos.getText());
             alumno.setDni(txtFieldDNI.getText());
+            alumno.setCurso(txtFieldCurso.getText());
             alumno.setFechaNac(Date.valueOf(DatepickerNacimiento.getValue()));
             alumno.setEmail(txtFieldEmail.getText());
             alumno.setTelefono(Integer.parseInt(txtFieldTelefono.getText()));
             alumno.setPassword(txtFieldContraseña.getText());
             alumno.setIdEmpresa(q.list().get(0));
             alumno.setIdProfesor(q2.list().get(0));
-            alumno.setHorasDual(null);
+            alumno.setHorasDual(15);
+            alumno.setHorasFct(15);
             alumno.setFotoImg(null);
 
             Transaction tr = s.beginTransaction();
             s.save(alumno);
             tr.commit();
         }catch (Exception ex){
+            ex.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error añadiendo alumno");
             alert.setHeaderText("No ha sido posible añadir al alumno");
