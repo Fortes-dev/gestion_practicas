@@ -56,6 +56,7 @@ public class SceneController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Bienvenido " + SessionData.getAlumnoActual().getNombre());
         stage.show();
     }
 
@@ -69,10 +70,8 @@ public class SceneController {
 
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/principalProfesor.fxml"));
         scene = new Scene(root);
-        stage.initModality(Modality.WINDOW_MODAL);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
-        stage.getIcons().add(new Image("img/logocesur.png"));
-        stage.setResizable(false);
         stage.setTitle("Bienvenido " + SessionData.getProfesorActual().getNombre());
         stage.show();
     }
@@ -106,14 +105,17 @@ public class SceneController {
     }
 
     public void switchToAñadirPracticas(ActionEvent event) throws IOException {
+        stage = new Stage();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/añadirPracticas.fxml"));
         scene = new Scene(root);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.getIcons().add(new Image("img/logocesur.png"));
-        stage.setResizable(false);;
+        stage.setResizable(false);
+        stage.setTitle("Añadir practica");
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
+        
     }
 
     public void switchToHistorial(ActionEvent event) throws IOException {
@@ -149,6 +151,7 @@ public class SceneController {
     }
 
     public void switchToPracticas(ActionEvent event) throws IOException {
+        stage =  new Stage();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/practicas.fxml"));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
@@ -156,7 +159,7 @@ public class SceneController {
         stage.setResizable(false);
         stage.setTitle("Prácticas");
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
     }
 
 }

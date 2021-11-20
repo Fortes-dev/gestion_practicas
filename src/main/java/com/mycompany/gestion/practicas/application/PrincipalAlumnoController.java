@@ -65,7 +65,7 @@ public class PrincipalAlumnoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarTareas();
 
-        lbNombreAlumno.setText(SessionData.getAlumnoActual().getNombre()+" "+SessionData.getAlumnoActual().getApellidos());
+        lbNombreAlumno.setText(SessionData.getAlumnoActual().getNombre() + " " + SessionData.getAlumnoActual().getApellidos());
         lbCurso.setText(SessionData.getAlumnoActual().getCurso());
         lbEmpresa.setText(SessionData.getAlumnoActual().getIdEmpresa().getNombre());
 
@@ -80,10 +80,10 @@ public class PrincipalAlumnoController implements Initializable {
         q.setParameter("actual", SessionData.getAlumnoActual());
         Query qa = s.createQuery("SELECT count (*) from Practica p where p.idAlumno=:actual");
         qa.setParameter("actual", SessionData.getAlumnoActual());
-        System.out.println(((Number)qa.uniqueResult()).intValue());
-        Practica [] practicas = q.list().toArray(new Practica[((Number)qa.uniqueResult()).intValue()]);
+        System.out.println(((Number) qa.uniqueResult()).intValue());
+        Practica[] practicas = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
         System.out.println(practicas.length);
-        switch (practicas.length-1) {
+        switch (practicas.length - 1) {
             case 0: {
                 btnAnnadirTarea1.setText(practicas[0].getFecha().toString());
                 btnAnnadirTarea1.setVisible(true);
