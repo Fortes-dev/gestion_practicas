@@ -107,15 +107,16 @@ public class AñadirPracticasController implements Initializable {
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
         } catch (Exception e) {
-            
-            e.printStackTrace();
-            
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error!");
             alert.setHeaderText("No ha sido posible añadir la nueva tarea");
             alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
             alert.setContentText("No puede contener un campo vació o hay algún campo erróneo");
             alert.show();
+            
+            e.printStackTrace();
+            
         } finally {
             s.close();
         }
