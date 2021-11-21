@@ -55,8 +55,6 @@ public class AnadirAlumnoController implements Initializable {
     @FXML
     private DatePicker DatepickerNacimiento;
     @FXML
-    private Button btnAnadir;
-    @FXML
     private TextField txtFieldApellidos;
     @FXML
     private ChoiceBox<String> cbEmpresa;
@@ -69,6 +67,8 @@ public class AnadirAlumnoController implements Initializable {
      * Initializes the controller class.
      */
     Session s;
+    @FXML
+    private Button btnGuardar;
    
     
     /**
