@@ -119,7 +119,7 @@ public class HistorialController implements Initializable {
             if (comboBoxTipo.getValue() == "ID") {
                 Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.id LIKE :t");
                 q.setParameter("n", 2);
-                q.setParameter("t", "%" + TextFieldBuscador.getText() + "%");
+                q.setParameter("t", TextFieldBuscador.getText());
                 contenido.addAll(q.list());
                 tablaPracticas.setItems(contenido);
 
@@ -127,7 +127,7 @@ public class HistorialController implements Initializable {
 
                 Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.fecha LIKE :t");
                 q.setParameter("n", a);
-                q.setParameter("t", "%" + TextFieldBuscador.getText() + "%");
+                q.setParameter("t", TextFieldBuscador.getText());
                 contenido.addAll(q.list());
                 tablaPracticas.setItems(contenido);
 
@@ -135,7 +135,7 @@ public class HistorialController implements Initializable {
 
                 Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.horasEmpleadas LIKE :t");
                 q.setParameter("n", a);
-                q.setParameter("t", "%" + TextFieldBuscador.getText() + "%");
+                q.setParameter("t", TextFieldBuscador.getText());
                 contenido.addAll(q.list());
                 tablaPracticas.setItems(contenido);
 
@@ -143,7 +143,7 @@ public class HistorialController implements Initializable {
 
                 Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.descripcion LIKE :t");
                 q.setParameter("n", a);
-                q.setParameter("t", "%" + TextFieldBuscador.getText() + "%");
+                q.setParameter("t", TextFieldBuscador.getText());
                 contenido.addAll(q.list());
                 tablaPracticas.setItems(contenido);
             }
