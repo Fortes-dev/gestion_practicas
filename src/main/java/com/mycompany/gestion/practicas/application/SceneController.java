@@ -56,6 +56,7 @@ public class SceneController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Bienvenido "+SessionData.getAlumnoActual().getNombre());
         stage.show();
     }
 
@@ -68,52 +69,65 @@ public class SceneController {
     public void switchToPrincipalProfesor(ActionEvent event) throws IOException {
 
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/principalProfesor.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
-        stage.getIcons().add(new Image("img/logocesur.png"));
-        stage.setResizable(false);
-        stage.setTitle("Bienvenido " + SessionData.getProfesorActual().getNombre());
+        stage.setTitle("Bienvenido "+SessionData.getProfesorActual().getNombre());
         stage.show();
     }
 
     /**
-     * Nos lleva a la escena de crud de ongs
+     * 
      *
      * @param event
      * @throws IOException
      */
     public void switchToAñadirAlumno(ActionEvent event) throws IOException {
+        stage = new Stage();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/anadirAlumno.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
-        stage.show();
+        stage.getIcons().add(new Image("img/logocesur.png"));
+        stage.setResizable(false);
+        stage.setTitle("Añadir alumno");
+        stage.setScene(scene);
+        stage.showAndWait();
+
     }
 
     /**
-     * Nos lleva a la escena de lista de ongs
+     * 
      *
      * @param event
      * @throws IOException
      */
     public void switchToAñadirEmpresa(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/annadirEmpresa.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToAñadirPracticas(ActionEvent event) throws IOException {
+        stage = new Stage();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/añadirPracticas.fxml"));
         scene = new Scene(root);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.getIcons().add(new Image("img/logocesur.png"));
-        stage.setResizable(false);;
+        stage.setResizable(false);
+        stage.setTitle("Añadir practica");
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
+
+    }
+
+    public void switchToAñadirPracticas(ActionEvent event) throws IOException {
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/annadirEmpresa.fxml"));
+        scene = new Scene(root);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+        stage.getIcons().add(new Image("img/logocesur.png"));
+        stage.setResizable(false);
+        stage.setTitle("Añadir empresa");
+        stage.setScene(scene);
+        stage.showAndWait();
+
     }
 
     public void switchToHistorial(ActionEvent event) throws IOException {
@@ -125,38 +139,56 @@ public class SceneController {
     }
 
     public void switchToPerfilAlumno(ActionEvent event) throws IOException {
+        stage = new Stage();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/perfilAlumno.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToPerfilEmpresa(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/perfilEmpresa.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToPerfilProfesor(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/perfilProfesor.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToPracticas(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/practicas.fxml"));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.getIcons().add(new Image("img/logocesur.png"));
         stage.setResizable(false);
-        stage.setTitle("Prácticas");
+        stage.setTitle("Perfil Alumno: "+SessionData.getAlumnoActual().getNombre());
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
+
     }
+
+    public void switchToPerfilEmpresa(ActionEvent event) throws IOException {
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/perfilEmpresa.fxml"));
+        scene = new Scene(root);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+        stage.getIcons().add(new Image("img/logocesur.png"));
+        stage.setResizable(false);
+        stage.setTitle("Perfil empresa: "+SessionData.getEmpresaActual().getNombre());
+        stage.setScene(scene);
+        stage.showAndWait();
+
+    }
+
+    public void switchToPerfilProfesor(ActionEvent event) throws IOException {
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/perfilProfesor.fxml"));
+        scene = new Scene(root);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+        stage.getIcons().add(new Image("img/logocesur.png"));
+        stage.setResizable(false);
+        stage.setTitle("Perfil profesor: "+SessionData.getProfesorActual().getNombre());
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    public void switchToPracticas(ActionEvent event) throws IOException {
+           stage =  new Stage();
+           root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/practicas.fxml"));
+           stage.initModality(Modality.WINDOW_MODAL);
+           stage.setScene(scene);
+           stage.getIcons().add(new Image("img/logocesur.png"));
+           stage.setResizable(false);
+           stage.setTitle("Prácticas");
+           stage.setScene(scene);
+           stage.showAndWait();
+       }
 
 }
