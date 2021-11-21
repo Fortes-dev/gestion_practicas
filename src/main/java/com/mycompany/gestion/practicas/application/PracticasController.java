@@ -11,6 +11,7 @@ import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Practica;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -92,11 +93,13 @@ public class PracticasController implements Initializable {
         observaciones.setWrapText(true);
 
         disableOptions();
-
+        Date date =SessionData.getPracticaActual().getFecha();
+        LocalDate local = date.toLocalDate();
+        datePicker.setValue(local);
         observaciones.setText(SessionData.getPracticaActual().getObservaciones());
         descripcion.setText(SessionData.getPracticaActual().getDescripcion());
 
-        setData();
+        
 
         toggle.setOnMouseClicked((Event t) -> {
             if (toggle.getState()) {

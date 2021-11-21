@@ -10,10 +10,13 @@ import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Practica;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
+import java.sql.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,16 +35,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
 /**
  * FXML Controller class
  *
  * @author hierr
  */
 public class HistorialController implements Initializable {
-
 
     @FXML
     private AnchorPane vistaHistorial;
@@ -70,113 +74,180 @@ public class HistorialController implements Initializable {
     private TableColumn<Practica, Date> colFecha;
     @FXML
     private ComboBox<String> comboBoxTipo;
-    
-    
+
     /**
      * Initializes the controller class.
      */
     Session s;
     ObservableList<Practica> contenido = FXCollections.observableArrayList();
     Alumno a = SessionData.getAlumnoActual();
-    
+    @FXML
+    private Button Volver;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        comboBoxTipo.getItems().addAll("ID","Fecha","Tipo","Horas empleadas","Descripcion");
+        comboBoxTipo.getItems().addAll("ID", "Fecha", "Tipo", "Horas empleadas", "Descripcion");
         comboBoxTipo.getSelectionModel().selectFirst();
-       
-        
-        nombreAlumno.setText(a.getNombre()+a.getApellidos());
+
+        nombreAlumno.setText(a.getNombre() + " " + a.getApellidos());
         claseAlumno.setText(a.getCurso());
-//        LogoEmpresaImg.set();
-        
-    
-    try{
-      s=HibernateUtil.getSessionFactory().openSession(); 
-    
-            colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-            colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-            colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-            colHoras.setCellValueFactory(new PropertyValueFactory<>("horasEmpleadas"));
-            colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-   
-    Query q= s.createQuery("FROM Practica p WHERE p.idAlumno=:n");
-    q.setParameter("n", a);
-    contenido.addAll(q.list());
-    tablaPracticas.setItems(contenido);
-     
-    }catch(Exception ex){
-        ex.printStackTrace();
-    }finally{
-        s.close();
-    }  
-        
-    } 
+        //        LogoEmpresaImg.set();
+
+        task();
+
+    }
 
     @FXML
     private void btnAnadir(ActionEvent event) {
         SceneController sc = new SceneController();
         try {
             sc.switchToAñadirPracticas(event);
+
         } catch (IOException ex) {
-            Logger.getLogger(HistorialController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HistorialController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @FXML
-    private void valorActualizado(ActionEvent event) {
-        
 
-
-    
-    }
 
     @FXML
     private void filtrar(KeyEvent event) {
-                try{
-              s = HibernateUtil.getSessionFactory().openSession();
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+
             if (comboBoxTipo.getValue() == "ID") {
-                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.id LIKE '%', :t, '%'");
-                q.setParameter("n", a.getId());
-                q.setParameter("t", TextFieldBuscador.getText() );
+                Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.id LIKE :t");
+                q.setParameter("n", 2);
+                q.setParameter("t", "%" + TextFieldBuscador.getText() + "%");
                 contenido.addAll(q.list());
                 tablaPracticas.setItems(contenido);
 
             } else if (comboBoxTipo.getValue() == "Fecha") {
 
-                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.fecha LIKE '%', :t, '%'");
-                q.setParameter("n", a.getId());
-                q.setParameter("t", TextFieldBuscador.getText());
+                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.fecha LIKE :t");
+                q.setParameter("n", a);
+                q.setParameter("t", "%" + TextFieldBuscador.getText() + "%");
                 contenido.addAll(q.list());
                 tablaPracticas.setItems(contenido);
-                
+
             } else if (comboBoxTipo.getValue() == "Horas empleadas") {
 
-                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.horasEmpleadas LIKE '%', :t, '%'");
-                q.setParameter("n", a.getId());
-                q.setParameter("t", TextFieldBuscador.getText());
+                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.horasEmpleadas LIKE :t");
+                q.setParameter("n", a);
+                q.setParameter("t", "%" + TextFieldBuscador.getText() + "%");
                 contenido.addAll(q.list());
-                tablaPracticas.setItems(contenido); 
-                
+                tablaPracticas.setItems(contenido);
+
             } else if (comboBoxTipo.getValue() == "Descripcion") {
 
-                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.descripcion LIKE '%', :t, '%'");
-                q.setParameter("n", a.getId());
-                q.setParameter("t", TextFieldBuscador.getText());
+                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.descripcion LIKE :t");
+                q.setParameter("n", a);
+                q.setParameter("t", "%" + TextFieldBuscador.getText() + "%");
                 contenido.addAll(q.list());
-                tablaPracticas.setItems(contenido);    
+                tablaPracticas.setItems(contenido);
             }
-                
 
-
-           }catch(Exception ex){
-               ex.printStackTrace();
-               Alert alert = new Alert(Alert.AlertType.ERROR);
-                   alert.setTitle("");
-                   alert.setHeaderText("Error mostrando datos");
-                   alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
-                   alert.show();
-           }finally{
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("");
+            alert.setHeaderText("Error mostrando datos");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+            alert.show();
+        } finally {
             s.close();
         }
     }
+
+    @FXML
+    private void btnVolver(ActionEvent event) {
+        SceneController sc = new SceneController();
+        try {
+            sc.switchToPrincipalAlumno(event);
+
+        } catch (IOException ex) {
+            Logger.getLogger(HistorialController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            s.close();
+        }
+
+    }
+
+    @FXML
+    private void seleccionar(MouseEvent event) {
+
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Integer id = tablaPracticas.getSelectionModel().getSelectedItem().getId();
+            SceneController sc = new SceneController();
+
+            Query q = s.createQuery("FROM Practica p WHERE p.id=:t");
+            q.setParameter("t", id);
+            SessionData.setPracticaActual((Practica) q.list().get(0));
+
+            try {
+                sc.switchToPracticasMouse(event);
+
+            } catch (Exception ex) {
+                Logger.getLogger(HistorialController.class
+                        .getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("");
+            alert.setHeaderText("Error accediendo a la practica");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+            alert.show();
+        } finally {
+            s.close();
+        }
+
+    }
+
+    public void task() {
+        var timer = new Timer();
+        var task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        initTabla();
+                    }
+
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(task, 0, 1500);
+    }
+    
+    
+    public void initTabla(){
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            contenido.clear();
+            
+            colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+            colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+            colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+            colHoras.setCellValueFactory(new PropertyValueFactory<>("horasEmpleadas"));
+            colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+
+            Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n");
+            q.setParameter("n", a);
+            contenido.addAll(q.list());
+            tablaPracticas.setItems(contenido);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            s.close();
+        }
+    }
+
 }
