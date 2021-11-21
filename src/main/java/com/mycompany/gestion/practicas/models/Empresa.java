@@ -21,7 +21,7 @@ public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -45,7 +45,7 @@ public class Empresa implements Serializable {
     public Empresa() {
     }
 
-    public Empresa(Long id, String nombre, String tutorEmpresa, String localizacionUrl, Integer telefono, String emailTutor, Blob logoImg) {
+    public Empresa(Integer id, String nombre, String tutorEmpresa, String localizacionUrl, Integer telefono, String emailTutor, Blob logoImg) {
         this.id = id;
         this.nombre = nombre;
         this.tutorEmpresa = tutorEmpresa;
@@ -103,11 +103,11 @@ public class Empresa implements Serializable {
         this.nombre = nombre;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

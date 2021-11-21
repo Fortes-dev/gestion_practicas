@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -21,7 +22,7 @@ public class Alumno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
@@ -57,18 +58,37 @@ public class Alumno implements Serializable {
 
     @Column(name = "horas_dual", nullable = false)
     private Integer horasDual;
-    
-    @Column(name = "curso", nullable = false)
+
+    @Column(name = "curso", length = 64)
     private String curso;
 
     @Lob
     @Column(name = "foto_img")
     private Blob fotoImg;
 
+    @OneToMany(mappedBy = "idAlumno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Practica> practicas;
+
+    public List<Practica> getPracticas() {
+        return practicas;
+    }
+
+    public void setPracticas(List<Practica> practicas) {
+        this.practicas = practicas;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
     public Alumno() {
     }
 
-    public Alumno(Long id, String nombre, String apellidos, String dni, java.sql.Date fechaNac, String email, String password, Integer telefono, Empresa idEmpresa, Profesor idProfesor, Integer horasFct,String curso, Integer horasDual, Blob fotoImg) {
+    public Alumno(Integer id, String nombre, String apellidos, String dni, java.sql.Date fechaNac, String email, String password, Integer telefono, Empresa idEmpresa, Profesor idProfesor, Integer horasFct, Integer horasDual, Blob fotoImg) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -82,11 +102,10 @@ public class Alumno implements Serializable {
         this.horasFct = horasFct;
         this.horasDual = horasDual;
         this.fotoImg = fotoImg;
-        this.curso = curso;
     }
 
     public Alumno(String nombre) {
-        this.id = 1L;
+        this.id = 1;
         this.nombre = nombre;
         this.apellidos = "García";
         this.dni = "3463456867H";
@@ -197,20 +216,12 @@ public class Alumno implements Serializable {
         this.nombre = nombre;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCurso() {
-        return curso;
-    }
-
-    public void setCurso(String curso) {
-        this.curso = curso;
     }
 
     @Override
@@ -220,7 +231,6 @@ public class Alumno implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", dni='" + dni + '\'' +
-                ", curso='" + curso + '\'' +
                 ", fechaNac=" + fechaNac +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

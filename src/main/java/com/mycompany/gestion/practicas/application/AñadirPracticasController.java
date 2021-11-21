@@ -7,6 +7,7 @@ package com.mycompany.gestion.practicas.application;
 
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
+import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Practica;
 import java.net.URL;
 import java.sql.Date;
@@ -31,6 +32,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  * FXML Controller class
@@ -56,13 +58,15 @@ public class AñadirPracticasController implements Initializable {
     @FXML
     private TextArea observaciones;
 
-    Session s;
+    private Session s;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         tipopractica.setItems(FXCollections.observableArrayList("Dual", "FCT"));
         tipopractica.getSelectionModel().selectFirst();
 
@@ -79,7 +83,6 @@ public class AñadirPracticasController implements Initializable {
 
         Date date = Date.valueOf(datePicker.getValue());
 
-        pr.setId(0L);
         pr.setIdAlumno(SessionData.getAlumnoActual());
         pr.setFecha(date);
         pr.setTipo(tipopractica.getValue());
@@ -88,7 +91,6 @@ public class AñadirPracticasController implements Initializable {
         pr.setObservaciones(observaciones.getText());
         
         try {
-            
             s = HibernateUtil.getSessionFactory().openSession();
             var tr = s.beginTransaction();
             s.save(pr);
@@ -104,7 +106,6 @@ public class AñadirPracticasController implements Initializable {
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
-            
         } catch (Exception e) {
             
             e.printStackTrace();

@@ -26,10 +26,10 @@
                      <children>
                         <TextField fx:id="txtFieldNombre" prefHeight="25.0" prefWidth="371.0" promptText="Nombre y apellidos del alumno" text="Nombre del alumno/a">
                            <HBox.margin>
-                              <Insets left="25.0" top="22.0" />
+                              <Insets left="35.0" top="22.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtFieldApellidos" layoutX="35.0" layoutY="32.0" prefHeight="25.0" prefWidth="371.0" promptText="Nombre y apellidos del alumno" text="Apellidos">
+                        <TextField fx:id="txtFieldApellidos" layoutX="35.0" layoutY="32.0" prefHeight="25.0" prefWidth="389.0" promptText="Nombre y apellidos del alumno" text="Apellidos">
                            <HBox.margin>
                               <Insets left="15.0" top="22.0" />
                            </HBox.margin>
@@ -38,14 +38,14 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="375.0">
                      <children>
-                        <TextField fx:id="txtFieldCurso" prefHeight="25.0" prefWidth="156.0" promptText="Curso y ciclo">
+                        <TextField fx:id="txtFieldCurso" prefHeight="25.0" prefWidth="165.0" promptText="Curso y ciclo">
                            <HBox.margin>
                               <Insets left="35.0" top="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <ChoiceBox fx:id="cbEmpresa" prefHeight="25.0" prefWidth="177.0">
+                        <ChoiceBox fx:id="cbEmpresa" prefHeight="25.0" prefWidth="182.0">
                            <HBox.margin>
-                              <Insets left="20.0" top="10.0" />
+                              <Insets left="14.0" top="10.0" />
                            </HBox.margin>
                         </ChoiceBox>
                      </children>
@@ -75,7 +75,7 @@
                   <Insets left="50.0" />
                </FlowPane.margin>
                <children>
-                  <ImageView fx:id="imgAñadirFoto" fitHeight="138.0" fitWidth="138.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgAñadirFoto" fitHeight="138.0" fitWidth="172.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../img/user.png" />
                      </image>
