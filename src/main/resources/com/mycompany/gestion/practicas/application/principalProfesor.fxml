@@ -24,7 +24,7 @@
             <BorderPane.margin>
                <Insets left="15.0" />
             </BorderPane.margin>
-            <Label fx:id="lbBienvenido" text="Bienvenido, Francisco">
+            <Label fx:id="lbBienvenido" onMouseClicked="#onMouseClickPerfilProfesor" text="Bienvenido, Francisco" underline="true">
                <font>
                   <Font name="System Bold" size="35.0" />
                </font>
@@ -69,7 +69,7 @@
                </HBox.margin>
             </TextField>
          </HBox>
-         <TableView fx:id="tvListaAlumnos" prefHeight="255.0" prefWidth="502.0">
+         <TableView fx:id="tvListaAlumnos" onMouseClicked="#seleccionarAlumno" prefHeight="255.0" prefWidth="502.0">
             <columns>
                <TableColumn fx:id="cNombreAlum" prefWidth="75.0" text="Nombre" />
                <TableColumn fx:id="cApellidoAlum" prefWidth="75.0" text="Apellidos" />
@@ -106,7 +106,7 @@
                </HBox.margin>
             </TextField>
          </HBox>
-         <TableView fx:id="tvListaEmpresas" prefHeight="254.0" prefWidth="500.0">
+         <TableView fx:id="tvListaEmpresas" onMouseClicked="#seleccionarEmpresa" prefHeight="254.0" prefWidth="500.0">
             <columns>
                <TableColumn fx:id="cNombreEmp" prefWidth="75.0" text="Nombre" />
                <TableColumn fx:id="cLocalizacion" prefWidth="75.0" text="Localización" />

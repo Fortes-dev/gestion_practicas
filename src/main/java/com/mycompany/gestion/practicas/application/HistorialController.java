@@ -86,6 +86,8 @@ public class HistorialController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Volver.setVisible(false);   // Arreglar para la version final
+        Volver.setDisable(false);
         comboBoxTipo.getItems().addAll("ID", "Fecha", "Tipo", "Horas empleadas", "Descripcion");
         comboBoxTipo.getSelectionModel().selectFirst();
 
@@ -160,7 +162,7 @@ public class HistorialController implements Initializable {
         }
     }
 
-    @FXML
+    /*@FXML         Arreglar version final
     private void btnVolver(ActionEvent event) {
         SceneController sc = new SceneController();
         try {
@@ -173,14 +175,14 @@ public class HistorialController implements Initializable {
             s.close();
         }
 
-    }
+    }*/
 
     @FXML
     private void seleccionar(MouseEvent event) {
 
         try {
             s = HibernateUtil.getSessionFactory().openSession();
-            Integer id = tablaPracticas.getSelectionModel().getSelectedItem().getId();
+            Long id = tablaPracticas.getSelectionModel().getSelectedItem().getId();
             SceneController sc = new SceneController();
 
             Query q = s.createQuery("FROM Practica p WHERE p.id=:t");

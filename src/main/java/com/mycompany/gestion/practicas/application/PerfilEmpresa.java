@@ -26,24 +26,13 @@ public class PerfilEmpresa implements Initializable {
     @FXML
     private Label lbTelefono;
 
-    private Session s;
-    private SceneController escena = new SceneController();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        s = HibernateUtil.getSessionFactory().openSession();
-
-        Query<Empresa> q = s.createQuery("FROM Empresa e where e.id=:id");
-        q.setParameter("id", SessionData.getEmpresaActual().getId());
-
-        Empresa e = q.list().get(0);
+        Empresa e = SessionData.getEmpresaActual();
 
         lbNombreEmpresa.setText(e.getNombre());
         lbTutorEmpresa.setText(e.getTutorEmpresa());
         lbEmail.setText(e.getEmailTutor());
         lbTelefono.setText(e.getTelefono().toString());
-
-        s.close();
     }
 }

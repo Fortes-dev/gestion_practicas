@@ -22,7 +22,7 @@ public class Alumno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
@@ -88,7 +88,7 @@ public class Alumno implements Serializable {
     public Alumno() {
     }
 
-    public Alumno(Integer id, String nombre, String apellidos, String dni, java.sql.Date fechaNac, String email, String password, Integer telefono, Empresa idEmpresa, Profesor idProfesor, Integer horasFct, Integer horasDual, Blob fotoImg) {
+    public Alumno(Long id, String nombre, String apellidos, String dni, java.sql.Date fechaNac, String email, String password, Integer telefono, Empresa idEmpresa, Profesor idProfesor, Integer horasFct, Integer horasDual, Blob fotoImg) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -102,22 +102,6 @@ public class Alumno implements Serializable {
         this.horasFct = horasFct;
         this.horasDual = horasDual;
         this.fotoImg = fotoImg;
-    }
-
-    public Alumno(String nombre) {
-        this.id = 1;
-        this.nombre = nombre;
-        this.apellidos = "García";
-        this.dni = "3463456867H";
-        this.fechaNac = new Date(0L);
-        this.email = "email";
-        this.password = "password";
-        this.telefono = 123456789;
-        this.idEmpresa = new Empresa();
-        this.idProfesor = new Profesor();
-        this.horasFct = 12;
-        this.horasDual = 8;
-        this.fotoImg = null;
     }
 
     public Blob getFotoImg() {
@@ -216,11 +200,11 @@ public class Alumno implements Serializable {
         this.nombre = nombre;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

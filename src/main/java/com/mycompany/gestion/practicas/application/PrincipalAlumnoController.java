@@ -4,6 +4,7 @@ import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Practica;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,15 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class PrincipalAlumnoController implements Initializable {
 
@@ -65,10 +65,10 @@ public class PrincipalAlumnoController implements Initializable {
     private Session s;
     private SceneController escena = new SceneController();
 
+    private Practica[] practicasT;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cargarTareas();
-
         lbNombreAlumno.setText(SessionData.getAlumnoActual().getNombre() + " " + SessionData.getAlumnoActual().getApellidos());
         lbCurso.setText(SessionData.getAlumnoActual().getCurso());
         lbEmpresa.setText(SessionData.getAlumnoActual().getIdEmpresa().getNombre());
@@ -76,18 +76,19 @@ public class PrincipalAlumnoController implements Initializable {
         lbHorasRestantes.setText(SessionData.getAlumnoActual().getHorasFct().toString());
         lbHorasRealizadas.setText(SessionData.getAlumnoActual().getHorasDual().toString());
 
+        task();
     }
 
     public void cargarTareas() {
         s = HibernateUtil.getSessionFactory().openSession();
-        Query<Practica> q = s.createQuery("FROM Practica p where p.idAlumno=:actual  order by p.fecha desc").setMaxResults(5);
+        Query<Practica> q = s.createQuery("FROM Practica p where p.idAlumno=:actual  order by p.fecha desc");
         q.setParameter("actual", SessionData.getAlumnoActual());
         Query qa = s.createQuery("SELECT count (*) from Practica p where p.idAlumno=:actual");
         qa.setParameter("actual", SessionData.getAlumnoActual());
-        Practica[] practicas = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
-        switch (practicas.length - 1) {
+        practicasT = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
+        switch (practicasT.length - 1) {
             case 0: {
-                btnAnnadirTarea1.setText(practicas[0].getFecha().toString());
+                btnAnnadirTarea1.setText(practicasT[0].getFecha().toLocalDate().toString());
                 btnAnnadirTarea1.setVisible(true);
                 btnAnnadirTarea2.setVisible(false);
                 btnAnnadirTarea3.setVisible(false);
@@ -96,8 +97,8 @@ public class PrincipalAlumnoController implements Initializable {
                 break;
             }
             case 1: {
-                btnAnnadirTarea1.setText(practicas[0].getFecha().toString());
-                btnAnnadirTarea2.setText(practicas[1].getFecha().toString());
+                btnAnnadirTarea1.setText(practicasT[0].getFecha().toString());
+                btnAnnadirTarea2.setText(practicasT[1].getFecha().toString());
                 btnAnnadirTarea2.setVisible(true);
                 btnAnnadirTarea3.setVisible(false);
                 btnAnnadirTarea4.setVisible(false);
@@ -105,31 +106,38 @@ public class PrincipalAlumnoController implements Initializable {
                 break;
             }
             case 2: {
-                btnAnnadirTarea1.setText(practicas[0].getFecha().toString());
-                btnAnnadirTarea2.setText(practicas[1].getFecha().toString());
-                btnAnnadirTarea3.setText(practicas[2].getFecha().toString());
+                btnAnnadirTarea1.setText(practicasT[0].getFecha().toString());
+                btnAnnadirTarea2.setText(practicasT[1].getFecha().toString());
+                btnAnnadirTarea3.setText(practicasT[2].getFecha().toString());
                 btnAnnadirTarea3.setVisible(true);
                 btnAnnadirTarea4.setVisible(false);
                 btnAnnadirTarea5.setVisible(false);
                 break;
             }
             case 3: {
-                btnAnnadirTarea1.setText(practicas[0].getFecha().toString());
-                btnAnnadirTarea2.setText(practicas[1].getFecha().toString());
-                btnAnnadirTarea3.setText(practicas[2].getFecha().toString());
-                btnAnnadirTarea4.setText(practicas[3].getFecha().toString());
+                btnAnnadirTarea1.setText(practicasT[0].getFecha().toString());
+                btnAnnadirTarea2.setText(practicasT[1].getFecha().toString());
+                btnAnnadirTarea3.setText(practicasT[2].getFecha().toString());
+                btnAnnadirTarea4.setText(practicasT[3].getFecha().toString());
                 btnAnnadirTarea4.setVisible(true);
                 btnAnnadirTarea5.setVisible(false);
                 break;
             }
             case 4: {
-                btnAnnadirTarea1.setText(practicas[0].getFecha().toString());
-                btnAnnadirTarea2.setText(practicas[1].getFecha().toString());
-                btnAnnadirTarea3.setText(practicas[2].getFecha().toString());
-                btnAnnadirTarea4.setText(practicas[3].getFecha().toString());
-                btnAnnadirTarea5.setText(practicas[4].getFecha().toString());
+                btnAnnadirTarea1.setText(practicasT[0].getFecha().toString());
+                btnAnnadirTarea2.setText(practicasT[1].getFecha().toString());
+                btnAnnadirTarea3.setText(practicasT[2].getFecha().toString());
+                btnAnnadirTarea4.setText(practicasT[3].getFecha().toString());
+                btnAnnadirTarea5.setText(practicasT[4].getFecha().toString());
                 btnAnnadirTarea5.setVisible(true);
                 break;
+            }
+            default: {
+                btnAnnadirTarea1.setText(practicasT[0].getFecha().toString());
+                btnAnnadirTarea2.setText(practicasT[1].getFecha().toString());
+                btnAnnadirTarea3.setText(practicasT[2].getFecha().toString());
+                btnAnnadirTarea4.setText(practicasT[3].getFecha().toString());
+                btnAnnadirTarea5.setText(practicasT[4].getFecha().toString());
             }
         }
         s.close();
@@ -161,5 +169,53 @@ public class PrincipalAlumnoController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void imgOnMouseClick(MouseEvent mouseEvent) {
+        ActionEvent e = new ActionEvent(mouseEvent.getSource(),mouseEvent.getTarget());
+        try {
+            escena.switchToPerfilAlumno(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnVerPracticaHandler(ActionEvent actionEvent) {
+        if (actionEvent.getSource()==btnAnnadirTarea1) {
+            SessionData.setPracticaActual(practicasT[0]);
+        } else if (actionEvent.getSource()==btnAnnadirTarea2) {
+            SessionData.setPracticaActual(practicasT[1]);
+        } else if (actionEvent.getSource()==btnAnnadirTarea3) {
+            SessionData.setPracticaActual(practicasT[2]);
+        } else if (actionEvent.getSource()==btnAnnadirTarea4) {
+            SessionData.setPracticaActual(practicasT[3]);
+        } else if (actionEvent.getSource()==btnAnnadirTarea5) {
+            SessionData.setPracticaActual(practicasT[4]);
+        }
+        try {
+            escena.switchToPracticas(actionEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void task() {
+        var timer = new Timer();
+        var task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        cargarTareas();
+                    }
+
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(task, 0, 1500);
     }
 }

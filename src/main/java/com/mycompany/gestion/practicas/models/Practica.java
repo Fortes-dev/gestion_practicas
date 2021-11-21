@@ -21,9 +21,9 @@ public class Practica implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_alumno", nullable = false)
     private Alumno idAlumno;
 
@@ -45,7 +45,7 @@ public class Practica implements Serializable {
     public Practica() {
     }
 
-    public Practica(Integer id, Alumno idAlumno, Date fecha, String tipo, Integer horasEmpleadas, String descripcion, String observaciones) {
+    public Practica(Long id, Alumno idAlumno, Date fecha, String tipo, Integer horasEmpleadas, String descripcion, String observaciones) {
         this.id = id;
         this.idAlumno = idAlumno;
         this.fecha = fecha;
@@ -103,11 +103,11 @@ public class Practica implements Serializable {
         this.idAlumno = idAlumno;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="vistaHistorial" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.HistorialController">
+<AnchorPane id="AnchorPane" fx:id="vistaHistorial" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.HistorialController">
    <children>
       <Label fx:id="nombreAlumno" layoutX="58.0" layoutY="31.0" prefHeight="35.0" prefWidth="297.0" text="Carles Strongs">
          <font>
@@ -44,7 +44,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <ComboBox fx:id="comboBoxTipo" layoutX="321.0" layoutY="103.0" onAction="#valorActualizado" prefHeight="25.0" prefWidth="117.0" />
-      <Button fx:id="Volver" layoutX="372.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnVolver" prefHeight="25.0" prefWidth="89.0" text="Volver" />
+      <ComboBox fx:id="comboBoxTipo" layoutX="321.0" layoutY="103.0" prefHeight="25.0" prefWidth="117.0" />
+      <Button fx:id="Volver" layoutX="372.0" layoutY="360.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Volver" />
    </children>
 </AnchorPane>
