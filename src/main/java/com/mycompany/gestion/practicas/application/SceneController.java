@@ -104,13 +104,13 @@ public class SceneController {
      */
     public void switchToAñadirEmpresa(ActionEvent event) throws IOException {
         stage = new Stage();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/añadirPracticas.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/añadirEmpresa.fxml"));
         scene = new Scene(root);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.getIcons().add(new Image("img/logocesur.png"));
         stage.setResizable(false);
-        stage.setTitle("Añadir practica");
+        stage.setTitle("Añadir Empresa");
         stage.setScene(scene);
         stage.showAndWait();
 
@@ -118,13 +118,13 @@ public class SceneController {
 
     public void switchToAñadirPracticas(ActionEvent event) throws IOException {
         stage = new Stage();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/annadirEmpresa.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/annadirPractica.fxml"));
         scene = new Scene(root);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.getIcons().add(new Image("img/logocesur.png"));
         stage.setResizable(false);
-        stage.setTitle("Añadir empresa");
+        stage.setTitle("Añadir practica");
         stage.setScene(scene);
         stage.showAndWait();
 
