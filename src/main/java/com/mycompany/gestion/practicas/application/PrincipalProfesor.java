@@ -4,19 +4,27 @@ import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Empresa;
+import com.mycompany.gestion.practicas.models.Practica;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PrincipalProfesor implements Initializable {
 
@@ -53,7 +61,7 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private TextField tfFiltroAlum;
     @FXML
-    private TableView tvListaAlumnos;
+    private TableView<Alumno> tvListaAlumnos;
     @FXML
     private Button btnAnnadirAlumno;
     @FXML
@@ -61,7 +69,7 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private TextField tfFiltroEmpresa;
     @FXML
-    private TableView tvListaEmpresas;
+    private TableView<Empresa> tvListaEmpresas;
     @FXML
     private Button btnAnnadirEmpresa;
 
@@ -90,8 +98,7 @@ public class PrincipalProfesor implements Initializable {
         cTelefonoEmp.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         cEmailEmp.setCellValueFactory(new PropertyValueFactory<>("emailTutor"));
 
-        cargarAlumnos();
-        cargarEmpresa();
+        task();
     }
 
     private void cargarAlumnos() {
@@ -125,6 +132,93 @@ public class PrincipalProfesor implements Initializable {
             escena.switchToAñadirEmpresa(actionEvent);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void task() {
+        var timer = new Timer();
+        var task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        cargarAlumnos();
+                        cargarEmpresa();
+                    }
+
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(task, 0, 1500);
+    }
+
+    @FXML
+    private void onMouseClickPerfilProfesor(MouseEvent mouseEvent) {
+        ActionEvent e = new ActionEvent(mouseEvent.getSource(),mouseEvent.getTarget());
+        try {
+            escena.switchToPerfilProfesor(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void seleccionarAlumno(MouseEvent mouseEvent) {
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+
+            Query<Alumno> q = s.createQuery("FROM Alumno a WHERE a.id=:t");
+            q.setParameter("t", tvListaAlumnos.getSelectionModel().getSelectedItem().getId());
+            SessionData.setAlumnoActual(q.list().get(0));
+
+            try {
+                ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
+                escena.switchToHistorial(e);
+            } catch (Exception ex) {
+                Logger.getLogger(HistorialController.class
+                        .getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("");
+            alert.setHeaderText("Error accediendo al alumno");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+            alert.show();
+        } finally {
+            s.close();
+        }
+    }
+
+    @FXML
+    private void seleccionarEmpresa(MouseEvent mouseEvent) {
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+
+            Query<Empresa> q = s.createQuery("FROM Empresa e WHERE e.id=:t");
+            q.setParameter("t", tvListaEmpresas.getSelectionModel().getSelectedItem().getId());
+            SessionData.setEmpresaActual(q.list().get(0));
+
+            try {
+                ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
+                escena.switchToPerfilEmpresa(e);
+            } catch (Exception ex) {
+                Logger.getLogger(HistorialController.class
+                        .getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("");
+            alert.setHeaderText("Error accediendo a la empresa");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+            alert.show();
+        } finally {
+            s.close();
         }
     }
 }

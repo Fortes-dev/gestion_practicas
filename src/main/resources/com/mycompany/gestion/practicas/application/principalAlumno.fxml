@@ -17,13 +17,16 @@
    <children>
       <BorderPane>
          <left>
-            <ImageView fx:id="imgFotoAlumno" fitHeight="116.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="imgFotoAlumno" fitHeight="116.0" fitWidth="157.0" onMouseClicked="#imgOnMouseClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="20.0" />
                </BorderPane.margin>
                <viewport>
                   <Rectangle2D />
                </viewport>
+               <image>
+                  <Image url="@../../../../../img/user.png" />
+               </image>
             </ImageView>
          </left>
          <right>
@@ -103,7 +106,7 @@
                            </graphic>
                         </Button>
                         <Separator orientation="VERTICAL" prefHeight="58.0" prefWidth="2.0" />
-                        <Button fx:id="btnAnnadirTarea1" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" text="12/03/2021" textFill="#4b2ae1" underline="true">
+                        <Button fx:id="btnAnnadirTarea1" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnVerPracticaHandler" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" textFill="#4b2ae1" underline="true">
                            <graphic>
                               <ImageView fitHeight="119.0" fitWidth="90.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -115,7 +118,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnAnnadirTarea2" contentDisplay="CENTER" layoutX="116.0" layoutY="10.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" text="11/03/2021" textFill="#4b2ae1" underline="true">
+                        <Button fx:id="btnAnnadirTarea2" contentDisplay="CENTER" layoutX="116.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnVerPracticaHandler" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" textFill="#4b2ae1" underline="true">
                            <graphic>
                               <ImageView fitHeight="119.0" fitWidth="90.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -127,7 +130,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnAnnadirTarea3" contentDisplay="CENTER" layoutX="236.0" layoutY="10.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" text="10/03/2021" textFill="#4b2ae1" underline="true">
+                        <Button fx:id="btnAnnadirTarea3" contentDisplay="CENTER" layoutX="236.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnVerPracticaHandler" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" textFill="#4b2ae1" underline="true">
                            <graphic>
                               <ImageView fitHeight="119.0" fitWidth="90.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -139,7 +142,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnAnnadirTarea4" contentDisplay="CENTER" layoutX="356.0" layoutY="10.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" text="09/03/2021" textFill="#4b2ae1" underline="true">
+                        <Button fx:id="btnAnnadirTarea4" contentDisplay="CENTER" layoutX="356.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnVerPracticaHandler" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" textFill="#4b2ae1" underline="true">
                            <graphic>
                               <ImageView fitHeight="119.0" fitWidth="90.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -151,7 +154,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnAnnadirTarea5" contentDisplay="CENTER" layoutX="476.0" layoutY="10.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" text="08/03/2021" textFill="#4b2ae1" underline="true">
+                        <Button fx:id="btnAnnadirTarea5" contentDisplay="CENTER" layoutX="476.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnVerPracticaHandler" prefHeight="77.0" prefWidth="87.0" style="-fx-background-color: none; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.5, 0.0, 0.0);" textFill="#4b2ae1" underline="true">
                            <graphic>
                               <ImageView fitHeight="119.0" fitWidth="90.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
                                  <image>

@@ -37,7 +37,6 @@ public class PerfilProfesorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         nombre.setText(SessionData.getProfesorActual().getNombre());
         email.setText(SessionData.getProfesorActual().getEmail());
-        imgPerfil.setImage((Image) SessionData.getProfesorActual().getFotoImg());
     }    
     
 }
