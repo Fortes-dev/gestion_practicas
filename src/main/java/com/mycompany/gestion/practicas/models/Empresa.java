@@ -113,14 +113,6 @@ public class Empresa implements Serializable {
 
     @Override
     public String toString() {
-        return "Empresa{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", tutorEmpresa='" + tutorEmpresa + '\'' +
-                ", localizacionUrl='" + localizacionUrl + '\'' +
-                ", telefono=" + telefono +
-                ", emailTutor='" + emailTutor + '\'' +
-                ", logoImg=" + logoImg +
-                '}';
+        return nombre;
     }
 }

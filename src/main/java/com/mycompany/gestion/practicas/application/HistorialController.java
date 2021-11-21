@@ -54,14 +54,11 @@ public class HistorialController implements Initializable {
     @FXML
     private TableColumn<Practica, Long> colId;
     @FXML
-    private TableColumn<Practica, Long> colIdAlumno;
-    @FXML
     private TableColumn<Practica, String> colTipo;
     @FXML
     private TableColumn<Practica, Integer> colHoras;
     @FXML
     private TableColumn<Practica, String> colDescripcion;
-    private TableColumn<Practica, String> colObservaciones;
     @FXML
     private TextField TextFieldBuscador;
     @FXML
@@ -97,14 +94,13 @@ public class HistorialController implements Initializable {
       s=HibernateUtil.getSessionFactory().openSession(); 
     
             colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-            colIdAlumno.setCellValueFactory(new PropertyValueFactory<>("id_alumno"));
             colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-            colHoras.setCellValueFactory(new PropertyValueFactory<>("horas_empleadas"));
+            colHoras.setCellValueFactory(new PropertyValueFactory<>("horasEmpleadas"));
             colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
    
-    Query q= s.createQuery("FROM Practica p WHERE p.id_alumno=:n");
-    q.setParameter("n", a.getId());
+    Query q= s.createQuery("FROM Practica p WHERE p.idAlumno=:n");
+    q.setParameter("n", a);
     contenido.addAll(q.list());
     tablaPracticas.setItems(contenido);
      

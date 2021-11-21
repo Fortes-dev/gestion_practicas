@@ -5,6 +5,7 @@
 package com.mycompany.gestion.practicas.application;
 
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
+import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Empresa;
 import com.mycompany.gestion.practicas.models.Profesor;
@@ -17,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -25,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -34,7 +37,7 @@ import org.hibernate.query.Query;
  *
  * @author hierr
  */
-public class AnadirAlumnoController implements Initializable {
+public class AnnadirAlumnoController implements Initializable {
 
     @FXML
     private TextField txtFieldNombre;
@@ -90,6 +93,7 @@ public class AnadirAlumnoController implements Initializable {
         Query<Profesor> q2 = s.createQuery("FROM Profesor");
         q2.list().forEach((p) -> profesores.add( p.getNombre()));
         cbNombreTutor.setItems(profesores);
+        cbNombreTutor.getSelectionModel().select(SessionData.getProfesorActual().getNombre());
         }finally{
             s.close();
         }
@@ -129,6 +133,10 @@ public class AnadirAlumnoController implements Initializable {
             Transaction tr = s.beginTransaction();
             s.save(alumno);
             tr.commit();
+
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
         }catch (Exception ex){
             ex.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);

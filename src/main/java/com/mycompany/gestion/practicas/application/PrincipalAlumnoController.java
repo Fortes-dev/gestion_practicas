@@ -24,6 +24,10 @@ import java.util.ResourceBundle;
 public class PrincipalAlumnoController implements Initializable {
 
     @FXML
+    private Button moverPIzq;
+    @FXML
+    private Button moverPDer;
+    @FXML
     private Button anadirPractica;
     @FXML
     private Button btnAnnadirTarea1;
@@ -74,15 +78,13 @@ public class PrincipalAlumnoController implements Initializable {
 
     }
 
-    private void cargarTareas() {
+    public void cargarTareas() {
         s = HibernateUtil.getSessionFactory().openSession();
         Query<Practica> q = s.createQuery("FROM Practica p where p.idAlumno=:actual  order by p.fecha desc").setMaxResults(5);
         q.setParameter("actual", SessionData.getAlumnoActual());
         Query qa = s.createQuery("SELECT count (*) from Practica p where p.idAlumno=:actual");
         qa.setParameter("actual", SessionData.getAlumnoActual());
-        System.out.println(((Number) qa.uniqueResult()).intValue());
         Practica[] practicas = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
-        System.out.println(practicas.length);
         switch (practicas.length - 1) {
             case 0: {
                 btnAnnadirTarea1.setText(practicas[0].getFecha().toString());
@@ -129,13 +131,6 @@ public class PrincipalAlumnoController implements Initializable {
                 btnAnnadirTarea5.setVisible(true);
                 break;
             }
-            default: {
-                btnAnnadirTarea1.setVisible(false);
-                btnAnnadirTarea2.setVisible(false);
-                btnAnnadirTarea3.setVisible(false);
-                btnAnnadirTarea4.setVisible(false);
-                btnAnnadirTarea5.setVisible(false);
-            }
         }
         s.close();
     }
@@ -144,6 +139,25 @@ public class PrincipalAlumnoController implements Initializable {
     private void btnAnadirPracticaHandler(ActionEvent actionEvent) {
         try {
             escena.switchToAñadirPracticas(actionEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnIrDer(ActionEvent actionEvent) {
+        scrollTareasPane.setHvalue(scrollTareasPane.getHvalue()+0.4);
+    }
+
+    @FXML
+    private void btnIrIzq(ActionEvent actionEvent) {
+        scrollTareasPane.setHvalue(scrollTareasPane.getHvalue()-0.4);
+    }
+
+    @FXML
+    private void btnHistorialHandler(ActionEvent actionEvent) {
+        try {
+            escena.switchToHistorial(actionEvent);
         } catch (IOException e) {
             e.printStackTrace();
         }

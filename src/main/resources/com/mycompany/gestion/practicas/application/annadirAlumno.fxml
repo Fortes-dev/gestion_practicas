@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.AnadirAlumnoController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.AnnadirAlumnoController">
    <children>
       <FlowPane prefHeight="166.0" prefWidth="600.0">
          <children>
@@ -24,12 +24,12 @@
                <children>
                   <HBox prefHeight="56.0" prefWidth="375.0">
                      <children>
-                        <TextField fx:id="txtFieldNombre" prefHeight="25.0" prefWidth="371.0" promptText="Nombre y apellidos del alumno" text="Nombre del alumno/a">
+                        <TextField fx:id="txtFieldNombre" prefHeight="25.0" prefWidth="371.0" promptText="Nombre">
                            <HBox.margin>
                               <Insets left="35.0" top="22.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtFieldApellidos" layoutX="35.0" layoutY="32.0" prefHeight="25.0" prefWidth="389.0" promptText="Nombre y apellidos del alumno" text="Apellidos">
+                        <TextField fx:id="txtFieldApellidos" layoutX="35.0" layoutY="32.0" prefHeight="25.0" prefWidth="389.0" promptText="Apellidos">
                            <HBox.margin>
                               <Insets left="15.0" top="22.0" />
                            </HBox.margin>
@@ -149,9 +149,9 @@
                         <Image url="@../../../../../img/calendario.png" />
                      </image>
                   </ImageView>
-                  <DatePicker fx:id="DatepickerNacimiento" prefHeight="25.0" prefWidth="138.0" promptText="fecha de nacimiento">
+                  <DatePicker fx:id="DatepickerNacimiento" prefHeight="25.0" prefWidth="138.0" promptText="Fecha de nacimiento">
                      <HBox.margin>
-                        <Insets left="18.0" top="10.0" />
+                        <Insets left="15.0" top="10.0" />
                      </HBox.margin>
                   </DatePicker>
                </children>

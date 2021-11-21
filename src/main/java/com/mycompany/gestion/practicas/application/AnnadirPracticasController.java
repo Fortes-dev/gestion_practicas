@@ -39,7 +39,7 @@ import org.hibernate.query.Query;
  *
  * @author medin
  */
-public class AñadirPracticasController implements Initializable {
+public class AnnadirPracticasController implements Initializable {
 
     @FXML
     private AnchorPane pane;
@@ -120,7 +120,6 @@ public class AñadirPracticasController implements Initializable {
         } finally {
             s.close();
         }
-        
 
     }
 

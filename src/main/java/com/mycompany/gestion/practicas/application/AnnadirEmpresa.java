@@ -5,11 +5,13 @@ import com.mycompany.gestion.practicas.models.Empresa;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -55,7 +57,9 @@ public class AnnadirEmpresa implements Initializable {
             Transaction ts = s.beginTransaction();
             s.save(e);
             ts.commit();
-
+            Node source = (Node) actionEvent.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
         } catch (Exception ex) {
 
             ex.printStackTrace();

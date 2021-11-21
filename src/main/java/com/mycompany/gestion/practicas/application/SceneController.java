@@ -84,7 +84,7 @@ public class SceneController {
      */
     public void switchToAñadirAlumno(ActionEvent event) throws IOException {
         stage = new Stage();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/anadirAlumno.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/annadirAlumno.fxml"));
         scene = new Scene(root);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
@@ -104,7 +104,7 @@ public class SceneController {
      */
     public void switchToAñadirEmpresa(ActionEvent event) throws IOException {
         stage = new Stage();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/añadirEmpresa.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/annadirEmpresa.fxml"));
         scene = new Scene(root);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
@@ -118,7 +118,7 @@ public class SceneController {
 
     public void switchToAñadirPracticas(ActionEvent event) throws IOException {
         stage = new Stage();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/annadirPractica.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/annadirPracticas.fxml"));
         scene = new Scene(root);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);

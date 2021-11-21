@@ -1,6 +1,7 @@
 com\mycompany\gestion\practicas\application\AnadirAlumnoController.class
 com\mycompany\gestion\practicas\customassets\ToggleSwitch.class
 com\mycompany\gestion\practicas\application\HistorialController.class
+com\mycompany\gestion\practicas\application\modificarAlumnoController.class
 com\mycompany\gestion\practicas\hibernate\HibernateUtil.class
 com\mycompany\gestion\practicas\application\PerfilEmpresa.class
 com\mycompany\gestion\practicas\application\AñadirPracticasController.class

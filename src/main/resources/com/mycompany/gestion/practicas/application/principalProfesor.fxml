@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1035.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalProfesor">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1035.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalProfesor">
    <BorderPane>
       <center>
          <HBox />
@@ -62,16 +62,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="cbFiltroAlum1" prefHeight="25.0" prefWidth="54.0">
-               <HBox.margin>
-                  <Insets left="50.0" right="5.0" />
-               </HBox.margin>
-            </ChoiceBox>
-            <ChoiceBox fx:id="cbFiltroAlum2" prefHeight="25.0" prefWidth="54.0">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin></ChoiceBox>
-            <ChoiceBox fx:id="cbFiltroAlum3" prefHeight="25.0" prefWidth="54.0" />
+            <ChoiceBox fx:id="cbFiltroAlum3" prefHeight="25.0" prefWidth="125.0" />
             <TextField fx:id="tfFiltroAlum">
                <HBox.margin>
                   <Insets left="30.0" />
@@ -92,7 +83,7 @@
             </columnResizePolicy>
          </TableView>
          <HBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="502.0">
-            <Button fx:id="btnAnnadirAlumno" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Añadir" />
+            <Button fx:id="btnAnnadirAlumno" mnemonicParsing="false" onAction="#btnAnadirAlumnoHandler" prefHeight="25.0" prefWidth="77.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Añadir" />
          </HBox>
       </VBox>
       <VBox>
@@ -108,17 +99,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="cbFiltroEmpre1" prefHeight="25.0" prefWidth="54.0">
-               <HBox.margin>
-                  <Insets left="50.0" right="5.0" />
-               </HBox.margin>
-            </ChoiceBox>
-            <ChoiceBox fx:id="cbFiltroEmpre2" prefHeight="25.0" prefWidth="54.0">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin></ChoiceBox>
-            <ChoiceBox fx:id="cbFiltroEmpre3" prefHeight="25.0" prefWidth="54.0" />
-            <TextField fx:id="tfFiltroEmpresa">
+            <ChoiceBox fx:id="cbFiltroEmpre3" prefHeight="25.0" prefWidth="125.0" />
+            <TextField fx:id="tfFiltroEmpresa" prefHeight="25.0" prefWidth="149.0">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
@@ -137,7 +119,7 @@
             </columnResizePolicy>
          </TableView>
          <HBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="502.0">
-            <Button fx:id="btnAnnadirEmpresa" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Añadir" />
+            <Button fx:id="btnAnnadirEmpresa" mnemonicParsing="false" onAction="#btnAnadirEmpresaHandler" prefHeight="25.0" prefWidth="77.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Añadir" />
          </HBox>
       </VBox>
    </HBox>
