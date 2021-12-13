@@ -25,6 +25,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 /**
@@ -85,6 +86,7 @@ public class LoginController implements Initializable {
             SessionData.setProfesorActual(p);
             s.close();
             try {
+                SessionData.setAdmin(Boolean.TRUE);
                 escena.switchToPrincipalProfesor(event);
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,5 +101,6 @@ public class LoginController implements Initializable {
         }
 
     }
+
 
 }

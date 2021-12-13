@@ -13,6 +13,7 @@ public class SessionData {
     private static Profesor profesorActual;
     private static Practica practicaActual;
     private static Empresa empresaActual;
+    private static Boolean admin = false;
 
     public static Alumno getAlumnoActual() {
         return alumnoActual;
@@ -46,6 +47,15 @@ public class SessionData {
         SessionData.empresaActual = empresaActual;
     }
 
+    public static Boolean getAdmin() {
+        return admin;
+    }
+
+    public static void setAdmin(Boolean admin) {
+        SessionData.admin = admin;
+    }
+
+    
     
     
 }

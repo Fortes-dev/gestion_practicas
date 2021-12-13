@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1035.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalProfesor">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1035.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalProfesor">
    <BorderPane>
       <center>
          <HBox />
@@ -63,7 +63,7 @@
                </font>
             </Label>
             <ChoiceBox fx:id="cbFiltroAlum3" prefHeight="25.0" prefWidth="125.0" />
-            <TextField fx:id="tfFiltroAlum">
+            <TextField fx:id="tfFiltroAlum" onKeyPressed="#filtroAlum">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
@@ -100,7 +100,7 @@
                </font>
             </Label>
             <ChoiceBox fx:id="cbFiltroEmpre3" prefHeight="25.0" prefWidth="125.0" />
-            <TextField fx:id="tfFiltroEmpresa" prefHeight="25.0" prefWidth="149.0">
+            <TextField fx:id="tfFiltroEmpresa" onKeyPressed="#filtroEmpresa" prefHeight="25.0" prefWidth="149.0">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
