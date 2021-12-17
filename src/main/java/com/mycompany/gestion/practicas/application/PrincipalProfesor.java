@@ -162,6 +162,7 @@ public class PrincipalProfesor implements Initializable {
 //        };
 //        timer.scheduleAtFixedRate(task, 0, 1500);
 //    }
+    
     @FXML
     private void onMouseClickPerfilProfesor(MouseEvent mouseEvent) {
         ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());

@@ -5,7 +5,6 @@
  */
 package com.mycompany.gestion.practicas.application;
 
-import com.mycompany.gestion.practicas.customassets.CallBack;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -62,7 +61,6 @@ public class AnnadirPracticasController implements Initializable {
     private TextArea observaciones;
 
     private Session s;
-    CallBack callBack;
 
     /**
      * Initializes the controller class.
@@ -122,7 +120,6 @@ public class AnnadirPracticasController implements Initializable {
             e.printStackTrace();
             
         } finally {
-            callBack.refresh();
             s.close();
         }
 

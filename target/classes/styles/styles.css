@@ -14,11 +14,25 @@
 }
 
 .boton:armed {
-    -fx-background-color: #155acc;
+    -fx-background-color: #154acc;
 }
 
 .boton:focused {
     -fx-border-color: #84aaee;
+}
+
+.botonRefresh {
+    -fx-background-color: none;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.1, 0.0, 0.0);
+    -fx-opacity: 0.5;
+}
+
+.botonRefresh:hover {
+    -fx-opacity: 0.8;
+}
+
+.botonRefresh:armed {
+    -fx-opacity: 1;
 }
 
 .botonRojo {
@@ -33,6 +47,8 @@
     -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.1, 0.0, 0.0);
     -fx-background-color: #ff0000;
 }
+
+
 
 .botonRojo:armed {
     -fx-background-color: #ad0404;

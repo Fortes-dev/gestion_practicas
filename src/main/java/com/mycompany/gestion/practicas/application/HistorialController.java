@@ -4,7 +4,6 @@
  */
 package com.mycompany.gestion.practicas.application;
 
-import com.mycompany.gestion.practicas.customassets.CallBack;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -21,6 +20,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -38,6 +38,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import static javafx.scene.input.MouseEvent.MOUSE_ENTERED;
+import static javafx.scene.input.MouseEvent.MOUSE_EXITED;
 import javafx.scene.layout.AnchorPane;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -47,7 +49,7 @@ import org.hibernate.query.Query;
  *
  * @author hierr
  */
-public class HistorialController implements CallBack, Initializable  {
+public class HistorialController implements Initializable {
 
     @FXML
     private AnchorPane vistaHistorial;
@@ -76,7 +78,10 @@ public class HistorialController implements CallBack, Initializable  {
     private TableColumn<Practica, Date> colFecha;
     @FXML
     private ComboBox<String> comboBoxTipo;
-
+    @FXML
+    private Button Volver;
+    @FXML
+    private Button btnRefresh;
 
     /**
      * Initializes the controller class.
@@ -84,8 +89,6 @@ public class HistorialController implements CallBack, Initializable  {
     Session s;
     ObservableList<Practica> contenido = FXCollections.observableArrayList();
     Alumno a = SessionData.getAlumnoActual();
-    @FXML
-    private Button Volver;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -99,10 +102,11 @@ public class HistorialController implements CallBack, Initializable  {
         //        LogoEmpresaImg.set();
 
         initTabla();
-            
+
     }
 
     @FXML
+
     private void btnAnadir(ActionEvent event) {
         SceneController sc = new SceneController();
         try {
@@ -155,7 +159,7 @@ public class HistorialController implements CallBack, Initializable  {
                     contenido.clear();
                     contenido.addAll(q.list());
                     tablaPracticas.setItems(contenido);
-                } else if(comboBoxTipo.getValue() == "Tipo") {
+                } else if (comboBoxTipo.getValue() == "Tipo") {
                     Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.tipo LIKE CONCAT ('%',:t,'%')");
                     q.setParameter("n", a);
                     q.setParameter("t", TextFieldBuscador.getText());
@@ -210,23 +214,6 @@ public class HistorialController implements CallBack, Initializable  {
         }
     }
 
-//    public void task() {
-//        var timer = new Timer();
-//        var task = new TimerTask() {
-//            @Override
-//            public void run() {
-//                Platform.runLater(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        initTabla();
-//                    }
-//
-//                });
-//            }
-//
-//        };
-//        timer.scheduleAtFixedRate(task, 0, 1500);
-//    }
     public void initTabla() {
         try {
             s = HibernateUtil.getSessionFactory().openSession();
@@ -261,8 +248,8 @@ public class HistorialController implements CallBack, Initializable  {
         }
     }
 
-    @Override
-    public void refresh() {
+    @FXML
+    private void refreshTable(ActionEvent event) {
         initTabla();
     }
 

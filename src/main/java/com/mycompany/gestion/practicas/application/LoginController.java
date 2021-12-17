@@ -25,16 +25,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
 /**
  * FXML Controller class
  *
  * @author medin
  */
 public class LoginController implements Initializable {
-
 
     @FXML
     private TextField userField;
@@ -44,6 +46,8 @@ public class LoginController implements Initializable {
     private Hyperlink linkPassword;
     @FXML
     private Button btnAceptar;
+    @FXML
+    private BorderPane parent;
 
     private Session s;
     private SceneController escena = new SceneController();
@@ -55,15 +59,32 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         s = HibernateUtil.getSessionFactory().openSession();
 
+        parent.setOnKeyPressed((KeyEvent t) -> {
+            if (t.getCode() == KeyCode.ENTER) {
+                ActionEvent e = new ActionEvent(t.getSource(), t.getTarget());
+                logIn(e);
+            }
+        });
     }
 
     @FXML
     private void linkPasswordHandler(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Recuperar contraseña");
+        alert.setHeaderText("Oh, parece que no recuerdas tu contraseña");
+        alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+        alert.setContentText("Aún no está implementada esta funcionalidad");
+        alert.show();
     }
 
     @FXML
     private void btnAceptarHandler(ActionEvent event) {
 
+        logIn(event);
+
+    }
+
+    private void logIn(ActionEvent event) {
         Query listAlumno = s.createQuery("From Alumno a WHERE a.email=:email and a.password=:password");
         listAlumno.setParameter("email", userField.getText());
         listAlumno.setParameter("password", passwordField.getText());
@@ -99,8 +120,5 @@ public class LoginController implements Initializable {
             alert.setContentText("Usuario: " + userField.getText() + " no existe o contraseña incorrecta");
             alert.show();
         }
-
     }
-
-
 }

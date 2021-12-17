@@ -37,6 +37,12 @@ public class Empresa implements Serializable {
 
     @Column(name = "email_tutor", nullable = false)
     private String emailTutor;
+    
+    @Column(name = "latitud", nullable = false)
+    private Double latitud;
+    
+    @Column(name = "longitud", nullable = false)
+    private Double longitud;
 
     @Lob
     @Column(name = "logo_img")
@@ -111,6 +117,23 @@ public class Empresa implements Serializable {
         this.id = id;
     }
 
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    
     @Override
     public String toString() {
         return nombre;
