@@ -1,5 +1,6 @@
 package com.mycompany.gestion.practicas.application;
 
+import com.mycompany.gestion.practicas.customassets.Constants;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -20,6 +21,7 @@ import org.hibernate.query.Query;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import javafx.scene.layout.VBox;
 
 public class PrincipalAlumnoController implements Initializable {
 
@@ -42,8 +44,6 @@ public class PrincipalAlumnoController implements Initializable {
     @FXML
     private HBox hbTareas;
     @FXML
-    private ImageView ivLibro;
-    @FXML
     private ImageView imgFotoAlumno;
     @FXML
     private ImageView imgLogoEmpresa;
@@ -64,8 +64,15 @@ public class PrincipalAlumnoController implements Initializable {
 
     private Session s;
     private SceneController escena = new SceneController();
-
     private Practica[] practicasT;
+    private Alumno a = SessionData.getAlumnoActual();
+    
+    @FXML
+    private VBox vFondo;
+    @FXML
+    private Label fctHorasRestantes;
+    @FXML
+    private Label fctHorasRealizadas;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,18 +80,30 @@ public class PrincipalAlumnoController implements Initializable {
         lbCurso.setText(SessionData.getAlumnoActual().getCurso());
         lbEmpresa.setText(SessionData.getAlumnoActual().getIdEmpresa().getNombre());
 
-        lbHorasRestantes.setText(SessionData.getAlumnoActual().getHorasFct().toString());
-        lbHorasRealizadas.setText(SessionData.getAlumnoActual().getHorasDual().toString());
-
         task();
+    }
+    
+    public void cargarHoras() {
+        lbHorasRestantes.setText(getDualHoras(a, "restantes").toString());
+        lbHorasRealizadas.setText(getDualHoras(a, "totales").toString());
+        fctHorasRestantes.setText(getFctHoras(a, "restantes").toString());
+        fctHorasRealizadas.setText(getFctHoras(a, "totales").toString());
     }
 
     public void cargarTareas() {
+
         s = HibernateUtil.getSessionFactory().openSession();
+        
         Query<Practica> q = s.createQuery("FROM Practica p where p.idAlumno=:actual  order by p.fecha desc");
         q.setParameter("actual", SessionData.getAlumnoActual());
+        
         Query qa = s.createQuery("SELECT count (*) from Practica p where p.idAlumno=:actual");
         qa.setParameter("actual", SessionData.getAlumnoActual());
+       
+        Query<Alumno> ap = s.createQuery("FROM Alumno a where a.id=:id");
+        ap.setParameter("id", a.getId());
+        
+        a = ap.list().get(0);
         practicasT = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
         switch (practicasT.length - 1) {
             case 0: {
@@ -154,12 +173,12 @@ public class PrincipalAlumnoController implements Initializable {
 
     @FXML
     private void btnIrDer(ActionEvent actionEvent) {
-        scrollTareasPane.setHvalue(scrollTareasPane.getHvalue()+0.4);
+        scrollTareasPane.setHvalue(scrollTareasPane.getHvalue() + 0.4);
     }
 
     @FXML
     private void btnIrIzq(ActionEvent actionEvent) {
-        scrollTareasPane.setHvalue(scrollTareasPane.getHvalue()-0.4);
+        scrollTareasPane.setHvalue(scrollTareasPane.getHvalue() - 0.4);
     }
 
     @FXML
@@ -173,7 +192,7 @@ public class PrincipalAlumnoController implements Initializable {
 
     @FXML
     private void imgOnMouseClick(MouseEvent mouseEvent) {
-        ActionEvent e = new ActionEvent(mouseEvent.getSource(),mouseEvent.getTarget());
+        ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
         try {
             escena.switchToPerfilAlumno(e);
         } catch (IOException ex) {
@@ -183,21 +202,56 @@ public class PrincipalAlumnoController implements Initializable {
 
     @FXML
     private void btnVerPracticaHandler(ActionEvent actionEvent) {
-        if (actionEvent.getSource()==btnAnnadirTarea1) {
+        if (actionEvent.getSource() == btnAnnadirTarea1) {
             SessionData.setPracticaActual(practicasT[0]);
-        } else if (actionEvent.getSource()==btnAnnadirTarea2) {
+        } else if (actionEvent.getSource() == btnAnnadirTarea2) {
             SessionData.setPracticaActual(practicasT[1]);
-        } else if (actionEvent.getSource()==btnAnnadirTarea3) {
+        } else if (actionEvent.getSource() == btnAnnadirTarea3) {
             SessionData.setPracticaActual(practicasT[2]);
-        } else if (actionEvent.getSource()==btnAnnadirTarea4) {
+        } else if (actionEvent.getSource() == btnAnnadirTarea4) {
             SessionData.setPracticaActual(practicasT[3]);
-        } else if (actionEvent.getSource()==btnAnnadirTarea5) {
+        } else if (actionEvent.getSource() == btnAnnadirTarea5) {
             SessionData.setPracticaActual(practicasT[4]);
         }
         try {
             escena.switchToPracticas(actionEvent);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private Integer getDualHoras(Alumno a, String total) {
+
+        Integer horas = 0;
+        var list = a.getPracticas();
+
+        for (Practica p : list) {
+            if (p.getTipo().equals("Dual")) {
+                horas += p.getHorasEmpleadas();
+            }
+        }
+
+        if (total.equals("restantes")) {
+            return Constants.HORAS_TOTAL_DUAL - horas;
+        } else {
+            return horas;
+        }
+    }
+
+    private Integer getFctHoras(Alumno a, String total) {
+
+        Integer horas = 0;
+        var list = a.getPracticas();
+
+        for (Practica p : list) {
+            if (p.getTipo().equals("FCT")) {
+                horas += p.getHorasEmpleadas();
+            }
+        }
+        if (total.equals("restantes")) {
+            return Constants.HORAS_TOTAL_DUAL - horas;
+        } else {
+            return horas;
         }
     }
 
@@ -210,6 +264,7 @@ public class PrincipalAlumnoController implements Initializable {
                     @Override
                     public void run() {
                         cargarTareas();
+                        cargarHoras();
                     }
 
                 });

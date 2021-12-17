@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vFondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="655.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalAlumnoController">
+<VBox fx:id="vFondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="655.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalAlumnoController">
    <children>
       <BorderPane>
          <left>
@@ -191,7 +191,7 @@
       </Button>
       <HBox alignment="CENTER_LEFT" spacing="20.0">
          <children>
-            <Label text="Horas restantes:">
+            <Label text="Horas restantes Dual:">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -217,6 +217,43 @@
                </font>
             </Label>
             <Label fx:id="lbHorasRealizadas" text="220h">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets left="89.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="20.0">
+         <children>
+            <Label text="Horas restantes FCT:">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="fctHorasRestantes" text="56h">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets left="89.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="656.0" spacing="20.0">
+         <children>
+            <Label text="Horas realizadas:">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="fctHorasRealizadas" text="220h">
                <font>
                   <Font size="19.0" />
                </font>

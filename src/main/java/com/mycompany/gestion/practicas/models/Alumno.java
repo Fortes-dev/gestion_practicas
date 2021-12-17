@@ -66,7 +66,7 @@ public class Alumno implements Serializable {
     @Column(name = "foto_img")
     private Blob fotoImg;
 
-    @OneToMany(mappedBy = "idAlumno", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "idAlumno", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Practica> practicas;
 
     public List<Practica> getPracticas() {
