@@ -96,7 +96,7 @@ public class HistorialController implements Initializable {
         //        LogoEmpresaImg.set();
 
         task();
-
+    
     }
 
     @FXML
@@ -115,13 +115,16 @@ public class HistorialController implements Initializable {
 
     @FXML
     private void filtrar(KeyEvent event) {
+        if(TextFieldBuscador.getText()!=null){
+        
         try {
             s = HibernateUtil.getSessionFactory().openSession();
 
             if (comboBoxTipo.getValue() == "ID") {
                 Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.id LIKE :t");
-                q.setParameter("n", 2);
-                q.setParameter("t", TextFieldBuscador.getText());
+                q.setParameter("n", a);
+                q.setParameter("t", Long.parseLong(TextFieldBuscador.getText()));
+                contenido.clear();
                 contenido.addAll(q.list());
                 tablaPracticas.setItems(contenido);
 
@@ -159,6 +162,7 @@ public class HistorialController implements Initializable {
             alert.show();
         } finally {
             s.close();
+        }
         }
     }
 

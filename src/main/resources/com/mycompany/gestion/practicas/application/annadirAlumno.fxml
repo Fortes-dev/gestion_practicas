@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.AnnadirAlumnoController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.AnnadirAlumnoController">
    <children>
       <FlowPane prefHeight="166.0" prefWidth="600.0">
          <children>
@@ -75,12 +75,12 @@
                   <Insets left="50.0" />
                </FlowPane.margin>
                <children>
-                  <ImageView fx:id="imgAñadirFoto" fitHeight="138.0" fitWidth="172.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgAñadirFoto" fitHeight="138.0" fitWidth="172.0" layoutX="9.0" layoutY="9.0" onMouseClicked="#btnAnadirImagenIcon" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../img/user.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="txtAñadirFoto" alignment="CENTER" layoutX="16.0" layoutY="79.0" prefHeight="19.0" prefWidth="125.0" text="Añadir foto" textFill="#00338a">
+                  <Label fx:id="txtAñadirFoto" alignment="CENTER" layoutX="16.0" layoutY="79.0" onMouseClicked="#btnAnadirFoto" prefHeight="19.0" prefWidth="125.0" text="Añadir foto" textFill="#00338a">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

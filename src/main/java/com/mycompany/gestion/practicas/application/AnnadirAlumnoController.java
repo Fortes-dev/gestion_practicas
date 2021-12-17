@@ -9,6 +9,7 @@ import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Empresa;
 import com.mycompany.gestion.practicas.models.Profesor;
+import java.io.File;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -27,6 +29,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -71,7 +77,7 @@ public class AnnadirAlumnoController implements Initializable {
      */
     Session s;
     @FXML
-    private Button btnGuardar;
+    private Button btnAnadir;
    
     
     /**
@@ -151,5 +157,26 @@ public class AnnadirAlumnoController implements Initializable {
         
         
     }
+
+//    @FXML
+//    private void btnAnadirImagenIcon(MouseEvent event) {
+//        FileChooser file = new FileChooser();  
+//        file.setTitle("Open File");  
+//                  
+//        HBox root = new HBox();            
+//        root.setSpacing(20);  
+//      
+//        Scene scene = new Scene(root,350,100);  
+//          
+//        primaryStage.setTitle("FileChooser Example");  
+//        primaryStage.show();  
+// }
+//        
+//        
+//    
+//
+//    @FXML
+//    private void btnAnadirFoto(MouseEvent event) {
+//    }
     
 }

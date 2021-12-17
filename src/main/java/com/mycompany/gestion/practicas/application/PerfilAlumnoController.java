@@ -65,8 +65,8 @@ public class PerfilAlumnoController implements Initializable {
 
         txtNombre.setText(a.getNombre()+a.getApellidos());
         txtClase.setText(a.getCurso());
-        txtEmpresa.setText(a.getIdEmpresa().getNombre());// Saco el nombre de la empresa que me ha devuelto la consulta q2
-        txtProfesor.setText(a.getIdProfesor().getNombre());// Saco el nombre del tutor que me ha devuelto la consulta q1
+        txtEmpresa.setText(a.getIdEmpresa().getNombre());
+        txtProfesor.setText(a.getIdProfesor().getNombre());
         txtCentro.setText("Cesur Malaga Este");
         txtDNI.setText(a.getDni());
         txtTelefono.setText(a.getTelefono().toString());
