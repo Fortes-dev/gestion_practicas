@@ -192,19 +192,6 @@ public class SceneController {
         stage.setScene(scene);
         stage.showAndWait();
     }
-
-      public void switchToPracticasMouse(MouseEvent event) throws IOException {
-           stage =  new Stage();
-           root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/practicas.fxml"));
-           stage.initModality(Modality.APPLICATION_MODAL);
-           scene = new Scene(root);
-           stage.setScene(scene);
-           stage.getIcons().add(new Image("img/logocesur.png"));
-           stage.setResizable(false);
-           stage.setTitle("Prácticas");
-           stage.setScene(scene);
-           stage.showAndWait();
-       }
     
     public void switchToPracticas(ActionEvent event) throws IOException {
            stage =  new Stage();

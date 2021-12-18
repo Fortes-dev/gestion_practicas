@@ -39,6 +39,8 @@ import org.hibernate.query.Query;
  *
  * @author medin
  */
+
+
 public class AnnadirPracticasController implements Initializable {
 
     @FXML
@@ -124,3 +126,4 @@ public class AnnadirPracticasController implements Initializable {
     }
 
 }
+

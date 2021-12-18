@@ -25,6 +25,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class PrincipalProfesor implements Initializable {
 
@@ -75,12 +78,15 @@ public class PrincipalProfesor implements Initializable {
 
     private Session s;
     private SceneController escena = new SceneController();
+    ObservableList<Alumno> contenidoAlumno = FXCollections.observableArrayList();
+    ObservableList<Empresa> contenidoEmpresa = FXCollections.observableArrayList();
+    Alumno a = SessionData.getAlumnoActual();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        lbBienvenido.setText("Bienvenido, "+SessionData.getProfesorActual().getNombre());
+        lbBienvenido.setText("Bienvenido, " + SessionData.getProfesorActual().getNombre());
 
-        cbFiltroAlum3.setItems(FXCollections.observableArrayList("DNI", "Empresa"));
+        cbFiltroAlum3.setItems(FXCollections.observableArrayList("Nombre", "Apellido", "DNI", "Empresa"));
         cbFiltroAlum3.getSelectionModel().selectFirst();
         cbFiltroEmpre3.setItems(FXCollections.observableArrayList("Nombre", "Tutor Empresa"));
         cbFiltroEmpre3.getSelectionModel().selectFirst();
@@ -98,7 +104,9 @@ public class PrincipalProfesor implements Initializable {
         cTelefonoEmp.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         cEmailEmp.setCellValueFactory(new PropertyValueFactory<>("emailTutor"));
 
-        task();
+        cargarAlumnos();
+        cargarEmpresa();
+//        task();
     }
 
     private void cargarAlumnos() {
@@ -109,6 +117,7 @@ public class PrincipalProfesor implements Initializable {
         tvListaAlumnos.getItems().addAll(q.list());
         s.close();
     }
+
     private void cargarEmpresa() {
         tvListaEmpresas.getItems().clear();
         s = HibernateUtil.getSessionFactory().openSession();
@@ -135,28 +144,28 @@ public class PrincipalProfesor implements Initializable {
         }
     }
 
-    public void task() {
-        var timer = new Timer();
-        var task = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        cargarAlumnos();
-                        cargarEmpresa();
-                    }
-
-                });
-            }
-
-        };
-        timer.scheduleAtFixedRate(task, 0, 1500);
-    }
-
+//    public void task() {
+//        var timer = new Timer();
+//        var task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                Platform.runLater(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        cargarAlumnos();
+//                        cargarEmpresa();
+//                    }
+//
+//                });
+//            }
+//
+//        };
+//        timer.scheduleAtFixedRate(task, 0, 1500);
+//    }
+    
     @FXML
     private void onMouseClickPerfilProfesor(MouseEvent mouseEvent) {
-        ActionEvent e = new ActionEvent(mouseEvent.getSource(),mouseEvent.getTarget());
+        ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
         try {
             escena.switchToPerfilProfesor(e);
         } catch (IOException ex) {
@@ -219,6 +228,100 @@ public class PrincipalProfesor implements Initializable {
             alert.show();
         } finally {
             s.close();
+        }
+    }
+
+    @FXML
+    private void filtroAlum(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                s = HibernateUtil.getSessionFactory().openSession();
+
+                if (tfFiltroAlum.getText() == "") {
+                    cargarAlumnos();
+                } else if (cbFiltroAlum3.getValue() == "DNI") {
+                    Query q = s.createQuery("FROM Alumno p WHERE p.dni LIKE :t");
+                    q.setParameter("t", Integer.parseInt(tfFiltroAlum.getText()));
+                    contenidoAlumno.clear();
+                    contenidoAlumno.addAll(q.list());
+                    tvListaAlumnos.setItems(contenidoAlumno);
+
+                } else if (cbFiltroAlum3.getValue() == "Nombre") {
+
+                    Query q = s.createQuery("FROM Alumno p WHERE p.nombre LIKE CONCAT ('%',:t,'%')");
+                    q.setParameter("t", tfFiltroAlum.getText());
+                    contenidoAlumno.clear();
+                    contenidoAlumno.addAll(q.list());
+                    tvListaAlumnos.setItems(contenidoAlumno);
+                } else if (cbFiltroAlum3.getValue() == "Apellidos") {
+
+                    Query q = s.createQuery("FROM Alumno p WHERE p.apellidos LIKE CONCAT ('%',:t,'%')");
+                    q.setParameter("t", tfFiltroAlum.getText());
+                    contenidoAlumno.clear();
+                    contenidoAlumno.addAll(q.list());
+                    tvListaAlumnos.setItems(contenidoAlumno);
+                } else if (cbFiltroAlum3.getValue() == "Empresa") {
+
+                    Query qq = s.createQuery("FROM Empresa e WHERE e.nombre LIKE CONCAT ('%',:t,'%')");
+                    qq.setParameter("t", tfFiltroAlum.getText());
+
+                    Empresa e = (Empresa) qq.uniqueResult();
+
+                    Query q = s.createQuery("FROM Alumno p WHERE p.idEmpresa LIKE CONCAT ('%',:t,'%')");
+                    q.setParameter("t", e);
+
+                    contenidoAlumno.clear();
+                    contenidoAlumno.addAll(q.list());
+                    tvListaAlumnos.setItems(contenidoAlumno);
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("");
+                alert.setHeaderText("Error mostrando datos");
+                alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+                alert.show();
+            } finally {
+                s.close();
+            }
+        }
+    }
+
+    @FXML
+    private void filtroEmpresa(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                s = HibernateUtil.getSessionFactory().openSession();
+
+                if (tfFiltroEmpresa.getText() == "") {
+                    cargarEmpresa();
+                } else if (cbFiltroEmpre3.getValue() == "Nombre") {
+                    Query q = s.createQuery("FROM Empresa p WHERE p.nombre LIKE CONCAT ('%',:t,'%')");
+                    q.setParameter("t", tfFiltroEmpresa.getText());
+                    contenidoEmpresa.clear();
+                    contenidoEmpresa.addAll(q.list());
+                    tvListaEmpresas.setItems(contenidoEmpresa);
+
+                } else if (cbFiltroEmpre3.getValue() == "Tutor Empresa") {
+
+                    Query q = s.createQuery("FROM Empresa p WHERE p.tutorEmpresa LIKE CONCAT ('%',:t,'%')");
+                    q.setParameter("t", tfFiltroEmpresa.getText());
+                    contenidoEmpresa.clear();
+                    contenidoEmpresa.addAll(q.list());
+                    tvListaEmpresas.setItems(contenidoEmpresa);
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("");
+                alert.setHeaderText("Error mostrando datos");
+                alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+                alert.show();
+            } finally {
+                s.close();
+            }
         }
     }
 }

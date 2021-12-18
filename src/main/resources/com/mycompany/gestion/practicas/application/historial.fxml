@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="vistaHistorial" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.HistorialController">
+<AnchorPane id="AnchorPane" fx:id="vistaHistorial" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.HistorialController">
    <children>
-      <Label fx:id="nombreAlumno" layoutX="58.0" layoutY="31.0" prefHeight="35.0" prefWidth="297.0" text="Carles Strongs">
+      <Label fx:id="nombreAlumno" layoutX="58.0" layoutY="31.0" onMouseClicked="#btnNombreAlumno" prefHeight="35.0" prefWidth="297.0" text="Carles Strongs">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -37,7 +37,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="TextFieldBuscador" layoutX="449.0" layoutY="103.0" onKeyTyped="#filtrar" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="TextFieldBuscador" layoutX="449.0" layoutY="103.0" onKeyPressed="#filtrar" prefHeight="25.0" prefWidth="117.0" />
       <Button fx:id="btnAnadir" layoutX="477.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnAnadir" prefHeight="25.0" prefWidth="89.0" text="Añadir" />
       <Label fx:id="claseAlumno" layoutX="58.0" layoutY="73.0" prefHeight="17.0" prefWidth="89.0" text="1º TECO">
          <font>
@@ -46,5 +46,14 @@
       </Label>
       <ComboBox fx:id="comboBoxTipo" layoutX="321.0" layoutY="103.0" prefHeight="25.0" prefWidth="117.0" />
       <Button fx:id="Volver" layoutX="372.0" layoutY="360.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Volver" />
+      <Button fx:id="btnRefresh" contentDisplay="CENTER" layoutX="6.0" layoutY="138.0" mnemonicParsing="false" onAction="#refreshTable" prefHeight="25.0" prefWidth="0.0" styleClass="botonRefresh" stylesheets="@../../../../../styles/styles.css">
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../img/refresh.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

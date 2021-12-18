@@ -20,6 +20,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -34,8 +35,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import static javafx.scene.input.MouseEvent.MOUSE_ENTERED;
+import static javafx.scene.input.MouseEvent.MOUSE_EXITED;
 import javafx.scene.layout.AnchorPane;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -74,6 +78,10 @@ public class HistorialController implements Initializable {
     private TableColumn<Practica, Date> colFecha;
     @FXML
     private ComboBox<String> comboBoxTipo;
+    @FXML
+    private Button Volver;
+    @FXML
+    private Button btnRefresh;
 
     /**
      * Initializes the controller class.
@@ -81,8 +89,6 @@ public class HistorialController implements Initializable {
     Session s;
     ObservableList<Practica> contenido = FXCollections.observableArrayList();
     Alumno a = SessionData.getAlumnoActual();
-    @FXML
-    private Button Volver;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -95,11 +101,12 @@ public class HistorialController implements Initializable {
         claseAlumno.setText(a.getCurso());
         //        LogoEmpresaImg.set();
 
-        task();
-    
+        initTabla();
+
     }
 
     @FXML
+
     private void btnAnadir(ActionEvent event) {
         SceneController sc = new SceneController();
         try {
@@ -111,78 +118,71 @@ public class HistorialController implements Initializable {
         }
     }
 
-
-
     @FXML
     private void filtrar(KeyEvent event) {
-        if(TextFieldBuscador.getText()!=null){
-        
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
 
-            if (comboBoxTipo.getValue() == "ID") {
-                Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.id LIKE :t");
-                q.setParameter("n", a);
-                q.setParameter("t", Long.parseLong(TextFieldBuscador.getText()));
-                contenido.clear();
-                contenido.addAll(q.list());
-                tablaPracticas.setItems(contenido);
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                s = HibernateUtil.getSessionFactory().openSession();
 
-            } else if (comboBoxTipo.getValue() == "Fecha") {
+                if (TextFieldBuscador.getText() == "") {
+                    initTabla();
+                } else if (comboBoxTipo.getValue() == "ID") {
+                    Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.id LIKE :t");
+                    q.setParameter("n", a);
+                    q.setParameter("t", Long.parseLong(TextFieldBuscador.getText()));
+                    contenido.clear();
+                    contenido.addAll(q.list());
+                    tablaPracticas.setItems(contenido);
 
-                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.fecha LIKE :t");
-                q.setParameter("n", a);
-                q.setParameter("t", TextFieldBuscador.getText());
-                contenido.addAll(q.list());
-                tablaPracticas.setItems(contenido);
+                } else if (comboBoxTipo.getValue() == "Fecha") {
 
-            } else if (comboBoxTipo.getValue() == "Horas empleadas") {
+                    Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.fecha LIKE CONCAT ('%',:t,'%')");
+                    q.setParameter("n", a);
+                    q.setParameter("t", TextFieldBuscador.getText());
+                    contenido.clear();
+                    contenido.addAll(q.list());
+                    tablaPracticas.setItems(contenido);
+                } else if (comboBoxTipo.getValue() == "Horas empleadas") {
 
-                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.horasEmpleadas LIKE :t");
-                q.setParameter("n", a);
-                q.setParameter("t", TextFieldBuscador.getText());
-                contenido.addAll(q.list());
-                tablaPracticas.setItems(contenido);
+                    Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.horasEmpleadas LIKE :t");
+                    q.setParameter("n", a);
+                    q.setParameter("t", Integer.parseInt(TextFieldBuscador.getText()));
+                    contenido.clear();
+                    contenido.addAll(q.list());
+                    tablaPracticas.setItems(contenido);
+                } else if (comboBoxTipo.getValue() == "Descripcion") {
 
-            } else if (comboBoxTipo.getValue() == "Descripcion") {
+                    Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.descripcion LIKE CONCAT ('%',:t,'%')");
+                    q.setParameter("n", a);
+                    q.setParameter("t", TextFieldBuscador.getText());
+                    contenido.clear();
+                    contenido.addAll(q.list());
+                    tablaPracticas.setItems(contenido);
+                } else if (comboBoxTipo.getValue() == "Tipo") {
+                    Query q = s.createQuery("FROM Practica p WHERE p.idAlumno=:n and p.tipo LIKE CONCAT ('%',:t,'%')");
+                    q.setParameter("n", a);
+                    q.setParameter("t", TextFieldBuscador.getText());
+                    contenido.clear();
+                    contenido.addAll(q.list());
+                    tablaPracticas.setItems(contenido);
+                }
 
-                Query q = s.createQuery("FROM Practica p WHERE p.id_alumno=:n and p.descripcion LIKE :t");
-                q.setParameter("n", a);
-                q.setParameter("t", TextFieldBuscador.getText());
-                contenido.addAll(q.list());
-                tablaPracticas.setItems(contenido);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("");
+                alert.setHeaderText("Error mostrando datos");
+                alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+                alert.show();
+            } finally {
+                s.close();
             }
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("");
-            alert.setHeaderText("Error mostrando datos");
-            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
-            alert.show();
-        } finally {
-            s.close();
-        }
         }
     }
 
-    /*@FXML         Arreglar version final
-    private void btnVolver(ActionEvent event) {
-        SceneController sc = new SceneController();
-        try {
-            sc.switchToPrincipalAlumno(event);
-
-        } catch (IOException ex) {
-            Logger.getLogger(HistorialController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            s.close();
-        }
-
-    }*/
-
     @FXML
-    private void seleccionar(MouseEvent event) {
+    private void seleccionar(MouseEvent mouseEvent) {
 
         try {
             s = HibernateUtil.getSessionFactory().openSession();
@@ -194,7 +194,8 @@ public class HistorialController implements Initializable {
             SessionData.setPracticaActual((Practica) q.list().get(0));
 
             try {
-                sc.switchToPracticasMouse(event);
+                ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
+                sc.switchToPracticas(e);
 
             } catch (Exception ex) {
                 Logger.getLogger(HistorialController.class
@@ -211,33 +212,13 @@ public class HistorialController implements Initializable {
         } finally {
             s.close();
         }
-
     }
 
-    public void task() {
-        var timer = new Timer();
-        var task = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        initTabla();
-                    }
-
-                });
-            }
-
-        };
-        timer.scheduleAtFixedRate(task, 0, 1500);
-    }
-    
-    
-    public void initTabla(){
+    public void initTabla() {
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             contenido.clear();
-            
+
             colId.setCellValueFactory(new PropertyValueFactory<>("id"));
             colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
@@ -254,6 +235,22 @@ public class HistorialController implements Initializable {
         } finally {
             s.close();
         }
+    }
+
+    @FXML
+    private void btnNombreAlumno(MouseEvent mouseEvent) {
+        try {
+            SceneController sc = new SceneController();
+            ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
+            sc.switchToPerfilAlumno(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void refreshTable(ActionEvent event) {
+        initTabla();
     }
 
 }

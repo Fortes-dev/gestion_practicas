@@ -1,7 +1,6 @@
 com\mycompany\gestion\practicas\customassets\ToggleSwitch.class
 com\mycompany\gestion\practicas\application\HistorialController.class
-com\mycompany\gestion\practicas\application\HistorialController$1.class
-com\mycompany\gestion\practicas\application\HistorialController$1$1.class
+com\mycompany\gestion\practicas\customassets\Constants.class
 com\mycompany\gestion\practicas\application\modificarAlumnoController.class
 com\mycompany\gestion\practicas\hibernate\HibernateUtil.class
 com\mycompany\gestion\practicas\application\PrincipalAlumnoController$1$1.class
@@ -12,14 +11,12 @@ com\mycompany\gestion\practicas\application\App.class
 com\mycompany\gestion\practicas\models\Alumno.class
 com\mycompany\gestion\practicas\application\PerfilProfesorController.class
 com\mycompany\gestion\practicas\application\AnnadirAlumnoController.class
-com\mycompany\gestion\practicas\application\PrincipalProfesor$1.class
 com\mycompany\gestion\practicas\application\PerfilAlumnoController.class
 com\mycompany\gestion\practicas\application\PracticasController.class
 module-info.class
 com\mycompany\gestion\practicas\models\Empresa.class
 com\mycompany\gestion\practicas\application\LoginController.class
 com\mycompany\gestion\practicas\models\Profesor.class
-com\mycompany\gestion\practicas\application\PrincipalProfesor$1$1.class
 com\mycompany\gestion\practicas\models\Practica.class
 com\mycompany\gestion\practicas\application\AnnadirPracticasController.class
 com\mycompany\gestion\practicas\application\PrincipalProfesor.class
