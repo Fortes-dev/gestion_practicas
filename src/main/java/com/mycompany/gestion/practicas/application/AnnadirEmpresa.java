@@ -73,11 +73,7 @@ public class AnnadirEmpresa implements Initializable {
     private TextField txtLongitud;
     @FXML
     private TextField txturl;
-    private SceneController escena = new SceneController();
-    private FileChooser fileChooser = new FileChooser();
-    private File selectedFile;
-    private Blob blob;
-    private BufferedImage bufferedImage;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

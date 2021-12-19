@@ -95,11 +95,6 @@ public class AnnadirAlumnoController implements Initializable {
     /**
      * Initializes the controller class.
      */
-
-
-    Session s;
-    @FXML
-    private Button btnAnadir;
    
 
     /**

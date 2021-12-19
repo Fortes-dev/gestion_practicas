@@ -5,6 +5,7 @@ import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Practica;
+import java.awt.image.BufferedImage;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,9 +20,17 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.io.InputStream;
+import static java.lang.System.in;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javax.imageio.ImageIO;
 
 public class PrincipalAlumnoController implements Initializable {
 
@@ -66,6 +75,7 @@ public class PrincipalAlumnoController implements Initializable {
     private SceneController escena = new SceneController();
     private Practica[] practicasT;
     private Alumno a = SessionData.getAlumnoActual();
+    private InputStream in;
     
     @FXML
     private VBox vFondo;
