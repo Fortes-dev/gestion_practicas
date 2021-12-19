@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +35,13 @@ import javax.imageio.ImageIO;
 
 public class PrincipalAlumnoController implements Initializable {
 
+
+    @FXML
+    private MenuItem btnAbout;
+    @FXML
+    private MenuItem btnSalir;
+    @FXML
+    private MenuItem btnCerrarSesion;
     @FXML
     private Button moverPIzq;
     @FXML
@@ -147,6 +155,15 @@ public class PrincipalAlumnoController implements Initializable {
         a = ap.list().get(0);
         practicasT = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
         switch (practicasT.length - 1) {
+            
+            case -1: {
+                btnAnnadirTarea1.setVisible(false);
+                btnAnnadirTarea2.setVisible(false);
+                btnAnnadirTarea3.setVisible(false);
+                btnAnnadirTarea4.setVisible(false);
+                btnAnnadirTarea5.setVisible(false);
+                break;
+            }
             case 0: {
                 btnAnnadirTarea1.setText(practicasT[0].getFecha().toLocalDate().toString());
                 btnAnnadirTarea1.setVisible(true);
@@ -326,4 +343,21 @@ public class PrincipalAlumnoController implements Initializable {
         timer.scheduleAtFixedRate(task, 0, 1500);
     }
 
+    @FXML
+    private void onCerrarSesionClick(ActionEvent actionEvent) {
+        try {
+            escena.switchToLogin(actionEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSalirClick(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    @FXML
+    private void onAboutClick(ActionEvent actionEvent) {
+    }
 }

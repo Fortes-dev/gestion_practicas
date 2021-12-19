@@ -1,5 +1,6 @@
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXTextField;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.models.Empresa;
 import java.awt.image.BufferedImage;
@@ -52,27 +53,25 @@ public class AnnadirEmpresa implements Initializable {
     @FXML
     private ImageView ivLogoEmpresa;
     @FXML
-    private TextField tfNombreEmpresa;
+    private JFXTextField tfNombreEmpresa;
     @FXML
-    private TextField tfTutorEmpresa;
+    private JFXTextField tfTutorEmpresa;
     @FXML
-    private TextField tfEmail;
+    private JFXTextField tfEmail;
     @FXML
-    private TextField tfTelefono;
+    private JFXTextField tfTelefono;
     @FXML
     private Button btnAnnadir;
-    @FXML
     private Label txtAñadirFoto;
-    @FXML
     private Session s;
     @FXML
-    private WebView wvMapa;
+    private JFXTextField txtLatitud;
     @FXML
-    private TextField txtLatitud;
+    private JFXTextField txtLongitud;
     @FXML
-    private TextField txtLongitud;
+    private JFXTextField txturl;
     @FXML
-    private TextField txturl;
+    private Button añadirFoto;
 
 
     @Override
@@ -83,7 +82,7 @@ public class AnnadirEmpresa implements Initializable {
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        ivLogoEmpresa.addEventHandler(MouseEvent.MOUSE_CLICKED,
+        añadirFoto.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 e -> {
                     var stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     selectedFile = fileChooser.showOpenDialog(stage);
@@ -95,7 +94,7 @@ public class AnnadirEmpresa implements Initializable {
                         s.getTransaction().commit();
                         bufferedImage = ImageIO.read(selectedFile);
                         ivLogoEmpresa.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
-                        txtAñadirFoto.setVisible(false);
+                        añadirFoto.setText("");
                     } catch (IOException ex) {
                         Logger.getLogger(AnnadirEmpresa.class.getName()).log(Level.SEVERE, null, ex);
                     } finally {

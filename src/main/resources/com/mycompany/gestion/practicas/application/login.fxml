@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="parent" maxHeight="660.0" maxWidth="501.0" minHeight="660.0" minWidth="501.0" prefHeight="660.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.LoginController">
+<BorderPane fx:id="parent" maxHeight="660.0" maxWidth="501.0" minHeight="660.0" minWidth="501.0" prefHeight="660.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.LoginController">
    <center>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" spacing="10.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -24,25 +23,23 @@
             </ImageView>
             <VBox spacing="10.0">
                <children>
-                  <Label alignment="TOP_LEFT" stylesheets="@../../../../../styles/styles.css" text="Usuario" textFill="#0f52ba">
+                  <JFXTextField fx:id="userField" labelFloat="true" prefHeight="59.0" prefWidth="301.0" promptText="Usuario" unFocusColor="#4059a9">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font size="18.0" />
                      </font>
-                  </Label>
-                  <TextField fx:id="userField" stylesheets="@../../../../../styles/styles.css" />
+                  </JFXTextField>
                </children>
             </VBox>
             <VBox spacing="10.0">
                <children>
-                  <Label stylesheets="@../../../../../styles/styles.css" text="Contraseña" textFill="#0f52ba">
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
+                  <JFXPasswordField fx:id="passwordField" labelFloat="true" promptText="Contraseña" unFocusColor="#4059a9">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font size="18.0" />
                      </font>
-                  </Label>
-                  <PasswordField fx:id="passwordField" stylesheets="@../../../../../styles/styles.css" />
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </JFXPasswordField>
                </children>
             </VBox>
             <HBox>
@@ -55,7 +52,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Hyperlink>
-                  <Button fx:id="btnAceptar" alignment="TOP_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnAceptarHandler" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Aceptar" textFill="WHITE">
+                  <Button fx:id="btnAceptar" alignment="TOP_RIGHT" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#btnAceptarHandler" style="-fx-background-color: #0F52BA;" stylesheets="@../../../../../styles/styles.css" text="Aceptar" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="20.0" left="72.0" top="5.0" />
                      </HBox.margin>

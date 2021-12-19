@@ -4,6 +4,7 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -41,6 +42,7 @@ import javafx.scene.input.MouseEvent;
 import static javafx.scene.input.MouseEvent.MOUSE_ENTERED;
 import static javafx.scene.input.MouseEvent.MOUSE_EXITED;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -77,9 +79,7 @@ public class HistorialController implements Initializable {
     @FXML
     private TableColumn<Practica, Date> colFecha;
     @FXML
-    private ComboBox<String> comboBoxTipo;
-    @FXML
-    private Button Volver;
+    private JFXComboBox<String> comboBoxTipo;
     @FXML
     private Button btnRefresh;
 
@@ -92,17 +92,42 @@ public class HistorialController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Volver.setVisible(false);   // Arreglar para la version final
-        Volver.setDisable(false);
+        task();
+
+        initTabla();
+
+    }
+
+    public void task() {
+        var timer = new Timer();
+        var task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        setDatos();
+                    }
+
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(task, 0, 1000);
+    }
+
+    public void setDatos() {
+
+        if(SessionData.getAlumnoActual() == null) {
+            Stage stage = (Stage) btnAnadir.getScene().getWindow();
+            stage.close();
+        }
+        
         comboBoxTipo.getItems().addAll("ID", "Fecha", "Tipo", "Horas empleadas", "Descripcion");
         comboBoxTipo.getSelectionModel().selectFirst();
 
         nombreAlumno.setText(a.getNombre() + " " + a.getApellidos());
         claseAlumno.setText(a.getCurso());
-        //        LogoEmpresaImg.set();
-
-        initTabla();
-
     }
 
     @FXML
@@ -252,5 +277,6 @@ public class HistorialController implements Initializable {
     private void refreshTable(ActionEvent event) {
         initTabla();
     }
+
 
 }

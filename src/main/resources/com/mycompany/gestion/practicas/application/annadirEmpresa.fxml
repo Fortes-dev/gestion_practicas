@@ -1,40 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.web.WebView?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.AnnadirEmpresa">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.AnnadirEmpresa">
    <HBox alignment="CENTER" prefHeight="232.0" prefWidth="700.0" spacing="50.0">
-      <Pane prefHeight="90.0" prefWidth="150.0">
-         <children>
-            <Button fx:id="añadirFoto" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="42.0" mnemonicParsing="false" prefHeight="136.0" prefWidth="136.0" style="-fx-background-color: none;" text="Insertar imagen" textFill="#0d44da">
-               <graphic>
-                  <ImageView fx:id="ivLogoEmpresa" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../img/empresa.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-      <WebView fx:id="wvMapa" prefHeight="212.0" prefWidth="390.0">
-         <HBox.margin>
-            <Insets right="5.0" top="20.0" />
-         </HBox.margin>
-      </WebView>
+      <children>
+         <Button fx:id="añadirFoto" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="136.0" prefWidth="136.0" style="-fx-background-color: none;" text="Insertar imagen" textFill="#0d44da">
+            <graphic>
+               <ImageView fx:id="ivLogoEmpresa" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../../img/mundo1.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Button>
+      </children>
    </HBox>
    <VBox prefHeight="249.0" prefWidth="630.0" spacing="5.0">
       <VBox.margin>
@@ -52,11 +43,11 @@
                <Font size="22.0" />
             </font>
          </Label>
-         <TextField fx:id="tfNombreEmpresa" prefHeight="31.0" prefWidth="284.0" promptText="Nombre Empresa">
+         <JFXTextField fx:id="tfNombreEmpresa" labelFloat="true" prefHeight="25.0" prefWidth="284.0" promptText="Nombre empresa" unFocusColor="#4059a9">
             <font>
-               <Font size="18.0" />
+               <Font size="16.0" />
             </font>
-         </TextField>
+         </JFXTextField>
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="670.0" spacing="40.0">
          <VBox.margin>
@@ -65,11 +56,11 @@
          <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../../../../img/birrete.png" />
          </ImageView>
-         <TextField fx:id="tfTutorEmpresa" prefHeight="29.0" prefWidth="339.0" promptText="Tutor Empresa">
+         <JFXTextField fx:id="tfTutorEmpresa" labelFloat="true" prefHeight="25.0" prefWidth="339.0" promptText="Tutor Empresa" unFocusColor="#4059a9">
             <font>
-               <Font size="18.0" />
+               <Font size="16.0" />
             </font>
-         </TextField>
+         </JFXTextField>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="40.0">
          <VBox.margin>
@@ -78,11 +69,11 @@
          <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../../../../img/email.png" />
          </ImageView>
-         <TextField fx:id="tfEmail" prefHeight="32.0" prefWidth="425.0" promptText="E-Mail">
+         <JFXTextField fx:id="tfEmail" labelFloat="true" prefHeight="25.0" prefWidth="425.0" promptText="E-Mail" unFocusColor="#4059a9">
             <font>
-               <Font size="18.0" />
+               <Font size="16.0" />
             </font>
-         </TextField>
+         </JFXTextField>
       </HBox>
       <HBox spacing="40.0">
          <VBox.margin>
@@ -91,11 +82,11 @@
          <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../../../../img/telephone.png" />
          </ImageView>
-         <TextField fx:id="tfTelefono" prefHeight="31.0" prefWidth="425.0" promptText="Número de teléfono">
+         <JFXTextField fx:id="tfTelefono" labelFloat="true" prefHeight="25.0" prefWidth="425.0" promptText="Número de teléfono" unFocusColor="#4059a9">
             <font>
-               <Font size="18.0" />
+               <Font size="16.0" />
             </font>
-         </TextField>
+         </JFXTextField>
       </HBox>
       <HBox layoutX="25.0" layoutY="207.0" prefHeight="19.0" prefWidth="297.0" spacing="40.0">
          <children>
@@ -104,16 +95,16 @@
                   <Image url="@../../../../../img/location.png" />
                </image>
             </ImageView>
-            <TextField fx:id="txtLatitud" prefHeight="39.0" prefWidth="122.0" promptText="latitud">
+            <JFXTextField fx:id="txtLatitud" labelFloat="true" prefHeight="25.0" prefWidth="122.0" promptText="latitud" unFocusColor="#4059a9">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
-            </TextField>
-            <TextField fx:id="txtLongitud" layoutX="87.0" layoutY="10.0" prefHeight="39.0" prefWidth="122.0" promptText="longitud">
+            </JFXTextField>
+            <JFXTextField fx:id="txtLongitud" labelFloat="true" prefHeight="25.0" prefWidth="122.0" promptText="longitud" unFocusColor="#4059a9">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
-            </TextField>
+            </JFXTextField>
          </children>
          <VBox.margin>
             <Insets left="15.0" top="15.0" />
@@ -126,11 +117,11 @@
                   <Image url="@../../../../../img/url.png" />
                </image>
             </ImageView>
-            <TextField fx:id="txturl" layoutX="87.0" layoutY="10.0" prefHeight="39.0" prefWidth="428.0" promptText="URL de Google Maps">
+            <JFXTextField fx:id="txturl" labelFloat="true" prefHeight="25.0" prefWidth="425.0" promptText="URL de Google Maps" unFocusColor="#4059a9">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
-            </TextField>
+            </JFXTextField>
          </children>
          <padding>
             <Insets left="15.0" top="15.0" />
@@ -141,7 +132,7 @@
       <VBox.margin>
          <Insets right="20.0" />
       </VBox.margin>
-      <Button fx:id="btnAnnadir" mnemonicParsing="false" onAction="#btnAnadirHandler" prefHeight="26.0" prefWidth="84.0" text="Añadir">
+      <Button fx:id="btnAnnadir" mnemonicParsing="false" onAction="#btnAnadirHandler" prefHeight="26.0" prefWidth="84.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Añadir">
          <font>
             <Font size="15.0" />
          </font>

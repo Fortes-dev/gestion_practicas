@@ -5,6 +5,8 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSlider;
 import com.mycompany.gestion.practicas.customassets.ToggleSwitch;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
@@ -57,11 +59,11 @@ public class PracticasController implements Initializable {
     @FXML
     private AnchorPane pane;
     @FXML
-    private ChoiceBox<String> tipopractica;
+    private JFXComboBox<String> tipopractica;
     @FXML
     private TextArea descripcion;
     @FXML
-    private Spinner<Integer> horas;
+    private JFXSlider horas;
     @FXML
     private TextArea observaciones;
     @FXML
@@ -80,12 +82,10 @@ public class PracticasController implements Initializable {
         tipopractica.setItems(FXCollections.observableArrayList("Dual", "FCT"));
         tipopractica.getSelectionModel().select(SessionData.getPracticaActual().getTipo());
 
-        SpinnerValueFactory svf = new IntegerSpinnerValueFactory(1, 8);
-        horas.setValueFactory(svf);
-        horas.getValueFactory().setValue(SessionData.getPracticaActual().getHorasEmpleadas());
-
         toggle.setMaxWidth(50);
         toggle.setMaxHeight(28);
+
+        horas.setValue(SessionData.getPracticaActual().getHorasEmpleadas());
 
         hbox1.getChildren().add(3, toggle);
 
@@ -128,6 +128,10 @@ public class PracticasController implements Initializable {
         tipopractica.setDisable(true);
         descripcion.setEditable(false);
         observaciones.setEditable(false);
+
+        datePicker.setOpacity(0.9);
+        tipopractica.setOpacity(0.9);
+        horas.setOpacity(0.9);
     }
 
     private void enableOptions() {
@@ -224,7 +228,7 @@ public class PracticasController implements Initializable {
         pr.setIdAlumno(SessionData.getAlumnoActual());
         pr.setFecha(date);
         pr.setTipo(tipopractica.getValue());
-        pr.setHorasEmpleadas(horas.getValue());
+        pr.setHorasEmpleadas((int) horas.getValue());
         pr.setDescripcion(descripcion.getText());
         pr.setObservaciones(observaciones.getText());
     }

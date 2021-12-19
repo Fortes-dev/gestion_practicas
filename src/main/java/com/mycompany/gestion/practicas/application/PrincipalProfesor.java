@@ -1,5 +1,6 @@
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -31,6 +32,13 @@ import javafx.scene.input.KeyEvent;
 
 public class PrincipalProfesor implements Initializable {
 
+
+    @FXML
+    private MenuItem btnAbout;
+    @FXML
+    private MenuItem btnSalir;
+    @FXML
+    private MenuItem btnCerrarSesion;
     @FXML
     private TableColumn<Alumno, String> cNombreAlum;
     @FXML
@@ -60,7 +68,7 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private ImageView ivLogoCesur;
     @FXML
-    private ChoiceBox<String> cbFiltroAlum3;
+    private JFXComboBox<String> cbFiltroAlum3;
     @FXML
     private TextField tfFiltroAlum;
     @FXML
@@ -68,7 +76,7 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private Button btnAnnadirAlumno;
     @FXML
-    private ChoiceBox<String> cbFiltroEmpre3;
+    private JFXComboBox<String> cbFiltroEmpre3;
     @FXML
     private TextField tfFiltroEmpresa;
     @FXML
@@ -80,7 +88,13 @@ public class PrincipalProfesor implements Initializable {
     private SceneController escena = new SceneController();
     ObservableList<Alumno> contenidoAlumno = FXCollections.observableArrayList();
     ObservableList<Empresa> contenidoEmpresa = FXCollections.observableArrayList();
-    Alumno a = SessionData.getAlumnoActual();
+    Alumno a;
+    @FXML
+    private ImageView refreshEmpresas;
+    @FXML
+    private Button btnRefreshAlumno;
+    @FXML
+    private Button btnRefreshEmpresas;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -143,25 +157,6 @@ public class PrincipalProfesor implements Initializable {
             e.printStackTrace();
         }
     }
-
-//    public void task() {
-//        var timer = new Timer();
-//        var task = new TimerTask() {
-//            @Override
-//            public void run() {
-//                Platform.runLater(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        cargarAlumnos();
-//                        cargarEmpresa();
-//                    }
-//
-//                });
-//            }
-//
-//        };
-//        timer.scheduleAtFixedRate(task, 0, 1500);
-//    }
     
     @FXML
     private void onMouseClickPerfilProfesor(MouseEvent mouseEvent) {
@@ -180,7 +175,9 @@ public class PrincipalProfesor implements Initializable {
 
             Query<Alumno> q = s.createQuery("FROM Alumno a WHERE a.id=:t");
             q.setParameter("t", tvListaAlumnos.getSelectionModel().getSelectedItem().getId());
-            SessionData.setAlumnoActual(q.list().get(0));
+            a = q.list().get(0);
+            s.evict(a);
+            SessionData.setAlumnoActual(a);
 
             try {
                 ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
@@ -198,6 +195,7 @@ public class PrincipalProfesor implements Initializable {
             alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
             alert.show();
         } finally {
+            
             s.close();
         }
     }
@@ -267,7 +265,7 @@ public class PrincipalProfesor implements Initializable {
 
                     Empresa e = (Empresa) qq.uniqueResult();
 
-                    Query q = s.createQuery("FROM Alumno p WHERE p.idEmpresa LIKE CONCAT ('%',:t,'%')");
+                    Query q = s.createQuery("FROM Alumno p WHERE p.idEmpresa =:t");
                     q.setParameter("t", e);
 
                     contenidoAlumno.clear();
@@ -323,5 +321,34 @@ public class PrincipalProfesor implements Initializable {
                 s.close();
             }
         }
+    }
+
+    @FXML
+    private void refreshAlumno(ActionEvent event) {
+        cargarAlumnos();
+    }
+
+    @FXML
+    private void refreshEmpresas(ActionEvent event) {
+        cargarEmpresa();
+    }
+
+
+    @FXML
+    private void onCerrarSesionClick(ActionEvent actionEvent) {
+        try {
+            escena.switchToLogin(actionEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSalirClick(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    @FXML
+    private void onAboutClick(ActionEvent actionEvent) {
     }
 }
