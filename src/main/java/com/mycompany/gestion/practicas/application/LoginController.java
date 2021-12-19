@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
@@ -30,6 +31,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -59,7 +61,7 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        s = HibernateUtil.getSessionFactory().openSession();
+
     }
 
     @FXML
@@ -80,6 +82,7 @@ public class LoginController implements Initializable {
     }
 
     private void logIn(ActionEvent event) {
+        s = HibernateUtil.getSessionFactory().openSession();
         Query listAlumno = s.createQuery("From Alumno a WHERE a.email=:email and a.password=:password");
         listAlumno.setParameter("email", userField.getText());
         listAlumno.setParameter("password", passwordField.getText());
@@ -93,19 +96,27 @@ public class LoginController implements Initializable {
             SessionData.setAlumnoActual(a);
             s.close();
             try {
-                escena.switchToPrincipalAlumno(event);
+                Node source = (Node) event.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+                escena.switchToPrincipalAlumno(stage);
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                s.close();
             }
         } else if (!listProfesor.list().isEmpty()) {
             Profesor p = (Profesor) listProfesor.list().get(0);
             SessionData.setProfesorActual(p);
-            s.close();
+
             try {
                 SessionData.setAdmin(Boolean.TRUE);
-                escena.switchToPrincipalProfesor(event);
+                Node source = (Node) event.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+                escena.switchToPrincipalProfesor(stage);
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                s.close();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
