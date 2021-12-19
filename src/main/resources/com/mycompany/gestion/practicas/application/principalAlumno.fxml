@@ -30,7 +30,7 @@
             </ImageView>
          </left>
          <right>
-            <ImageView fx:id="imgLogoEmpresa" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="imgLogoEmpresa" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#imgEmpresaOnMouseClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets right="10.0" />
                </BorderPane.margin>

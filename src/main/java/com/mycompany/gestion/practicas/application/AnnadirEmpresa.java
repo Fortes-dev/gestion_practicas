@@ -73,10 +73,15 @@ public class AnnadirEmpresa implements Initializable {
     private TextField txtLongitud;
     @FXML
     private TextField txturl;
+    private SceneController escena = new SceneController();
+    private FileChooser fileChooser = new FileChooser();
+    private File selectedFile;
+    private Blob blob;
+    private BufferedImage bufferedImage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All Images", "*.*"),
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
@@ -93,7 +98,7 @@ public class AnnadirEmpresa implements Initializable {
                         blob = Hibernate.getLobCreator(s).createBlob(Files.readAllBytes(Paths.get(selectedFile.getPath())));
                         s.getTransaction().commit();
                         bufferedImage = ImageIO.read(selectedFile);
-                        ivLogoEmpresa.setImage(toFXImage(bufferedImage));
+                        ivLogoEmpresa.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
                         txtAñadirFoto.setVisible(false);
                     } catch (IOException ex) {
                         Logger.getLogger(AnnadirEmpresa.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,17 +142,4 @@ public class AnnadirEmpresa implements Initializable {
             s.close();
         }
     }
-
-    private InputStream fileToInputStream(File file) throws IOException, SQLException {
-
-        InputStream is = new FileInputStream(file);
-        
-        return is;
-    }
-
-    private Image toFXImage(BufferedImage bufferedImage) {
-
-        return SwingFXUtils.toFXImage(bufferedImage, null);
-    }
-
 }

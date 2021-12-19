@@ -81,6 +81,37 @@ public class PrincipalAlumnoController implements Initializable {
         lbEmpresa.setText(SessionData.getAlumnoActual().getIdEmpresa().getNombre());
 
         task();
+
+        try {
+
+            lbNombreAlumno.setText(a.getNombre() + " " + a.getApellidos());
+            lbCurso.setText(a.getCurso());
+            lbEmpresa.setText(a.getIdEmpresa().getNombre());
+
+            in = a.getIdEmpresa().getLogoImg().getBinaryStream();
+            BufferedImage imagenEmpresa = ImageIO.read(in);
+            Image logoEmpresa = SwingFXUtils.toFXImage(imagenEmpresa, null);
+
+            imgLogoEmpresa.setImage(logoEmpresa);
+
+            in = a.getFotoImg().getBinaryStream();
+            BufferedImage imagenAlumno = ImageIO.read(in);
+            Image imgAlumno = SwingFXUtils.toFXImage(imagenAlumno, null);
+
+            imgFotoAlumno.setImage(imgAlumno);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PrincipalAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(PrincipalAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
     
     public void cargarHoras() {
@@ -201,6 +232,17 @@ public class PrincipalAlumnoController implements Initializable {
     }
 
     @FXML
+    private void imgEmpresaOnMouseClick(MouseEvent mouseEvent) {
+        ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
+        try {
+            SessionData.setEmpresaActual(a.getIdEmpresa());
+            escena.switchToPerfilEmpresa(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     private void btnVerPracticaHandler(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnAnnadirTarea1) {
             SessionData.setPracticaActual(practicasT[0]);
@@ -273,4 +315,5 @@ public class PrincipalAlumnoController implements Initializable {
         };
         timer.scheduleAtFixedRate(task, 0, 1500);
     }
+
 }

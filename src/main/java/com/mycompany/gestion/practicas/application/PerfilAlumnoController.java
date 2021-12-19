@@ -18,14 +18,19 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 /**
  * FXML Controller class
@@ -54,14 +59,41 @@ public class PerfilAlumnoController implements Initializable {
     @FXML
     private Label txtProfesor;
 
+
     private SceneController escena = new SceneController();
+
+    @FXML
+    private ImageView fotoAlumno;
+
+
+    @FXML
+    private Button btnEliminar;
+    @FXML
+    private Button btnModificar;
+
+    private Alumno a = SessionData.getAlumnoActual();
+    private SceneController escena = new SceneController();
+    private Session s;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         Alumno a = SessionData.getAlumnoActual();
+        
+        if(!SessionData.getAdmin()) {
+            btnEliminar.setVisible(false);
+            btnModificar.setVisible(false);
+        }
+        
+        InputStream in = null;
+        try {
+
+            in = a.getFotoImg().getBinaryStream();
+            BufferedImage imagenAlumno = ImageIO.read(in);
+            Image imgAlumno = SwingFXUtils.toFXImage(imagenAlumno, null);
 
         txtNombre.setText(a.getNombre()+a.getApellidos());
         txtClase.setText(a.getCurso());
@@ -82,6 +114,60 @@ public class PerfilAlumnoController implements Initializable {
             escena.switchToPerfilProfesor(e);
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onMouseClickPerfilEmpresa(MouseEvent mouseEvent) {
+        ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
+        SessionData.setProfesorActual(SessionData.getAlumnoActual().getIdProfesor());
+        try {
+            SessionData.setEmpresaActual(a.getIdEmpresa());
+            escena.switchToPerfilEmpresa(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnEliminar(ActionEvent event) {
+        try {
+            
+            s = HibernateUtil.getSessionFactory().openSession();
+            Transaction ts = s.beginTransaction();
+            s.remove(a);
+            ts.commit();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Eliminad@");
+            alert.setHeaderText("Eliminado con éxito");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/eliminar.png").toString())));
+            alert.setContentText("El alumno: ID[" + a.getId() + "] Nombre: " + a.getNombre() + " y DNI: " + a.getDni() + " ha sido eliminad@ con éxito!");
+            alert.showAndWait();
+
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error eliminando alumn@");
+            alert.setHeaderText("No ha sido posible eliminar alumn@");
+            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
+            alert.show();
+        } finally {
+            s.close();
+        }
+    }
+
+    @FXML
+    private void btnModificar(ActionEvent event) {
+        try {
+            SceneController scene = new SceneController();
+            scene.switchToModificarAlumno(event);
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

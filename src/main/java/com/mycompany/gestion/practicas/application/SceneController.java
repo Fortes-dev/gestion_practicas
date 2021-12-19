@@ -96,6 +96,19 @@ public class SceneController {
         stage.showAndWait();
 
     }
+    
+    public void switchToModificarAlumno(ActionEvent event) throws IOException {
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/modificarAlumno.fxml"));
+        scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.getIcons().add(new Image("img/logocesur.png"));
+        stage.setResizable(false);
+        stage.setTitle("Modificar alumno");
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
 
     /**
      * 
@@ -133,12 +146,6 @@ public class SceneController {
 
 
     public void switchToHistorial(ActionEvent event) throws IOException {
-        /*root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/historial.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("Historial de prácticas");
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
 
         stage = new Stage();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/historial.fxml"));

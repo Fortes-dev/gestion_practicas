@@ -16,16 +16,18 @@
    <HBox alignment="CENTER" prefHeight="232.0" prefWidth="700.0" spacing="50.0">
       <Pane prefHeight="90.0" prefWidth="150.0">
          <children>
-            <ImageView fx:id="ivLogoEmpresa" fitHeight="150.0" fitWidth="150.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../img/empresa.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="txtAñadirFoto" alignment="CENTER" layoutX="13.0" layoutY="99.0" prefHeight="19.0" prefWidth="125.0" text="Añadir foto" textFill="#00338a">
+            <Button fx:id="añadirFoto" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="42.0" mnemonicParsing="false" prefHeight="136.0" prefWidth="136.0" style="-fx-background-color: none;" text="Insertar imagen" textFill="#0d44da">
+               <graphic>
+                  <ImageView fx:id="ivLogoEmpresa" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../img/empresa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
-            </Label>
+            </Button>
          </children>
       </Pane>
       <WebView fx:id="wvMapa" prefHeight="212.0" prefWidth="390.0">

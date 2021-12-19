@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -34,14 +35,6 @@
                         <Label fx:id="txtClase" prefHeight="28.0" prefWidth="153.0" text="2º DAM">
                            <HBox.margin>
                               <Insets left="35.0" top="10.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="txtEmpresa" layoutX="30.0" layoutY="20.0" prefHeight="28.0" prefWidth="173.0" text="Viewnext">
-                           <HBox.margin>
-                              <Insets left="20.0" top="10.0" />
                            </HBox.margin>
                            <font>
                               <Font size="19.0" />
@@ -122,7 +115,7 @@
                         <Image url="@../../../../../img/email.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="txtEmail" prefHeight="17.0" prefWidth="467.0" text="francisco.romero@cesurformacion.com">
+                  <Label fx:id="txtEmail" prefHeight="27.0" prefWidth="320.0" text="francisco.romero@cesurformacion.com">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>
@@ -172,6 +165,49 @@
                   </Label>
                </children>
             </HBox>
+            <HBox prefHeight="92.0" prefWidth="600.0">
+               <children>
+                  <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="21.0" top="4.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../../../../../img/portafolio.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="txtEmpresa" onMouseClicked="#onMouseClickPerfilEmpresa" prefHeight="28.0" prefWidth="180.0" text="Viewnext" underline="true">
+                     <HBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <FlowPane alignment="TOP_RIGHT" hgap="25.0" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="btnEliminar" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnEliminar" prefHeight="25.0" prefWidth="85.0" styleClass="botonRojo" stylesheets="@../../../../../styles/styles.css" text="Eliminar" textAlignment="RIGHT">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="2.0" top="8.0" />
+                     </FlowPane.margin>
+                  </Button>
+                  <Button fx:id="btnModificar" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnModificar" prefHeight="25.0" prefWidth="85.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Modificar" textAlignment="RIGHT">
+                     <FlowPane.margin>
+                        <Insets bottom="2.0" right="43.0" top="8.0" />
+                     </FlowPane.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </FlowPane>
          </children>
       </VBox>
    </children>
