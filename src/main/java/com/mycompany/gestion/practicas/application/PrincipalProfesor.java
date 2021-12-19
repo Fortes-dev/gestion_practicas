@@ -1,5 +1,6 @@
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -31,6 +32,13 @@ import javafx.scene.input.KeyEvent;
 
 public class PrincipalProfesor implements Initializable {
 
+
+    @FXML
+    private MenuItem btnAbout;
+    @FXML
+    private MenuItem btnSalir;
+    @FXML
+    private MenuItem btnCerrarSesion;
     @FXML
     private TableColumn<Alumno, String> cNombreAlum;
     @FXML
@@ -60,7 +68,7 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private ImageView ivLogoCesur;
     @FXML
-    private ChoiceBox<String> cbFiltroAlum3;
+    private JFXComboBox<String> cbFiltroAlum3;
     @FXML
     private TextField tfFiltroAlum;
     @FXML
@@ -68,7 +76,7 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private Button btnAnnadirAlumno;
     @FXML
-    private ChoiceBox<String> cbFiltroEmpre3;
+    private JFXComboBox<String> cbFiltroEmpre3;
     @FXML
     private TextField tfFiltroEmpresa;
     @FXML
@@ -257,7 +265,7 @@ public class PrincipalProfesor implements Initializable {
 
                     Empresa e = (Empresa) qq.uniqueResult();
 
-                    Query q = s.createQuery("FROM Alumno p WHERE p.idEmpresa LIKE CONCAT ('%',:t,'%')");
+                    Query q = s.createQuery("FROM Alumno p WHERE p.idEmpresa =:t");
                     q.setParameter("t", e);
 
                     contenidoAlumno.clear();
@@ -323,5 +331,24 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private void refreshEmpresas(ActionEvent event) {
         cargarEmpresa();
+    }
+
+
+    @FXML
+    private void onCerrarSesionClick(ActionEvent actionEvent) {
+        try {
+            escena.switchToLogin(actionEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSalirClick(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    @FXML
+    private void onAboutClick(ActionEvent actionEvent) {
     }
 }

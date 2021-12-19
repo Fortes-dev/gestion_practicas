@@ -4,6 +4,8 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -54,29 +56,29 @@ import org.hibernate.query.Query;
 public class modificarAlumnoController implements Initializable {
 
     @FXML
-    private TextField txtFieldNombre;
+    private JFXTextField txtFieldNombre;
     @FXML
-    private TextField txtFieldApellidos;
+    private JFXTextField txtFieldApellidos;
     @FXML
-    private TextField txtFieldCurso;
+    private JFXTextField txtFieldCurso;
     @FXML
-    private ChoiceBox<String> cbEmpresa;
+    private JFXComboBox<String> cbEmpresa;
     @FXML
-    private TextField txtFieldCentro;
+    private JFXTextField txtFieldCentro;
     @FXML
-    private TextField txtFieldContraseña;
+    private JFXTextField txtFieldContraseña;
     @FXML
     private ImageView imgAñadirFoto;
     @FXML
-    private TextField txtFieldDNI;
+    private JFXTextField txtFieldDNI;
     @FXML
-    private TextField txtFieldTelefono;
+    private JFXTextField txtFieldTelefono;
     @FXML
-    private TextField txtFieldEmail;
+    private JFXTextField txtFieldEmail;
     @FXML
     private DatePicker DatepickerNacimiento;
     @FXML
-    private ChoiceBox<String> cbNombreTutor;
+    private JFXComboBox<String> cbNombreTutor;
     @FXML
     private Button btnGuardar;
     @FXML

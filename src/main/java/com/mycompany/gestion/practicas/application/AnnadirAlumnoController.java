@@ -4,6 +4,8 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -19,7 +21,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Blob;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,10 +34,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -56,30 +55,31 @@ import org.hibernate.query.Query;
 public class AnnadirAlumnoController implements Initializable {
 
     @FXML
-    private TextField txtFieldNombre;
+    private JFXTextField txtFieldNombre;
     @FXML
-    private TextField txtFieldCurso;
+    private JFXTextField txtFieldCurso;
     @FXML
-    private TextField txtFieldCentro;
+    private JFXTextField txtFieldCentro;
     @FXML
     private ImageView imgAñadirFoto;
+    @FXML
     private Label txtAñadirFoto;
     @FXML
-    private TextField txtFieldDNI;
+    private JFXTextField txtFieldDNI;
     @FXML
-    private TextField txtFieldTelefono;
+    private JFXTextField txtFieldTelefono;
     @FXML
-    private TextField txtFieldEmail;
+    private JFXTextField txtFieldEmail;
     @FXML
-    private DatePicker DatepickerNacimiento;
+    private DatePicker datepickerNacimiento;
     @FXML
-    private TextField txtFieldApellidos;
+    private JFXTextField txtFieldApellidos;
     @FXML
-    private ChoiceBox<String> cbEmpresa;
+    private JFXComboBox<String> cbEmpresa;
     @FXML
-    private ChoiceBox<String> cbNombreTutor;
+    private JFXComboBox<String> cbNombreTutor;
     @FXML
-    private TextField txtFieldContraseña;
+    private JFXTextField txtFieldContraseña;
     @FXML
     private Button añadirImg;
     @FXML
@@ -95,8 +95,9 @@ public class AnnadirAlumnoController implements Initializable {
     /**
      * Initializes the controller class.
      */
-   
 
+
+    
     /**
      * Creo ObsevableLists de Empresas y Profesores a través de consultas HQL
      * Los resultados de esas consultas aparecen en los ChoiceBox para que el
@@ -131,21 +132,19 @@ public class AnnadirAlumnoController implements Initializable {
                     } finally {
                         s.close();
                     }
-                });
+                });        s=HibernateUtil.getSessionFactory().openSession();
+        try{
+        ObservableList<String> empresas = FXCollections.observableArrayList();//Contenido del ChoiceBox de Empresas
+        Query<Empresa> q = s.createQuery("FROM Empresa");
+        q.list().forEach((e) -> empresas.add( e.getNombre()));
 
-        s = HibernateUtil.getSessionFactory().openSession();
-        try {
-            ObservableList<String> empresas = FXCollections.observableArrayList();//Contenido del ChoiceBox de Empresas
-            Query<Empresa> q = s.createQuery("FROM Empresa");
-            q.list().forEach((e) -> empresas.add(e.getNombre()));
-            cbEmpresa.setItems(empresas);
-
-            ObservableList<String> profesores = FXCollections.observableArrayList();//Contenido del ChoiceBox de Profesores
-            Query<Profesor> q2 = s.createQuery("FROM Profesor");
-            q2.list().forEach((p) -> profesores.add(p.getNombre()));
-            cbNombreTutor.setItems(profesores);
-            cbNombreTutor.getSelectionModel().select(SessionData.getProfesorActual().getNombre());
-        } finally {
+        cbEmpresa.setItems(empresas);
+        ObservableList<String> profesores = FXCollections.observableArrayList();//Contenido del ChoiceBox de Profesores
+        Query<Profesor> q2 = s.createQuery("FROM Profesor");
+        q2.list().forEach((p) -> profesores.add( p.getNombre()));
+        cbNombreTutor.setItems(profesores);
+        cbNombreTutor.getSelectionModel().select(SessionData.getProfesorActual().getNombre());
+        }finally{
             s.close();
         }
 
@@ -170,7 +169,7 @@ public class AnnadirAlumnoController implements Initializable {
             alumno.setApellidos(txtFieldApellidos.getText());
             alumno.setDni(txtFieldDNI.getText());
             alumno.setCurso(txtFieldCurso.getText());
-            alumno.setFechaNac(Date.valueOf(DatepickerNacimiento.getValue()));
+            alumno.setFechaNac(Date.valueOf(datepickerNacimiento.getValue()));
             alumno.setEmail(txtFieldEmail.getText());
             alumno.setTelefono(Integer.parseInt(txtFieldTelefono.getText()));
             alumno.setPassword(txtFieldContraseña.getText());

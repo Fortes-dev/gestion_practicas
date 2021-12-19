@@ -66,29 +66,54 @@
 
 /*  Estilos TableView  */
 
-.table-row-cell:even {
-    -fx-background-color: rgba(65, 158, 255, 0.14);
-}
-
-.table-row-cell:empty .table-cell{
+.table-row-cell:empty {
     -fx-background-color: white;
     -fx-border-width: 0px;
 }
 
-.table-row-cell:odd {
-    -fx-background-color: rgb(255, 255, 255);
-}
+
 
 .table-view .column-header {
     -fx-background-color: #0061a6;
 }
-.table-view .column-header .label {
+.column-header .label {
     -fx-text-fill: white;
 }
 .table-view .arrow {
     -fx-mark-color: white;
 }
 
-.table-view .table-row-cell:focused .label{
-    -fx-text-fill: black;
+
+
+
+
+
+.jfx-slider > .track {
+    -fx-background-color: yellow;
+}
+
+.jfx-slider > .thumb {
+    -fx-background-color: blue;
+}
+
+.jfx-slider > .colored-track {
+    -fx-background-color: blue;
+}
+
+.jfx-slider > .animated-thumb {
+    -fx-background-color: blue;
+}
+
+.jfx-slider .slider-value {
+    -fx-fill: yellow;
+    -fx-stroke: yellow;
+}
+
+.jfx-date-picker {
+    -jfx-default-color: blue;
+    -jfx-overlay: true;
+}
+
+.disable:disabled {
+    -fx-opacity: 1;
 }

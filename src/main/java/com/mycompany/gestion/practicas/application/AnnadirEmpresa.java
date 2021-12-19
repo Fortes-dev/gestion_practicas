@@ -1,5 +1,6 @@
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXTextField;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.models.Empresa;
 import java.awt.image.BufferedImage;
@@ -52,23 +53,23 @@ public class AnnadirEmpresa implements Initializable {
     @FXML
     private ImageView ivLogoEmpresa;
     @FXML
-    private TextField tfNombreEmpresa;
+    private JFXTextField tfNombreEmpresa;
     @FXML
-    private TextField tfTutorEmpresa;
+    private JFXTextField tfTutorEmpresa;
     @FXML
-    private TextField tfEmail;
+    private JFXTextField tfEmail;
     @FXML
-    private TextField tfTelefono;
+    private JFXTextField tfTelefono;
     @FXML
     private Button btnAnnadir;
     private Label txtAñadirFoto;
     private Session s;
     @FXML
-    private TextField txtLatitud;
+    private JFXTextField txtLatitud;
     @FXML
-    private TextField txtLongitud;
+    private JFXTextField txtLongitud;
     @FXML
-    private TextField txturl;
+    private JFXTextField txturl;
     @FXML
     private Button añadirFoto;
 

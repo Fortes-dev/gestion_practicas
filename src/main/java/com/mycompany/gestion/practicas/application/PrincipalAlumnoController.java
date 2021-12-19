@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +35,13 @@ import javax.imageio.ImageIO;
 
 public class PrincipalAlumnoController implements Initializable {
 
+
+    @FXML
+    private MenuItem btnAbout;
+    @FXML
+    private MenuItem btnSalir;
+    @FXML
+    private MenuItem btnCerrarSesion;
     @FXML
     private Button moverPIzq;
     @FXML
@@ -335,4 +343,21 @@ public class PrincipalAlumnoController implements Initializable {
         timer.scheduleAtFixedRate(task, 0, 1500);
     }
 
+    @FXML
+    private void onCerrarSesionClick(ActionEvent actionEvent) {
+        try {
+            escena.switchToLogin(actionEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSalirClick(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    @FXML
+    private void onAboutClick(ActionEvent actionEvent) {
+    }
 }

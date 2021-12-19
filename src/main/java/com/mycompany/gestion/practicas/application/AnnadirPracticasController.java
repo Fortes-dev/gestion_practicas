@@ -5,6 +5,8 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSlider;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -52,11 +54,11 @@ public class AnnadirPracticasController implements Initializable {
     @FXML
     private Button btnAñadir;
     @FXML
-    private ChoiceBox<String> tipopractica;
+    private JFXComboBox<String> tipopractica;
     @FXML
     private TextArea descripcion;
     @FXML
-    private Spinner<Integer> horas;
+    private JFXSlider horas;
     @FXML
     private TextArea observaciones;
 
@@ -67,15 +69,7 @@ public class AnnadirPracticasController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
         tipopractica.setItems(FXCollections.observableArrayList("Dual", "FCT"));
-        tipopractica.getSelectionModel().selectFirst();
-
-        SpinnerValueFactory svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8);
-        horas.setValueFactory(svf);
-        horas.getValueFactory().setValue(8);
-
     }
 
     @FXML
@@ -88,7 +82,7 @@ public class AnnadirPracticasController implements Initializable {
         pr.setIdAlumno(SessionData.getAlumnoActual());
         pr.setFecha(date);
         pr.setTipo(tipopractica.getValue());
-        pr.setHorasEmpleadas(horas.getValue());
+        pr.setHorasEmpleadas((int) horas.getValue());
         pr.setDescripcion(descripcion.getText());
         pr.setObservaciones(observaciones.getText());
         

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.AnnadirAlumnoController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.AnnadirAlumnoController">
    <children>
       <FlowPane prefHeight="166.0" prefWidth="600.0">
          <children>
@@ -23,48 +23,48 @@
                <children>
                   <HBox prefHeight="56.0" prefWidth="375.0">
                      <children>
-                        <TextField fx:id="txtFieldNombre" prefHeight="25.0" prefWidth="371.0" promptText="Nombre">
+                        <JFXTextField fx:id="txtFieldNombre" labelFloat="true" prefHeight="25.0" prefWidth="371.0" promptText="Nombre" unFocusColor="#4059a9">
                            <HBox.margin>
                               <Insets left="35.0" top="22.0" />
                            </HBox.margin>
-                        </TextField>
-                        <TextField fx:id="txtFieldApellidos" layoutX="35.0" layoutY="32.0" prefHeight="25.0" prefWidth="389.0" promptText="Apellidos">
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtFieldApellidos" labelFloat="true" prefHeight="25.0" prefWidth="389.0" promptText="Apellidos" unFocusColor="#4059a9">
                            <HBox.margin>
                               <Insets left="15.0" top="22.0" />
                            </HBox.margin>
-                        </TextField>
+                        </JFXTextField>
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="375.0">
                      <children>
-                        <TextField fx:id="txtFieldCurso" prefHeight="25.0" prefWidth="165.0" promptText="Curso y ciclo">
+                        <JFXTextField fx:id="txtFieldCurso" labelFloat="true" prefHeight="25.0" prefWidth="165.0" promptText="Curso y ciclo" unFocusColor="#4059a9">
                            <HBox.margin>
-                              <Insets left="35.0" top="10.0" />
+                              <Insets left="35.0" top="20.0" />
                            </HBox.margin>
-                        </TextField>
-                        <ChoiceBox fx:id="cbEmpresa" prefHeight="25.0" prefWidth="182.0">
+                        </JFXTextField>
+                        <JFXComboBox fx:id="cbEmpresa" labelFloat="true" prefHeight="25.0" prefWidth="182.0" promptText="Empresa" unFocusColor="#4059a9">
                            <HBox.margin>
-                              <Insets left="14.0" top="10.0" />
+                              <Insets left="14.0" top="20.0" />
                            </HBox.margin>
-                        </ChoiceBox>
+                        </JFXComboBox>
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="82.0" prefHeight="57.0" prefWidth="375.0">
                      <children>
-                        <TextField fx:id="txtFieldCentro" prefHeight="25.0" prefWidth="381.0" promptText="Centro">
+                        <JFXTextField fx:id="txtFieldCentro" labelFloat="true" prefHeight="25.0" prefWidth="381.0" promptText="Centro" unFocusColor="#4059a9">
                            <HBox.margin>
-                              <Insets left="35.0" top="10.0" />
+                              <Insets left="35.0" top="20.0" />
                            </HBox.margin>
-                        </TextField>
+                        </JFXTextField>
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="110.0" prefHeight="57.0" prefWidth="375.0">
                      <children>
-                        <TextField fx:id="txtFieldContraseña" prefHeight="25.0" prefWidth="381.0" promptText="Contraseña">
+                        <JFXTextField fx:id="txtFieldContraseña" labelFloat="true" prefHeight="25.0" prefWidth="381.0" promptText="Contraseña" unFocusColor="#4059a9">
                            <HBox.margin>
-                              <Insets left="35.0" top="10.0" />
+                              <Insets left="35.0" top="20.0" />
                            </HBox.margin>
-                        </TextField>
+                        </JFXTextField>
                      </children>
                   </HBox>
                </children>
@@ -103,11 +103,11 @@
                         <Image url="@../../../../../img/dni.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="txtFieldDNI" prefHeight="25.0" prefWidth="241.0" promptText="DNI">
+                  <JFXTextField fx:id="txtFieldDNI" labelFloat="true" prefHeight="25.0" prefWidth="241.0" promptText="DNI" unFocusColor="#4059a9">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>
-                  </TextField>
+                  </JFXTextField>
                   <ImageView fitHeight="30.0" fitWidth="33.0" layoutX="31.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../img/telephone.png" />
@@ -116,11 +116,11 @@
                         <Insets left="27.0" top="7.0" />
                      </HBox.margin>
                   </ImageView>
-                  <TextField fx:id="txtFieldTelefono" layoutX="69.0" layoutY="10.0" prefHeight="25.0" prefWidth="173.0" promptText="Número teléfono">
+                  <JFXTextField fx:id="txtFieldTelefono" labelFloat="true" prefHeight="25.0" prefWidth="173.0" promptText="Número de teléfono" unFocusColor="#4059a9">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>
-                  </TextField>
+                  </JFXTextField>
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="57.0" prefWidth="600.0">
@@ -133,11 +133,11 @@
                         <Image url="@../../../../../img/email.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="txtFieldEmail" prefHeight="25.0" prefWidth="484.0" promptText="Email">
+                  <JFXTextField fx:id="txtFieldEmail" labelFloat="true" prefHeight="25.0" prefWidth="484.0" promptText="Email" unFocusColor="#4059a9">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>
-                  </TextField>
+                  </JFXTextField>
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="102.0" prefHeight="49.0" prefWidth="600.0">
@@ -150,7 +150,7 @@
                         <Image url="@../../../../../img/calendario.png" />
                      </image>
                   </ImageView>
-                  <DatePicker fx:id="DatepickerNacimiento" prefHeight="25.0" prefWidth="138.0" promptText="Fecha de nacimiento">
+                  <DatePicker fx:id="datepickerNacimiento" prefHeight="25.0" prefWidth="155.0" promptText="Fecha de nacimiento">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>
@@ -167,16 +167,19 @@
                         <Image url="@../../../../../img/birrete.png" />
                      </image>
                   </ImageView>
-                  <ChoiceBox fx:id="cbNombreTutor" prefHeight="25.0" prefWidth="255.0">
+                  <JFXComboBox fx:id="cbNombreTutor" labelFloat="true" prefHeight="25.0" prefWidth="255.0" promptText="Profesor" unFocusColor="#4059a9">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>
-                  </ChoiceBox>
+                  </JFXComboBox>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
             <FlowPane alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="btnAnadir" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnAceptar" prefHeight="25.0" prefWidth="85.0" text="Añadir" textAlignment="RIGHT">
+                  <Button fx:id="btnAnadir" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnAceptar" prefHeight="25.0" prefWidth="85.0" styleClass="boton" stylesheets="@../../../../../styles/styles.css" text="Añadir" textAlignment="RIGHT">
                      <FlowPane.margin>
                         <Insets bottom="2.0" right="43.0" top="8.0" />
                      </FlowPane.margin>

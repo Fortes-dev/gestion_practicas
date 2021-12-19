@@ -4,6 +4,7 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -78,7 +79,7 @@ public class HistorialController implements Initializable {
     @FXML
     private TableColumn<Practica, Date> colFecha;
     @FXML
-    private ComboBox<String> comboBoxTipo;
+    private JFXComboBox<String> comboBoxTipo;
     @FXML
     private Button btnRefresh;
 

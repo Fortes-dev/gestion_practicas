@@ -5,6 +5,8 @@
  */
 package com.mycompany.gestion.practicas.application;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -39,9 +41,9 @@ import org.hibernate.query.Query;
 public class LoginController implements Initializable {
 
     @FXML
-    private TextField userField;
+    private JFXTextField userField;
     @FXML
-    private PasswordField passwordField;
+    private JFXPasswordField passwordField;
     @FXML
     private Hyperlink linkPassword;
     @FXML
@@ -58,13 +60,6 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         s = HibernateUtil.getSessionFactory().openSession();
-
-        parent.setOnKeyPressed((KeyEvent t) -> {
-            if (t.getCode() == KeyCode.ENTER) {
-                ActionEvent e = new ActionEvent(t.getSource(), t.getTarget());
-                logIn(e);
-            }
-        });
     }
 
     @FXML
