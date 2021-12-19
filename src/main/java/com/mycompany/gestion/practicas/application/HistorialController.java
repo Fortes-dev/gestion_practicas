@@ -123,6 +123,7 @@ public class HistorialController implements Initializable {
             stage.close();
         }
         
+        comboBoxTipo.getItems().clear();
         comboBoxTipo.getItems().addAll("ID", "Fecha", "Tipo", "Horas empleadas", "Descripcion");
         comboBoxTipo.getSelectionModel().selectFirst();
 

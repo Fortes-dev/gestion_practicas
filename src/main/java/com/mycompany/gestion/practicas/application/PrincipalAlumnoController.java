@@ -29,12 +29,13 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class PrincipalAlumnoController implements Initializable {
-
 
     @FXML
     private MenuItem btnAbout;
@@ -84,7 +85,7 @@ public class PrincipalAlumnoController implements Initializable {
     private Practica[] practicasT;
     private Alumno a = SessionData.getAlumnoActual();
     private InputStream in;
-    
+
     @FXML
     private VBox vFondo;
     @FXML
@@ -131,7 +132,7 @@ public class PrincipalAlumnoController implements Initializable {
         }
 
     }
-    
+
     public void cargarHoras() {
         lbHorasRestantes.setText(getDualHoras(a, "restantes").toString());
         lbHorasRealizadas.setText(getDualHoras(a, "totales").toString());
@@ -142,20 +143,20 @@ public class PrincipalAlumnoController implements Initializable {
     public void cargarTareas() {
 
         s = HibernateUtil.getSessionFactory().openSession();
-        
+
         Query<Practica> q = s.createQuery("FROM Practica p where p.idAlumno=:actual  order by p.fecha desc");
         q.setParameter("actual", SessionData.getAlumnoActual());
-        
+
         Query qa = s.createQuery("SELECT count (*) from Practica p where p.idAlumno=:actual");
         qa.setParameter("actual", SessionData.getAlumnoActual());
-       
+
         Query<Alumno> ap = s.createQuery("FROM Alumno a where a.id=:id");
         ap.setParameter("id", a.getId());
-        
+
         a = ap.list().get(0);
         practicasT = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
         switch (practicasT.length - 1) {
-            
+
             case -1: {
                 btnAnnadirTarea1.setVisible(false);
                 btnAnnadirTarea2.setVisible(false);
@@ -346,7 +347,8 @@ public class PrincipalAlumnoController implements Initializable {
     @FXML
     private void onCerrarSesionClick(ActionEvent actionEvent) {
         try {
-            escena.switchToLogin(actionEvent);
+            Stage stage = (Stage) lbHorasRestantes.getScene().getWindow();
+            escena.switchToLogin(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -359,5 +361,11 @@ public class PrincipalAlumnoController implements Initializable {
 
     @FXML
     private void onAboutClick(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Sobre nosotros..");
+        alert.setHeaderText("Gestor de prácticas alternancia Dual");
+        alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/logocesur.png").toString())));
+        alert.setContentText("Práctica realizada por alumnos de 2ºDAM del centro Cesur Malaga Este\nCarlos Fortes Medina\nRoberto García Rodríguez\nPablo Hierrezuelo Muñoz");
+        alert.showAndWait();
     }
 }

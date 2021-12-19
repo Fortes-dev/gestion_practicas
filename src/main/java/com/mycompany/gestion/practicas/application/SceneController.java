@@ -38,9 +38,8 @@ public class SceneController {
      * @param event
      * @throws IOException
      */
-    public void switchToLogin(ActionEvent event) throws IOException {
+    public void switchToLogin(Stage stage) throws IOException {
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/login.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -52,9 +51,8 @@ public class SceneController {
      * @param event
      * @throws IOException
      */
-    public void switchToPrincipalAlumno(ActionEvent event) throws IOException {
+    public void switchToPrincipalAlumno(Stage stage) throws IOException {
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/principalAlumno.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Bienvenido "+SessionData.getAlumnoActual().getNombre());
@@ -67,10 +65,9 @@ public class SceneController {
      * @param event
      * @throws IOException
      */
-    public void switchToPrincipalProfesor(ActionEvent event) throws IOException {
+    public void switchToPrincipalProfesor(Stage stage) throws IOException {
 
         root = FXMLLoader.load(getClass().getClassLoader().getResource("com/mycompany/gestion/practicas/application/principalProfesor.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Bienvenido "+SessionData.getProfesorActual().getNombre());

@@ -27,8 +27,10 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 public class PrincipalProfesor implements Initializable {
 
@@ -337,7 +339,10 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private void onCerrarSesionClick(ActionEvent actionEvent) {
         try {
-            escena.switchToLogin(actionEvent);
+            
+            Stage stage = (Stage) tvListaEmpresas.getScene().getWindow();
+            escena.switchToLogin(stage);
+            escena.switchToLogin(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -350,5 +355,10 @@ public class PrincipalProfesor implements Initializable {
 
     @FXML
     private void onAboutClick(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Sobre nosotros..");
+        alert.setHeaderText("Gestor de prácticas alternancia Dual");
+        alert.setContentText("Práctica realizada por alumnos de 2ºDAM del centro Cesur Malaga Este\n\n\nCarlos Fortes Medina\n\nRoberto García Rodríguez\n\nPablo Hierrezuelo Muñoz");
+        alert.showAndWait();
     }
 }
