@@ -42,7 +42,13 @@ import javax.imageio.ImageIO;
 import org.hibernate.Hibernate;
 
 public class AnnadirEmpresa implements Initializable {
-
+    
+    private FileChooser fileChooser = new FileChooser();
+    private File selectedFile;
+    private Blob blob;
+    private BufferedImage bufferedImage;  
+    
+    
     @FXML
     private ImageView ivLogoEmpresa;
     @FXML
@@ -58,10 +64,7 @@ public class AnnadirEmpresa implements Initializable {
     @FXML
     private Label txtAñadirFoto;
     @FXML
-    private WebView wvMapa;
-
     private Session s;
-    private SceneController escena = new SceneController();
     @FXML
     private WebView wvMapa;
     @FXML
@@ -110,7 +113,7 @@ public class AnnadirEmpresa implements Initializable {
         e.setLocalizacionUrl(txturl.getText());
         e.setLongitud(Double.parseDouble(txtLongitud.getText()));
         e.setLatitud(Double.parseDouble(txtLatitud.getText()));
-        e.setLogoImg(null);
+        e.setLogoImg(blob);
 
         try {
             s = HibernateUtil.getSessionFactory().openSession();
