@@ -58,7 +58,7 @@ public class AnnadirEmpresa implements Initializable {
         e.setTutorEmpresa(tfTutorEmpresa.getText());
         e.setEmailTutor(tfEmail.getText());
         e.setTelefono(Integer.parseInt(tfTelefono.getText()));
-        e.setLocalizacionUrl(null);
+        e.setLocalizacionUrl(txturl.getText());
         e.setLongitud(Double.parseDouble(txtLongitud.getText()));
         e.setLatitud(Double.parseDouble(txtLatitud.getText()));
         e.setLogoImg(null);
