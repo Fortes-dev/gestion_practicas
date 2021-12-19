@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="vistaHistorial" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.HistorialController">
+<AnchorPane id="AnchorPane" fx:id="vistaHistorial" prefHeight="400.0" prefWidth="600.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.HistorialController">
    <children>
       <Label fx:id="nombreAlumno" layoutX="58.0" layoutY="31.0" onMouseClicked="#btnNombreAlumno" prefHeight="35.0" prefWidth="297.0" text="Carles Strongs">
          <font>

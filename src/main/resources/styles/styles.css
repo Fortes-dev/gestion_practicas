@@ -60,7 +60,6 @@
 
 /*  Imagen de fondo de las ventanas   */
 .ventana {
-    -fx-background-image: url(../../../src/main/resources/img/fondoVentana.png);
     -fx-background-color: 2px;
 }
 
