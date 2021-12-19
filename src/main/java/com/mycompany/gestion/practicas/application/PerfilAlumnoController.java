@@ -67,6 +67,9 @@ public class PerfilAlumnoController implements Initializable {
 
 
     @FXML
+    private ImageView fotoAlumno;
+
+    @FXML
     private Button btnEliminar;
     @FXML
     private Button btnModificar;
@@ -81,7 +84,6 @@ public class PerfilAlumnoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        Alumno a = SessionData.getAlumnoActual();
         
         if(!SessionData.getAdmin()) {
             btnEliminar.setVisible(false);
@@ -128,6 +130,7 @@ public class PerfilAlumnoController implements Initializable {
             ex.printStackTrace();
         }
     }
+
 
     @FXML
     private void btnEliminar(ActionEvent event) {

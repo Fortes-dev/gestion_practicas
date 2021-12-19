@@ -96,10 +96,12 @@ public class AnnadirAlumnoController implements Initializable {
      * Initializes the controller class.
      */
 
+
     Session s;
     @FXML
     private Button btnAnadir;
    
+
     /**
      * Creo ObsevableLists de Empresas y Profesores a través de consultas HQL
      * Los resultados de esas consultas aparecen en los ChoiceBox para que el
