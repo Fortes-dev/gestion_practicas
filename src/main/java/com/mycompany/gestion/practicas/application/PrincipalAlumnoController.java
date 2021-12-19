@@ -5,6 +5,7 @@ import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
 import com.mycompany.gestion.practicas.models.Practica;
+import java.awt.image.BufferedImage;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,9 +20,16 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javax.imageio.ImageIO;
 
 public class PrincipalAlumnoController implements Initializable {
 
@@ -66,7 +74,7 @@ public class PrincipalAlumnoController implements Initializable {
     private SceneController escena = new SceneController();
     private Practica[] practicasT;
     private Alumno a = SessionData.getAlumnoActual();
-    
+
     @FXML
     private VBox vFondo;
     @FXML
@@ -76,13 +84,39 @@ public class PrincipalAlumnoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lbNombreAlumno.setText(SessionData.getAlumnoActual().getNombre() + " " + SessionData.getAlumnoActual().getApellidos());
-        lbCurso.setText(SessionData.getAlumnoActual().getCurso());
-        lbEmpresa.setText(SessionData.getAlumnoActual().getIdEmpresa().getNombre());
-
+        InputStream in = null;
         task();
+        try {
+            
+            lbNombreAlumno.setText(a.getNombre() + " " + a.getApellidos());
+            lbCurso.setText(a.getCurso());
+            lbEmpresa.setText(a.getIdEmpresa().getNombre());
+            
+            in = a.getIdEmpresa().getLogoImg().getBinaryStream();
+            BufferedImage imagenEmpresa = ImageIO.read(in);
+            Image logoEmpresa = SwingFXUtils.toFXImage(imagenEmpresa, null);
+            
+            imgLogoEmpresa.setImage(logoEmpresa);
+            
+            in = a.getFotoImg().getBinaryStream();
+            BufferedImage imagenAlumno = ImageIO.read(in);
+            Image imgAlumno = SwingFXUtils.toFXImage(imagenAlumno, null);
+            
+            imgFotoAlumno.setImage(imgAlumno);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PrincipalAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(PrincipalAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-    
+
     public void cargarHoras() {
         lbHorasRestantes.setText(getDualHoras(a, "restantes").toString());
         lbHorasRealizadas.setText(getDualHoras(a, "totales").toString());
@@ -93,16 +127,16 @@ public class PrincipalAlumnoController implements Initializable {
     public void cargarTareas() {
 
         s = HibernateUtil.getSessionFactory().openSession();
-        
+
         Query<Practica> q = s.createQuery("FROM Practica p where p.idAlumno=:actual  order by p.fecha desc");
         q.setParameter("actual", SessionData.getAlumnoActual());
-        
+
         Query qa = s.createQuery("SELECT count (*) from Practica p where p.idAlumno=:actual");
         qa.setParameter("actual", SessionData.getAlumnoActual());
-       
+
         Query<Alumno> ap = s.createQuery("FROM Alumno a where a.id=:id");
         ap.setParameter("id", a.getId());
-        
+
         a = ap.list().get(0);
         practicasT = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
         switch (practicasT.length - 1) {
