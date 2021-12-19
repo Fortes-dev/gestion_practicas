@@ -92,12 +92,12 @@
                   <Image url="@../../../../../img/location.png" />
                </image>
             </ImageView>
-            <TextField fx:id="tfTelefono1" prefHeight="39.0" prefWidth="122.0" promptText="latitud">
+            <TextField fx:id="txtLatitud" prefHeight="39.0" prefWidth="122.0" promptText="latitud">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="tfTelefono11" layoutX="87.0" layoutY="10.0" prefHeight="39.0" prefWidth="122.0" promptText="longitud">
+            <TextField fx:id="txtLongitud" layoutX="87.0" layoutY="10.0" prefHeight="39.0" prefWidth="122.0" promptText="longitud">
                <font>
                   <Font size="18.0" />
                </font>
@@ -106,6 +106,23 @@
          <VBox.margin>
             <Insets left="15.0" top="15.0" />
          </VBox.margin>
+      </HBox>
+      <HBox layoutX="25.0" layoutY="266.0" prefHeight="19.0" prefWidth="297.0" spacing="40.0">
+         <children>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../img/url.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="txturl" layoutX="87.0" layoutY="10.0" prefHeight="39.0" prefWidth="428.0" promptText="URL de Google Maps">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+         <padding>
+            <Insets left="15.0" top="15.0" />
+         </padding>
       </HBox>
    </VBox>
    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">

@@ -17,6 +17,7 @@ import org.hibernate.Transaction;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.web.WebView;
 
 public class AnnadirEmpresa implements Initializable {
 
@@ -35,6 +36,14 @@ public class AnnadirEmpresa implements Initializable {
 
     private Session s;
     private SceneController escena = new SceneController();
+    @FXML
+    private WebView wvMapa;
+    @FXML
+    private TextField txtLatitud;
+    @FXML
+    private TextField txtLongitud;
+    @FXML
+    private TextField txturl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,6 +59,8 @@ public class AnnadirEmpresa implements Initializable {
         e.setEmailTutor(tfEmail.getText());
         e.setTelefono(Integer.parseInt(tfTelefono.getText()));
         e.setLocalizacionUrl(null);
+        e.setLongitud(Double.parseDouble(txtLongitud.getText()));
+        e.setLatitud(Double.parseDouble(txtLatitud.getText()));
         e.setLogoImg(null);
 
         try {

@@ -51,7 +51,7 @@ public class Empresa implements Serializable {
     public Empresa() {
     }
 
-    public Empresa(Long id, String nombre, String tutorEmpresa, String localizacionUrl, Integer telefono, String emailTutor, Blob logoImg) {
+    public Empresa(Long id, String nombre, String tutorEmpresa, String localizacionUrl, Integer telefono, String emailTutor, Blob logoImg, Double latitud, Double longitud) {
         this.id = id;
         this.nombre = nombre;
         this.tutorEmpresa = tutorEmpresa;
@@ -59,6 +59,8 @@ public class Empresa implements Serializable {
         this.telefono = telefono;
         this.emailTutor = emailTutor;
         this.logoImg = logoImg;
+        this.latitud= latitud;
+        this.longitud=longitud;
     }
 
     public Blob getLogoImg() {
