@@ -80,7 +80,7 @@ public class PrincipalProfesor implements Initializable {
     private SceneController escena = new SceneController();
     ObservableList<Alumno> contenidoAlumno = FXCollections.observableArrayList();
     ObservableList<Empresa> contenidoEmpresa = FXCollections.observableArrayList();
-    Alumno a = SessionData.getAlumnoActual();
+    Alumno a;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -143,25 +143,6 @@ public class PrincipalProfesor implements Initializable {
             e.printStackTrace();
         }
     }
-
-//    public void task() {
-//        var timer = new Timer();
-//        var task = new TimerTask() {
-//            @Override
-//            public void run() {
-//                Platform.runLater(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        cargarAlumnos();
-//                        cargarEmpresa();
-//                    }
-//
-//                });
-//            }
-//
-//        };
-//        timer.scheduleAtFixedRate(task, 0, 1500);
-//    }
     
     @FXML
     private void onMouseClickPerfilProfesor(MouseEvent mouseEvent) {
@@ -180,7 +161,9 @@ public class PrincipalProfesor implements Initializable {
 
             Query<Alumno> q = s.createQuery("FROM Alumno a WHERE a.id=:t");
             q.setParameter("t", tvListaAlumnos.getSelectionModel().getSelectedItem().getId());
-            SessionData.setAlumnoActual(q.list().get(0));
+            a = q.list().get(0);
+            s.evict(a);
+            SessionData.setAlumnoActual(a);
 
             try {
                 ActionEvent e = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
@@ -198,6 +181,7 @@ public class PrincipalProfesor implements Initializable {
             alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
             alert.show();
         } finally {
+            
             s.close();
         }
     }

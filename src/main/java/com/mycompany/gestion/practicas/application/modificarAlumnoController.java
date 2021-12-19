@@ -102,6 +102,8 @@ public class modificarAlumnoController implements Initializable {
         try {
             s = HibernateUtil.getSessionFactory().openSession();
 
+            blob = a.getFotoImg();
+            
             in = a.getFotoImg().getBinaryStream();
             BufferedImage imagen = ImageIO.read(in);
             Image img = SwingFXUtils.toFXImage(imagen, null);
@@ -205,6 +207,8 @@ public class modificarAlumnoController implements Initializable {
             Transaction ts = s.beginTransaction();
             s.update(a);
             ts.commit();
+            
+            SessionData.setAlumnoActual(a);
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Modificad@");
@@ -218,6 +222,7 @@ public class modificarAlumnoController implements Initializable {
             stage.close();
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error actualizando datos");
             alert.setHeaderText("No ha sido posible modificar los datos del alumno");
@@ -228,37 +233,6 @@ public class modificarAlumnoController implements Initializable {
             s.close();
         }
 
-    }
-
-    @FXML
-    private void btnEliminar(ActionEvent event) {
-        try {
-            
-            s = HibernateUtil.getSessionFactory().openSession();
-            Transaction ts = s.beginTransaction();
-            s.remove(a);
-            ts.commit();
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Eliminad@");
-            alert.setHeaderText("Eliminado con éxito");
-            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/eliminar.png").toString())));
-            alert.setContentText("El alumno: ID[" + a.getId() + "] Nombre: " + a.getNombre() + " y DNI: " + a.getDni() + " ha sido eliminad@ con éxito!");
-            alert.showAndWait();
-
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-
-        } catch (Exception ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error eliminando alumn@");
-            alert.setHeaderText("No ha sido posible eliminar alumn@");
-            alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/error.png").toString())));
-            alert.show();
-        } finally {
-            s.close();
-        }
     }
 
 }

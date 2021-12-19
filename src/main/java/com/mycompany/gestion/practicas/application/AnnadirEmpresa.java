@@ -61,18 +61,16 @@ public class AnnadirEmpresa implements Initializable {
     private TextField tfTelefono;
     @FXML
     private Button btnAnnadir;
-    @FXML
     private Label txtAñadirFoto;
-    @FXML
     private Session s;
-    @FXML
-    private WebView wvMapa;
     @FXML
     private TextField txtLatitud;
     @FXML
     private TextField txtLongitud;
     @FXML
     private TextField txturl;
+    @FXML
+    private Button añadirFoto;
 
 
     @Override
@@ -83,7 +81,7 @@ public class AnnadirEmpresa implements Initializable {
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        ivLogoEmpresa.addEventHandler(MouseEvent.MOUSE_CLICKED,
+        añadirFoto.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 e -> {
                     var stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     selectedFile = fileChooser.showOpenDialog(stage);
@@ -95,7 +93,7 @@ public class AnnadirEmpresa implements Initializable {
                         s.getTransaction().commit();
                         bufferedImage = ImageIO.read(selectedFile);
                         ivLogoEmpresa.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
-                        txtAñadirFoto.setVisible(false);
+                        añadirFoto.setText("");
                     } catch (IOException ex) {
                         Logger.getLogger(AnnadirEmpresa.class.getName()).log(Level.SEVERE, null, ex);
                     } finally {

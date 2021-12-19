@@ -13,8 +13,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 
 import javafx.event.ActionEvent;
@@ -71,19 +74,42 @@ public class PerfilAlumnoController implements Initializable {
 
     private Alumno a = SessionData.getAlumnoActual();
     private SceneController escena = new SceneController();
-    private Session s;
+    private Session s = null;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        if(!SessionData.getAdmin()) {
+
+        if (!SessionData.getAdmin()) {
             btnEliminar.setVisible(false);
             btnModificar.setVisible(false);
         }
         
+        task();
+
+    }
+
+    public void task() {
+        var timer = new Timer();
+        var task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        setDatos();
+                    }
+
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(task, 0, 2000);
+    }
+
+    public void setDatos() {
         InputStream in = null;
         try {
 
@@ -101,15 +127,20 @@ public class PerfilAlumnoController implements Initializable {
             txtTelefono.setText(a.getTelefono().toString());
             txtEmail.setText(a.getEmail());
             txtNacimiento.setText(a.getFechaNac().toString());
+
         } catch (SQLException ex) {
-            Logger.getLogger(PerfilAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PerfilAlumnoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(PerfilAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PerfilAlumnoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 in.close();
+
             } catch (IOException ex) {
-                Logger.getLogger(PerfilAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PerfilAlumnoController.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -140,7 +171,7 @@ public class PerfilAlumnoController implements Initializable {
     @FXML
     private void btnEliminar(ActionEvent event) {
         try {
-            
+
             s = HibernateUtil.getSessionFactory().openSession();
             Transaction ts = s.beginTransaction();
             s.remove(a);
@@ -156,6 +187,8 @@ public class PerfilAlumnoController implements Initializable {
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
+            
+            SessionData.setAlumnoActual(null);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -174,8 +207,11 @@ public class PerfilAlumnoController implements Initializable {
         try {
             SceneController scene = new SceneController();
             scene.switchToModificarAlumno(event);
+
         } catch (IOException ex) {
-            Logger.getLogger(PerfilAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+
+            Logger.getLogger(PerfilAlumnoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
