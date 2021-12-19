@@ -147,6 +147,15 @@ public class PrincipalAlumnoController implements Initializable {
         a = ap.list().get(0);
         practicasT = q.list().toArray(new Practica[((Number) qa.uniqueResult()).intValue()]);
         switch (practicasT.length - 1) {
+            
+            case -1: {
+                btnAnnadirTarea1.setVisible(false);
+                btnAnnadirTarea2.setVisible(false);
+                btnAnnadirTarea3.setVisible(false);
+                btnAnnadirTarea4.setVisible(false);
+                btnAnnadirTarea5.setVisible(false);
+                break;
+            }
             case 0: {
                 btnAnnadirTarea1.setText(practicasT[0].getFecha().toLocalDate().toString());
                 btnAnnadirTarea1.setVisible(true);
