@@ -81,6 +81,12 @@ public class PrincipalProfesor implements Initializable {
     ObservableList<Alumno> contenidoAlumno = FXCollections.observableArrayList();
     ObservableList<Empresa> contenidoEmpresa = FXCollections.observableArrayList();
     Alumno a;
+    @FXML
+    private ImageView refreshEmpresas;
+    @FXML
+    private Button btnRefreshAlumno;
+    @FXML
+    private Button btnRefreshEmpresas;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -307,5 +313,15 @@ public class PrincipalProfesor implements Initializable {
                 s.close();
             }
         }
+    }
+
+    @FXML
+    private void refreshAlumno(ActionEvent event) {
+        cargarAlumnos();
+    }
+
+    @FXML
+    private void refreshEmpresas(ActionEvent event) {
+        cargarEmpresa();
     }
 }

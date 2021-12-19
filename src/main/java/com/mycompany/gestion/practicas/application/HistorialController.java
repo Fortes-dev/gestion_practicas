@@ -277,8 +277,5 @@ public class HistorialController implements Initializable {
         initTabla();
     }
 
-    public void closeModal() {
-
-    }
 
 }
