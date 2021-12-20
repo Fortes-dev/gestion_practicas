@@ -19,7 +19,7 @@
 
 <VBox fx:id="vFondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="655.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PrincipalAlumnoController">
    <children>
-      <MenuBar>
+      <MenuBar stylesheets="@../../../../../styles/styles.css">
         <menus>
           <Menu mnemonicParsing="false" text="Menu">
             <items>
@@ -59,7 +59,7 @@
          <center>
             <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER_LEFT">
                <children>
-                  <Label fx:id="lbNombreAlumno" text="Francisco Romero">
+                  <Label fx:id="lbNombreAlumno" onMouseClicked="#imgOnMouseClick" styleClass="hovertexto" stylesheets="@../../../../../styles/styles.css" text="Francisco Romero" underline="true">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>

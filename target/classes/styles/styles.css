@@ -127,6 +127,43 @@
     -jfx-overlay: true;
 }
 
-.disable:disabled {
-    -fx-opacity: 1;
+/*Estilos de la barra de menu*/
+
+.menu-item:hover, .menu-item:focused {
+    -fx-background-color: rgb(0, 131, 225);
+}
+
+.menu-button .label{
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+
+.menu-button:hover, .menu-button:focused {
+    -fx-background-color: rgb(0, 131, 225);
+}
+
+.menu:showing {
+    -fx-background-color: rgb(0, 131, 225);
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+.menu-item {
+    -fx-background-color:  #0061a6;
+}
+
+.menu-bar {
+    -fx-background-color: #0061a6;
+}
+.context-menu {
+    -fx-background-color: #0061a6;
+}
+
+/* Estilos varios */
+
+.hovertexto:hover {
+    -fx-underline: true;
+    -fx-text-fill: #0061a6;
 }

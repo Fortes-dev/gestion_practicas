@@ -361,10 +361,9 @@ public class PrincipalAlumnoController implements Initializable {
 
     @FXML
     private void onAboutClick(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Sobre nosotros..");
         alert.setHeaderText("Gestor de prácticas alternancia Dual");
-        alert.setGraphic(new ImageView(new Image(this.getClass().getResource("/img/logocesur.png").toString())));
         alert.setContentText("Práctica realizada por alumnos de 2ºDAM del centro Cesur Malaga Este\nCarlos Fortes Medina\nRoberto García Rodríguez\nPablo Hierrezuelo Muñoz");
         alert.showAndWait();
     }

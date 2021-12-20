@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PerfilAlumnoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="ventana" stylesheets="@../../../../../styles/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.practicas.application.PerfilAlumnoController">
    <children>
       <FlowPane prefHeight="166.0" prefWidth="600.0">
          <children>
@@ -160,7 +160,7 @@
                         <Image url="@../../../../../img/birrete.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="txtProfesor" onMouseClicked="#onMouseClickPerfilTutor" prefHeight="17.0" prefWidth="378.0" text="Artacho el de los muchachos" underline="true">
+                  <Label fx:id="txtProfesor" onMouseClicked="#onMouseClickPerfilTutor" prefHeight="17.0" prefWidth="378.0" styleClass="hovertexto" stylesheets="@../../../../../styles/styles.css" text="Artacho el de los muchachos" underline="true">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>
@@ -180,7 +180,7 @@
                         <Image url="@../../../../../img/portafolio.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="txtEmpresa" onMouseClicked="#onMouseClickPerfilEmpresa" prefHeight="28.0" prefWidth="180.0" text="Viewnext" underline="true">
+                  <Label fx:id="txtEmpresa" onMouseClicked="#onMouseClickPerfilEmpresa" prefHeight="28.0" prefWidth="180.0" styleClass="hovertexto" stylesheets="@../../../../../styles/styles.css" text="Viewnext" underline="true">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>

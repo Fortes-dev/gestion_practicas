@@ -1,6 +1,7 @@
 package com.mycompany.gestion.practicas.application;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import com.mycompany.gestion.practicas.hibernate.HibernateUtil;
 import com.mycompany.gestion.practicas.hibernate.SessionData;
 import com.mycompany.gestion.practicas.models.Alumno;
@@ -72,7 +73,7 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private JFXComboBox<String> cbFiltroAlum3;
     @FXML
-    private TextField tfFiltroAlum;
+    private JFXTextField tfFiltroAlum;
     @FXML
     private TableView<Alumno> tvListaAlumnos;
     @FXML
@@ -80,7 +81,7 @@ public class PrincipalProfesor implements Initializable {
     @FXML
     private JFXComboBox<String> cbFiltroEmpre3;
     @FXML
-    private TextField tfFiltroEmpresa;
+    private JFXTextField tfFiltroEmpresa;
     @FXML
     private TableView<Empresa> tvListaEmpresas;
     @FXML
@@ -241,7 +242,7 @@ public class PrincipalProfesor implements Initializable {
                     cargarAlumnos();
                 } else if (cbFiltroAlum3.getValue() == "DNI") {
                     Query q = s.createQuery("FROM Alumno p WHERE p.dni LIKE :t");
-                    q.setParameter("t", Integer.parseInt(tfFiltroAlum.getText()));
+                    q.setParameter("t", tfFiltroAlum.getText());
                     contenidoAlumno.clear();
                     contenidoAlumno.addAll(q.list());
                     tvListaAlumnos.setItems(contenidoAlumno);
@@ -253,7 +254,7 @@ public class PrincipalProfesor implements Initializable {
                     contenidoAlumno.clear();
                     contenidoAlumno.addAll(q.list());
                     tvListaAlumnos.setItems(contenidoAlumno);
-                } else if (cbFiltroAlum3.getValue() == "Apellidos") {
+                } else if (cbFiltroAlum3.getValue() == "Apellido") {
 
                     Query q = s.createQuery("FROM Alumno p WHERE p.apellidos LIKE CONCAT ('%',:t,'%')");
                     q.setParameter("t", tfFiltroAlum.getText());
@@ -355,7 +356,7 @@ public class PrincipalProfesor implements Initializable {
 
     @FXML
     private void onAboutClick(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Sobre nosotros..");
         alert.setHeaderText("Gestor de prácticas alternancia Dual");
         alert.setContentText("Práctica realizada por alumnos de 2ºDAM del centro Cesur Malaga Este\n\n\nCarlos Fortes Medina\n\nRoberto García Rodríguez\n\nPablo Hierrezuelo Muñoz");

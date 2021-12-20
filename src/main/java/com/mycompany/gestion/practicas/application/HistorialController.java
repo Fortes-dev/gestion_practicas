@@ -92,6 +92,9 @@ public class HistorialController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        comboBoxTipo.getItems().clear();
+        comboBoxTipo.getItems().addAll("ID", "Fecha", "Tipo", "Horas empleadas", "Descripcion");
+        comboBoxTipo.getSelectionModel().selectFirst();
         task();
 
         initTabla();
@@ -122,11 +125,6 @@ public class HistorialController implements Initializable {
             Stage stage = (Stage) btnAnadir.getScene().getWindow();
             stage.close();
         }
-        
-        comboBoxTipo.getItems().clear();
-        comboBoxTipo.getItems().addAll("ID", "Fecha", "Tipo", "Horas empleadas", "Descripcion");
-        comboBoxTipo.getSelectionModel().selectFirst();
-
         nombreAlumno.setText(a.getNombre() + " " + a.getApellidos());
         claseAlumno.setText(a.getCurso());
     }
